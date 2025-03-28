@@ -1,0 +1,298 @@
+@extends('layouts.app')
+
+@section('title', 'Brick Base - Products')
+
+@section('content')
+    <section class="relative h-40 md:h-64 overflow-hidden">
+        <!-- Background Image -->
+        <div class="absolute inset-0">
+            <img src="{{ asset('storage/photos/Section.png') }}" alt="Construction Background"
+                 class="w-full h-full object-cover">
+        </div>
+
+
+        <!-- Hero Content -->
+        <div class="container mx-auto px-4 h-full flex flex-col justify-center items-start ml-6 relative z-10">
+            <h1 class="text-white text-3xl md:text-5xl font-bold text-center">Our Products</h1>
+            <p class="text-gray-200 text-sm md:text-base text-center mb-2">Home > Our Products</p>
+        </div>
+    </section>
+    <div class="container mx-auto px-4 py-8">
+        <div class="flex flex-col lg:flex-row gap-6">
+            <!-- Search and Filter Sidebar -->
+            <div class="lg:w-1/4 w-full space-y-6">
+                <!-- Search -->
+                <div class="bg-[#D9D9D9] rounded-lg shadow p-4">
+                    <h3 class="font-medium text-lg mb-4">Search</h3>
+                    <div class="relative">
+                        <input type="text" placeholder="Type To Search" class="w-full border bg-[#FFFFFF] border-gray-300 rounded-lg py-2 px-4 pr-10 outline-none">
+                        <button class="absolute right-3 top-2.5">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-gray-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Filter -->
+                <div class="bg-[#D9D9D9] rounded-lg shadow p-4">
+                    <h3 class="font-medium text-lg mb-4 font-poppins text-[#121C45]">Filter</h3>
+                    <div class="space-y-4">
+                        <div>
+                            <label class="block mb-2 text-sm font-medium text-gray-700">Popularity</label>
+                            <select class="w-full border border-gray-300 rounded py-2 px-3 bg-[#FFFFFF] outline-none">
+                                <option selected>Select option</option>
+                                <option>Most Popular</option>
+                                <option>Newest</option>
+                                <option>Price: Low to High</option>
+                                <option>Price: High to Low</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="block mb-2 text-sm font-medium text-gray-700">Reviews</label>
+                            <select class="w-full border border-gray-300 rounded py-2 px-3 bg-[#FFFFFF] outline-none">
+                                <option selected>Select option</option>
+                                <option>5 Stars</option>
+                                <option>4 Stars & Up</option>
+                                <option>3 Stars & Up</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="block mb-2 text-sm font-medium text-gray-700">Categories</label>
+                            <select class="w-full border border-gray-300 rounded py-2 px-3 bg-[#FFFFFF] outline-none">
+                                <option selected>Select option</option>
+                                <option>Adhesives</option>
+                                <option>Grouts</option>
+                                <option>Sealants</option>
+                                <option>Mortars</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Products Grid -->
+            <div class="lg:w-3/4 w-full">
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    <!-- Product  -->
+                    <div class="bg-white rounded-lg shadow overflow-hidden h-full">
+                        <div class="">
+                            <img src="{{ asset('storage/photos/sima.png') }}" class="w-full h-1/2 object-cover" alt="Adesilex P9">
+                        </div>
+                        <div class="p-4">
+                            <div class="flex items-center justify-between mb-2">
+                                <h3 class="font-bold text-lg">ADESILEX P9</h3>
+                                <div class="flex items-center">
+                                    <span class="mr-1 text-sm">4.5/5</span>
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-yellow-400" viewBox="0 0 20 20" fill="currentColor">
+                                        <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                                    </svg>
+                                </div>
+                            </div>
+                            <p class="text-gray-600 text-sm mb-4">High-performance cementitious adhesive with no vertical slip and extended open time for ceramic tiles and stone materials. The white version has very high whiteness and excellent workability.</p>
+                            <a href="#" class="inline-flex items-center text-blue-600 hover:text-blue-800">
+                                View Details
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 ml-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                                </svg>
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="bg-white rounded-lg shadow overflow-hidden h-full">
+                        <div class="">
+                            <img src="{{ asset('storage/photos/sima.png') }}" class="w-full h-1/2 object-cover" alt="Adesilex P9">
+                        </div>
+                        <div class="p-4">
+                            <div class="flex items-center justify-between mb-2">
+                                <h3 class="font-bold text-lg">ADESILEX P9</h3>
+                                <div class="flex items-center">
+                                    <span class="mr-1 text-sm">4.5/5</span>
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-yellow-400" viewBox="0 0 20 20" fill="currentColor">
+                                        <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                                    </svg>
+                                </div>
+                            </div>
+                            <p class="text-gray-600 text-sm mb-4">High-performance cementitious adhesive with no vertical slip and extended open time for ceramic tiles and stone materials. The white version has very high whiteness and excellent workability.</p>
+                            <a href="#" class="inline-flex items-center text-blue-600 hover:text-blue-800">
+                                View Details
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 ml-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                                </svg>
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="bg-white rounded-lg shadow overflow-hidden h-full">
+                        <div class="">
+                            <img src="{{ asset('storage/photos/sima.png') }}" class="w-full h-1/2 object-cover" alt="Adesilex P9">
+                        </div>
+                        <div class="p-4">
+                            <div class="flex items-center justify-between mb-2">
+                                <h3 class="font-bold text-lg">ADESILEX P9</h3>
+                                <div class="flex items-center">
+                                    <span class="mr-1 text-sm">4.5/5</span>
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-yellow-400" viewBox="0 0 20 20" fill="currentColor">
+                                        <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                                    </svg>
+                                </div>
+                            </div>
+                            <p class="text-gray-600 text-sm mb-4">High-performance cementitious adhesive with no vertical slip and extended open time for ceramic tiles and stone materials. The white version has very high whiteness and excellent workability.</p>
+                            <a href="#" class="inline-flex items-center text-blue-600 hover:text-blue-800">
+                                View Details
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 ml-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                                </svg>
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="bg-white rounded-lg shadow overflow-hidden h-full">
+                        <div class="">
+                            <img src="{{ asset('storage/photos/sima.png') }}" class="w-full h-1/2 object-cover" alt="Adesilex P9">
+                        </div>
+                        <div class="p-4">
+                            <div class="flex items-center justify-between mb-2">
+                                <h3 class="font-bold text-lg">ADESILEX P9</h3>
+                                <div class="flex items-center">
+                                    <span class="mr-1 text-sm">4.5/5</span>
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-yellow-400" viewBox="0 0 20 20" fill="currentColor">
+                                        <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                                    </svg>
+                                </div>
+                            </div>
+                            <p class="text-gray-600 text-sm mb-4">High-performance cementitious adhesive with no vertical slip and extended open time for ceramic tiles and stone materials. The white version has very high whiteness and excellent workability.</p>
+                            <a href="#" class="inline-flex items-center text-blue-600 hover:text-blue-800">
+                                View Details
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 ml-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                                </svg>
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="bg-white rounded-lg shadow overflow-hidden h-full">
+                        <div class="">
+                            <img src="{{ asset('storage/photos/sima.png') }}" class="w-full h-1/2 object-cover" alt="Adesilex P9">
+                        </div>
+                        <div class="p-4">
+                            <div class="flex items-center justify-between mb-2">
+                                <h3 class="font-bold text-lg">ADESILEX P9</h3>
+                                <div class="flex items-center">
+                                    <span class="mr-1 text-sm">4.5/5</span>
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-yellow-400" viewBox="0 0 20 20" fill="currentColor">
+                                        <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                                    </svg>
+                                </div>
+                            </div>
+                            <p class="text-gray-600 text-sm mb-4">High-performance cementitious adhesive with no vertical slip and extended open time for ceramic tiles and stone materials. The white version has very high whiteness and excellent workability.</p>
+                            <a href="#" class="inline-flex items-center text-blue-600 hover:text-blue-800">
+                                View Details
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 ml-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                                </svg>
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="bg-white rounded-lg shadow overflow-hidden h-full">
+                        <div class="">
+                            <img src="{{ asset('storage/photos/sima.png') }}" class="w-full h-1/2 object-cover" alt="Adesilex P9">
+                        </div>
+                        <div class="p-4">
+                            <div class="flex items-center justify-between mb-2">
+                                <h3 class="font-bold text-lg">ADESILEX P9</h3>
+                                <div class="flex items-center">
+                                    <span class="mr-1 text-sm">4.5/5</span>
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-yellow-400" viewBox="0 0 20 20" fill="currentColor">
+                                        <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                                    </svg>
+                                </div>
+                            </div>
+                            <p class="text-gray-600 text-sm mb-4">High-performance cementitious adhesive with no vertical slip and extended open time for ceramic tiles and stone materials. The white version has very high whiteness and excellent workability.</p>
+                            <a href="#" class="inline-flex items-center text-blue-600 hover:text-blue-800">
+                                View Details
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 ml-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                                </svg>
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="bg-white rounded-lg shadow overflow-hidden h-full">
+                        <div class="">
+                            <img src="{{ asset('storage/photos/sima.png') }}" class="w-full h-1/2 object-cover" alt="Adesilex P9">
+                        </div>
+                        <div class="p-4">
+                            <div class="flex items-center justify-between mb-2">
+                                <h3 class="font-bold text-lg">ADESILEX P9</h3>
+                                <div class="flex items-center">
+                                    <span class="mr-1 text-sm">4.5/5</span>
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-yellow-400" viewBox="0 0 20 20" fill="currentColor">
+                                        <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                                    </svg>
+                                </div>
+                            </div>
+                            <p class="text-gray-600 text-sm mb-4">High-performance cementitious adhesive with no vertical slip and extended open time for ceramic tiles and stone materials. The white version has very high whiteness and excellent workability.</p>
+                            <a href="#" class="inline-flex items-center text-blue-600 hover:text-blue-800">
+                                View Details
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 ml-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                                </svg>
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="bg-white rounded-lg shadow overflow-hidden h-full">
+                        <div class="">
+                            <img src="{{ asset('storage/photos/sima.png') }}" class="w-full h-1/2 object-cover" alt="Adesilex P9">
+                        </div>
+                        <div class="p-4">
+                            <div class="flex items-center justify-between mb-2">
+                                <h3 class="font-bold text-lg">ADESILEX P9</h3>
+                                <div class="flex items-center">
+                                    <span class="mr-1 text-sm">4.5/5</span>
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-yellow-400" viewBox="0 0 20 20" fill="currentColor">
+                                        <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                                    </svg>
+                                </div>
+                            </div>
+                            <p class="text-gray-600 text-sm mb-4">High-performance cementitious adhesive with no vertical slip and extended open time for ceramic tiles and stone materials. The white version has very high whiteness and excellent workability.</p>
+                            <a href="#" class="inline-flex items-center text-blue-600 hover:text-blue-800">
+                                View Details
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 ml-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                                </svg>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+
+                <!-- Pagination -->
+                <div class="flex justify-center mt-10">
+                    <nav class="inline-flex rounded-md shadow">
+                        <a href="#" class="py-2 px-4 border border-gray-300 bg-white rounded-l-md text-sm font-medium text-gray-700 hover:bg-gray-50">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-1 inline-block" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+                            </svg>
+                            Previous
+                        </a>
+                        <a href="#" class="py-2 px-4 border border-gray-300 text-yellow-400 text-white text-sm font-medium">1</a>
+                        <a href="#" class="py-2 px-4 border border-gray-300 bg-white text-sm font-medium text-gray-700 hover:bg-gray-50">2</a>
+                        <a href="#" class="py-2 px-4 border border-gray-300 bg-white text-sm font-medium text-gray-700 hover:bg-gray-50">3</a>
+                        <span class="py-2 px-4 border border-gray-300 bg-white text-sm font-medium text-gray-700">...</span>
+                        <a href="#" class="py-2 px-4 border border-gray-300 bg-white text-sm font-medium text-gray-700 hover:bg-gray-50">67</a>
+                        <a href="#" class="py-2 px-4 border border-gray-300 bg-white text-sm font-medium text-gray-700 hover:bg-gray-50">68</a>
+                        <a href="#" class="py-2 px-4 border border-gray-300 bg-white rounded-r-md text-sm font-medium text-gray-700 hover:bg-gray-50">
+                            Next
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 ml-1 inline-block" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                            </svg>
+                        </a>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </div>
+@endsection
