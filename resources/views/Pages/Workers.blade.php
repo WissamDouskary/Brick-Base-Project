@@ -3,34 +3,102 @@
 @section('title', 'Brick Base - Workers')
 
 @section('content')
+    <section class="relative h-40 md:h-64 overflow-hidden">
+        <!-- Background Image -->
+        <div class="absolute inset-0">
+            <img src="{{ asset('storage/photos/Section.png') }}" alt="Construction Background"
+                class="w-full h-full object-cover">
+        </div>
+
+
+        <!-- Hero Content -->
+        <div class="container mx-auto px-4 h-full flex flex-col justify-center items-start ml-6 relative z-10">
+            <h1 class="text-white text-3xl md:text-5xl font-bold text-center">Our Workers</h1>
+            <p class="text-gray-200 text-sm md:text-base text-center mb-2">Home > Our Workers</p>
+        </div>
+    </section>
     <div class="container mx-auto px-4 py-6">
-        <div class="flex items-center justify-between mb-6">
-            <div class="flex space-x-4">
-                <select class="border rounded px-2 py-1">
-                    <option>reviews</option>
-                </select>
-                <select class="border rounded px-2 py-1">
-                    <option>popularity</option>
-                </select>
-                <select class="border rounded px-2 py-1">
-                    <option>category</option>
-                </select>
-                <select class="border rounded px-2 py-1">
-                    <option>city</option>
-                    <option>All</option>
-                </select>
+        <div class="flex flex-col md:flex-row items-start md:items-center justify-between gap-4 mb-8 w-full mt-10">
+            <div class="flex flex-wrap gap-3">
+                <div class="relative">
+                    <select
+                        class="bg-white border border-gray-200 text-gray-700 rounded-lg px-4 py-2.5 pr-10 appearance-none cursor-pointer focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent shadow-sm hover:border-gray-300 transition-colors">
+                        <option>Reviews</option>
+                        <option>Highest</option>
+                        <option>Lowest</option>
+                    </select>
+                    <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-500">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                            xmlns="http://www.w3.org/2000/svg">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                        </svg>
+                    </div>
+                </div>
+
+                <div class="relative">
+                    <select
+                        class="bg-white border border-gray-200 text-gray-700 rounded-lg px-4 py-2.5 pr-10 appearance-none cursor-pointer focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent shadow-sm hover:border-gray-300 transition-colors">
+                        <option>Popularity</option>
+                        <option>Most Popular</option>
+                        <option>Least Popular</option>
+                    </select>
+                    <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-500">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                            xmlns="http://www.w3.org/2000/svg">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                        </svg>
+                    </div>
+                </div>
+
+                <div class="relative">
+                    <select
+                        class="bg-white border border-gray-200 text-gray-700 rounded-lg px-4 py-2.5 pr-10 appearance-none cursor-pointer focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent shadow-sm hover:border-gray-300 transition-colors">
+                        <option>Category</option>
+                        <option>Restaurants</option>
+                        <option>Hotels</option>
+                        <option>Entertainment</option>
+                    </select>
+                    <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-500">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                            xmlns="http://www.w3.org/2000/svg">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                        </svg>
+                    </div>
+                </div>
+
+                <div class="relative">
+                    <select
+                        class="bg-white border border-gray-200 text-gray-700 rounded-lg px-4 py-2.5 pr-10 appearance-none cursor-pointer focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent shadow-sm hover:border-gray-300 transition-colors">
+                        <option>City</option>
+                        <option>All</option>
+                        <option>New York</option>
+                        <option>Los Angeles</option>
+                        <option>Chicago</option>
+                    </select>
+                    <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-500">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                            xmlns="http://www.w3.org/2000/svg">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                        </svg>
+                    </div>
+                </div>
             </div>
-            <div class="flex">
-                <input type="text" placeholder="Search" class="border rounded px-2 py-1 mr-2">
-                <button class="bg-blue-500 text-white px-4 py-1 rounded">Search</button>
+
+            <div class="flex w-full md:w-auto">
+                <input type="text" placeholder="Search"
+                    class="w-full md:w-64 border border-gray-200 rounded-l-lg px-4 py-2.5 focus:outline-none focus:ring-2 focus:ring-yellow-400 focus:border-transparent">
+                <button
+                    class="bg-yellow-500 cursor-pointer hover:bg-yellow-600 text-white font-medium px-6 py-2.5 rounded-r-lg transition-colors focus:outline-none">
+                    Search
+                </button>
             </div>
         </div>
 
-        <div class="grid grid-cols-3 gap-6">
+        <div class="grid grid-cols-3 gap-20 mt-20">
             <div class="bg-white shadow-md rounded-lg overflow-hidden">
                 <div class="relative">
-                    <img src="/path/to/worker-image.jpg" alt="Worker" class="w-full h-48 object-cover">
-                    <div class="absolute bottom-0 left-0 right-0 bg-black bg-opacity-50 text-white p-2">
+                    <img src="{{ asset('storage/photos/Ourworkers.png') }}" alt="Worker" class="w-full h-72 object-cover">
+                    <div class="absolute bottom-0 left-0 right-0 bg-yellow-500 bg-opacity-50 text-white p-1 w-1/2">
                         Ceramics and Stone Materials
                     </div>
                 </div>
@@ -40,14 +108,22 @@
                         <div class="text-yellow-500">★★★★½</div>
                         <span class="ml-2 text-gray-600">4.5/5</span>
                     </div>
-                    <p class="text-gray-600 mb-4">High-performance cementitious adhesive with no vertical slip and extended open time for ceramic tiles and stone materials. The white version has very high white balance and excellent workability.</p>
+                    <p class="text-gray-600 mb-4">High-performance cementitious adhesive with no vertical slip and extended
+                        open time for ceramic tiles and stone materials. The white version has very high white balance and
+                        excellent workability.</p>
                     <div class="flex justify-between items-center">
-                        <a href="#" class="bg-blue-500 text-white px-4 py-2 rounded">
+                        <a href="#" class="inline-flex items-center text-blue-600 hover:text-blue-800">
                             View Details
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 ml-1" fill="none" viewBox="0 0 24 24"
+                                stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                            </svg>
                         </a>
                         <div class="flex items-center text-gray-600">
                             <svg class="w-4 h-4 mr-2" fill="currentColor" viewBox="0 0 20 20">
-                                <path fill-rule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clip-rule="evenodd" />
+                                <path fill-rule="evenodd"
+                                    d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z"
+                                    clip-rule="evenodd" />
                             </svg>
                             Casablanca
                         </div>
@@ -57,8 +133,8 @@
 
             <div class="bg-white shadow-md rounded-lg overflow-hidden">
                 <div class="relative">
-                    <img src="/path/to/worker-image.jpg" alt="Worker" class="w-full h-48 object-cover">
-                    <div class="absolute bottom-0 left-0 right-0 bg-black bg-opacity-50 text-white p-2">
+                    <img src="{{ asset('storage/photos/Ourworkers.png') }}" alt="Worker" class="w-full h-72 object-cover">
+                    <div class="absolute bottom-0 left-0 right-0 bg-yellow-500 bg-opacity-50 text-white p-1 w-1/2">
                         Ceramics and Stone Materials
                     </div>
                 </div>
@@ -68,14 +144,22 @@
                         <div class="text-yellow-500">★★★★½</div>
                         <span class="ml-2 text-gray-600">4.5/5</span>
                     </div>
-                    <p class="text-gray-600 mb-4">High-performance cementitious adhesive with no vertical slip and extended open time for ceramic tiles and stone materials. The white version has very high white balance and excellent workability.</p>
+                    <p class="text-gray-600 mb-4">High-performance cementitious adhesive with no vertical slip and extended
+                        open time for ceramic tiles and stone materials. The white version has very high white balance and
+                        excellent workability.</p>
                     <div class="flex justify-between items-center">
-                        <a href="#" class="bg-blue-500 text-white px-4 py-2 rounded">
+                        <a href="#" class="inline-flex items-center text-blue-600 hover:text-blue-800">
                             View Details
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 ml-1" fill="none"
+                                viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                            </svg>
                         </a>
                         <div class="flex items-center text-gray-600">
                             <svg class="w-4 h-4 mr-2" fill="currentColor" viewBox="0 0 20 20">
-                                <path fill-rule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clip-rule="evenodd" />
+                                <path fill-rule="evenodd"
+                                    d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z"
+                                    clip-rule="evenodd" />
                             </svg>
                             Casablanca
                         </div>
@@ -85,8 +169,8 @@
 
             <div class="bg-white shadow-md rounded-lg overflow-hidden">
                 <div class="relative">
-                    <img src="/path/to/worker-image.jpg" alt="Worker" class="w-full h-48 object-cover">
-                    <div class="absolute bottom-0 left-0 right-0 bg-black bg-opacity-50 text-white p-2">
+                    <img src="{{ asset('storage/photos/Ourworkers.png') }}" alt="Worker" class="w-full h-72 object-cover">
+                    <div class="absolute bottom-0 left-0 right-0 bg-yellow-500 bg-opacity-50 text-white p-1 w-1/2">
                         Ceramics and Stone Materials
                     </div>
                 </div>
@@ -96,14 +180,22 @@
                         <div class="text-yellow-500">★★★★½</div>
                         <span class="ml-2 text-gray-600">4.5/5</span>
                     </div>
-                    <p class="text-gray-600 mb-4">High-performance cementitious adhesive with no vertical slip and extended open time for ceramic tiles and stone materials. The white version has very high white balance and excellent workability.</p>
+                    <p class="text-gray-600 mb-4">High-performance cementitious adhesive with no vertical slip and extended
+                        open time for ceramic tiles and stone materials. The white version has very high white balance and
+                        excellent workability.</p>
                     <div class="flex justify-between items-center">
-                        <a href="#" class="bg-blue-500 text-white px-4 py-2 rounded">
+                        <a href="#" class="inline-flex items-center text-blue-600 hover:text-blue-800">
                             View Details
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 ml-1" fill="none"
+                                viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                            </svg>
                         </a>
                         <div class="flex items-center text-gray-600">
                             <svg class="w-4 h-4 mr-2" fill="currentColor" viewBox="0 0 20 20">
-                                <path fill-rule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clip-rule="evenodd" />
+                                <path fill-rule="evenodd"
+                                    d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z"
+                                    clip-rule="evenodd" />
                             </svg>
                             Casablanca
                         </div>
@@ -112,4 +204,75 @@
             </div>
         </div>
     </div>
+
+
+    <!-- Pagination -->
+    <div class="flex justify-center mt-10">
+        <nav class="inline-flex rounded-md shadow">
+            <a href="#" class="py-2 px-4 border border-gray-300 bg-white rounded-l-md text-sm font-medium text-gray-700 hover:bg-gray-50">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-1 inline-block" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+                </svg>
+                Previous
+            </a>
+            <a href="#" class="py-2 px-4 border border-gray-300 text-yellow-400 text-white text-sm font-medium">1</a>
+            <a href="#" class="py-2 px-4 border border-gray-300 bg-white text-sm font-medium text-gray-700 hover:bg-gray-50">2</a>
+            <a href="#" class="py-2 px-4 border border-gray-300 bg-white text-sm font-medium text-gray-700 hover:bg-gray-50">3</a>
+            <span class="py-2 px-4 border border-gray-300 bg-white text-sm font-medium text-gray-700">...</span>
+            <a href="#" class="py-2 px-4 border border-gray-300 bg-white text-sm font-medium text-gray-700 hover:bg-gray-50">67</a>
+            <a href="#" class="py-2 px-4 border border-gray-300 bg-white text-sm font-medium text-gray-700 hover:bg-gray-50">68</a>
+            <a href="#" class="py-2 px-4 border border-gray-300 bg-white rounded-r-md text-sm font-medium text-gray-700 hover:bg-gray-50">
+                Next
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 ml-1 inline-block" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                </svg>
+            </a>
+        </nav>
+    </div>
+
+        {{-- why choose us section --}}
+        <section class="grid grid-cols-2 mb-16 mt-16" data-aos="fade-up"
+        data-aos-anchor-placement="top-bottom">
+            <div class="h-[550px]">
+                <img class="w-full h-full" src="{{ asset('storage/photos/3workers.png') }}" alt="helmet photo">
+                
+            </div>
+    
+            <div class="bg-amber-400 p-16 flex flex-col justify-center">
+                <h2 class="text-white text-4xl font-bold mb-4">
+                    Why chose us<br />
+                    Workers
+                </h2>
+    
+                <p class="text-white mb-12 text-sm">
+                    At Brick Base, we are committed to building strong foundations for the future. As a leading
+                    construction company, we specialize in delivering high-quality, reliable, and innovative
+                    construction solutions for residential, commercial, and industrial projects. Our team of experienced
+                    professionals is dedicated to bringing your vision to life with precision...
+                </p>
+    
+                {{-- les statistique --}}
+                <div class="grid grid-cols-3 gap-8">
+                    <div class="text-white">
+                        <div class="text-5xl font-bold mb-2">4</div>
+                        <div class="text-sm">Consolidated Turnover in 2019</div>
+                    </div>
+    
+                    <div class="text-white">
+                        <div class="text-5xl font-bold mb-2">1,879</div>
+                        <div class="text-sm">Employee</div>
+                    </div>
+    
+                    <div class="text-white">
+                        <div class="text-5xl font-bold mb-2">178</div>
+                        <div class="text-sm">New formulations by Brick Base every year</div>
+                    </div>
+                </div>
+    
+                <div class="mt-12 text-white text-sm">
+                    <p>Whether the job is water proofing, grouting, sealing or any other construction and building needs,</p>
+                    <p>The artist is always Brick Base!</p>
+                </div>
+            </div>
+        </section>
 @endsection
