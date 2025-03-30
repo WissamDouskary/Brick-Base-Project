@@ -16,8 +16,8 @@ export default {
                     100: '#FFEB99',
                     200: '#FFDA66',
                     300: '#FFCC33',
-                    400: '#FFBE41',  // Your custom primary color
-                    500: '#FFAA00',  // Darker shade of your primary color
+                    400: '#FFBE41',
+                    500: '#FFAA00',
                 },
                 secondary: '#121C45',
             },

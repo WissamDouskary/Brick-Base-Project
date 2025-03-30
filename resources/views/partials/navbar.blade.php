@@ -10,7 +10,7 @@
         <a href="{{ route('About') }}" class="text-gray-600 hover:text-gray-900">About</a>
         <a href="{{route('Products')}}" class="text-gray-600 hover:text-gray-900">Products</a>
         <a href="{{route('Workers')}}" class="text-gray-600 hover:text-gray-900">Workers</a>
-        <a href="#" class="text-gray-600 hover:text-gray-900">Contact</a>
+        <a href="{{route('Contact')}}" class="text-gray-600 hover:text-gray-900">Contact</a>
     </div>
 
     <!-- Account Button -->
