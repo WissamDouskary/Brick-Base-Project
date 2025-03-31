@@ -131,6 +131,32 @@
                     @enderror
                 </div>
 
+                <div class="mb-4">
+                    <label for="city" class="block text-sm font-medium text-gray-700 mb-1">
+                        Show me your city!
+                    </label>
+                    <div class="relative">
+                        <select
+                            id="city"
+                            name="city"
+                            class="w-full p-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-amber-400 appearance-none bg-white pr-8 @error('city') border-red-500 @enderror"
+                            required
+                        >
+                            <option value="" disabled {{ old('city') ? '' : 'selected' }}>Select Your City</option>
+                            <option value="Casablanca" {{ old('city') == 'Casablanca' ? 'selected' : '' }}>Casablanca</option>
+                            <option value="Safi" {{ old('city') == 'Safi' ? 'selected' : '' }}>Safi</option>
+                        </select>
+                        <div class="absolute inset-y-0 right-0 flex items-center px-2 pointer-events-none">
+                            <svg class="w-4 h-4 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                            </svg>
+                        </div>
+                    </div>
+                    @error('city')
+                        <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
+                    @enderror
+                </div>
+
                 <!-- Password field -->
                 <div class="mb-1">
                     <div class="flex justify-between items-center mb-1">
