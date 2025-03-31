@@ -90,7 +90,7 @@
                                 </div>
                             </div>
                             <p class="text-gray-600 text-sm mb-4">High-performance cementitious adhesive with no vertical slip and extended open time for ceramic tiles and stone materials. The white version has very high whiteness and excellent workability.</p>
-                            <a href="#" class="inline-flex items-center text-blue-600 hover:text-blue-800">
+                            <a href="{{ route('ProductPreview') }}" class="inline-flex items-center text-blue-600 hover:text-blue-800">
                                 View Details
                                 <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 ml-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
@@ -114,7 +114,7 @@
                                 </div>
                             </div>
                             <p class="text-gray-600 text-sm mb-4">High-performance cementitious adhesive with no vertical slip and extended open time for ceramic tiles and stone materials. The white version has very high whiteness and excellent workability.</p>
-                            <a href="#" class="inline-flex items-center text-blue-600 hover:text-blue-800">
+                            <a href="{{ route('ProductPreview') }}" class="inline-flex items-center text-blue-600 hover:text-blue-800">
                                 View Details
                                 <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 ml-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
@@ -138,7 +138,7 @@
                                 </div>
                             </div>
                             <p class="text-gray-600 text-sm mb-4">High-performance cementitious adhesive with no vertical slip and extended open time for ceramic tiles and stone materials. The white version has very high whiteness and excellent workability.</p>
-                            <a href="#" class="inline-flex items-center text-blue-600 hover:text-blue-800">
+                            <a href="{{ route('ProductPreview') }}" class="inline-flex items-center text-blue-600 hover:text-blue-800">
                                 View Details
                                 <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 ml-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
@@ -162,7 +162,7 @@
                                 </div>
                             </div>
                             <p class="text-gray-600 text-sm mb-4">High-performance cementitious adhesive with no vertical slip and extended open time for ceramic tiles and stone materials. The white version has very high whiteness and excellent workability.</p>
-                            <a href="#" class="inline-flex items-center text-blue-600 hover:text-blue-800">
+                            <a href="{{ route('ProductPreview') }}" class="inline-flex items-center text-blue-600 hover:text-blue-800">
                                 View Details
                                 <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 ml-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
@@ -186,7 +186,7 @@
                                 </div>
                             </div>
                             <p class="text-gray-600 text-sm mb-4">High-performance cementitious adhesive with no vertical slip and extended open time for ceramic tiles and stone materials. The white version has very high whiteness and excellent workability.</p>
-                            <a href="#" class="inline-flex items-center text-blue-600 hover:text-blue-800">
+                            <a href="{{ route('ProductPreview') }}" class="inline-flex items-center text-blue-600 hover:text-blue-800">
                                 View Details
                                 <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 ml-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />

@@ -112,7 +112,7 @@
                         open time for ceramic tiles and stone materials. The white version has very high white balance and
                         excellent workability.</p>
                     <div class="flex justify-between items-center">
-                        <a href="#" class="inline-flex items-center text-blue-600 hover:text-blue-800">
+                        <a href="{{route('Preview')}}" class="inline-flex items-center text-blue-600 hover:text-blue-800">
                             View Details
                             <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 ml-1" fill="none" viewBox="0 0 24 24"
                                 stroke="currentColor">
@@ -148,7 +148,7 @@
                         open time for ceramic tiles and stone materials. The white version has very high white balance and
                         excellent workability.</p>
                     <div class="flex justify-between items-center">
-                        <a href="#" class="inline-flex items-center text-blue-600 hover:text-blue-800">
+                        <a href="{{route('Preview')}}" class="inline-flex items-center text-blue-600 hover:text-blue-800">
                             View Details
                             <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 ml-1" fill="none"
                                 viewBox="0 0 24 24" stroke="currentColor">
@@ -184,7 +184,7 @@
                         open time for ceramic tiles and stone materials. The white version has very high white balance and
                         excellent workability.</p>
                     <div class="flex justify-between items-center">
-                        <a href="#" class="inline-flex items-center text-blue-600 hover:text-blue-800">
+                        <a href="{{route('Preview')}}" class="inline-flex items-center text-blue-600 hover:text-blue-800">
                             View Details
                             <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 ml-1" fill="none"
                                 viewBox="0 0 24 24" stroke="currentColor">

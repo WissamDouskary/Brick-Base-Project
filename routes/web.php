@@ -21,3 +21,11 @@ Route::get('/Workers', function (){
 Route::get('/Contact', function(){
     return view('Pages.Contact');
 })->name('Contact');
+
+Route::get('/Workers/Preview', function(){
+    return view('Pages.Worker-preview');
+})->name('Preview');
+
+Route::get('/Products/Preview', function(){
+    return view('Pages.Product-preview');
+})->name('ProductPreview');
