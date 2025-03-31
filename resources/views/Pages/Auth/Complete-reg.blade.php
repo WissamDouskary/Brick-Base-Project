@@ -59,6 +59,24 @@
                     @enderror
                 </div>
 
+                <!-- Category field -->
+                <div class="mb-6">
+                    <label for="Category" class="block text-sm font-medium text-gray-700 mb-1">
+                        Category
+                    </label>
+                    <input
+                        type="text"
+                        id="Category"
+                        name="Category"
+                        value="{{ old('Category') }}"
+                        class="w-full p-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-amber-400 @error('Category') border-red-500 @enderror"
+                        required
+                    >
+                    @error('Category')
+                        <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
+                    @enderror
+                </div>
+
                 <!-- Complete button -->
                 <div class="flex justify-start">
                     <button

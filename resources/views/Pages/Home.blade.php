@@ -18,7 +18,7 @@
                 </h1>
                 <p class="text-lg sm:text-xl mb-6 sm:mb-8">Construction structuring</p>
                 <div class="flex flex-row w-60 sm:flex-row gap-4">
-                    <a href="" class="w-1/2 sm:w-auto"><button
+                    <a href="{{ route('Products')}}" class="w-1/2 sm:w-auto"><button
                             class="w-full sm:w-auto bg-amber-400 text-white px-6 sm:px-10 py-3 hover:bg-amber-500 cursor-pointer duration-200">
                             Products
                         </button></a>

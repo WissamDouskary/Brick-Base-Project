@@ -14,11 +14,26 @@
 
     <!-- Desktop Navigation Links (Hidden on Mobile) -->
     <div class="hidden lg:flex items-center space-x-8">
-        <a href="{{ route('Home') }}" class="text-gray-600 hover:text-gray-900">Home</a>
-        <a href="{{ route('About') }}" class="text-gray-600 hover:text-gray-900">About</a>
-        <a href="{{ route('Products') }}" class="text-gray-600 hover:text-gray-900">Products</a>
-        <a href="{{ route('Workers') }}" class="text-gray-600 hover:text-gray-900">Workers</a>
-        <a href="{{ route('Contact') }}" class="text-gray-600 hover:text-gray-900">Contact</a>
+        <a href="{{ route('Home') }}" 
+           class="text-gray-600 hover:text-gray-900 relative py-2 {{ request()->routeIs('Home') ? 'text-gray-900 font-medium after:absolute after:bottom-0 after:left-0 after:w-full after:h-0.5 after:bg-gray-900' : '' }}">
+            Home
+        </a>
+        <a href="{{ route('About') }}" 
+           class="text-gray-600 hover:text-gray-900 relative py-2 {{ request()->routeIs('About') ? 'text-gray-900 font-medium after:absolute after:bottom-0 after:left-0 after:w-full after:h-0.5 after:bg-gray-900' : '' }}">
+            About
+        </a>
+        <a href="{{ route('Products') }}" 
+           class="text-gray-600 hover:text-gray-900 relative py-2 {{ request()->routeIs('Products') ? 'text-gray-900 font-medium after:absolute after:bottom-0 after:left-0 after:w-full after:h-0.5 after:bg-gray-900' : '' }}">
+            Products
+        </a>
+        <a href="{{ route('Workers') }}" 
+           class="text-gray-600 hover:text-gray-900 relative py-2 {{ request()->routeIs('Workers') ? 'text-gray-900 font-medium after:absolute after:bottom-0 after:left-0 after:w-full after:h-0.5 after:bg-gray-900' : '' }}">
+            Workers
+        </a>
+        <a href="{{ route('Contact') }}" 
+           class="text-gray-600 hover:text-gray-900 relative py-2 {{ request()->routeIs('Contact') ? 'text-gray-900 font-medium after:absolute after:bottom-0 after:left-0 after:w-full after:h-0.5 after:bg-gray-900' : '' }}">
+            Contact
+        </a>
     </div>
 
     <!-- Desktop Account Button (Hidden on Mobile) -->
@@ -160,6 +175,7 @@
             <div class="border-t px-6 py-8">
                 @auth
                     <!-- Mobile Account Dropdown -->
+                    @if(auth()->user()->role_id == 1)
                     <div class="space-y-4">
                         <div class="flex items-center space-x-3 mb-4">
                             <div class="relative">
@@ -170,7 +186,7 @@
                                 </div>
                             </div>
                             <div>
-                                <div class="font-medium text-gray-800">{{ auth()->user()->name }}</div>
+                                <div class="font-medium text-gray-800">{{ auth()->user()->first_name . ' ' . auth()->user()->last_name }}</div>
                                 <div class="text-sm text-gray-500">{{ auth()->user()->email }}</div>
                             </div>
                         </div>
@@ -187,6 +203,33 @@
                                 class="block w-full text-left py-2 text-gray-600 hover:text-gray-900">Log out</button>
                         </form>
                     </div>
+                    @else
+                    <div class="space-y-4">
+                        <div class="flex items-center space-x-3 mb-4">
+                            <div class="relative">
+                                <img class="w-10 h-10 rounded-full object-cover"
+                                    src="{{ asset('storage/' . auth()->user()->profile_photo) }}" alt="Profile Photo">
+                                <div
+                                    class="absolute bottom-0 right-0 w-2.5 h-2.5 bg-green-500 rounded-full border-2 border-white">
+                                </div>
+                            </div>
+                            <div>
+                                <div class="font-medium text-gray-800">{{ auth()->user()->first_name . ' ' . auth()->user()->last_name }}</div>
+                                <div class="text-sm text-gray-500">{{ auth()->user()->email }}</div>
+                            </div>
+                        </div>
+
+                        <a href="" class="block py-2 text-gray-600 hover:text-gray-900">View profile</a>
+                        <a href="" class="block py-2 text-gray-600 hover:text-gray-900">Settings</a>
+                        <a href="" class="block py-2 text-gray-600 hover:text-gray-900">Support</a>
+
+                        <form method="POST" action="">
+                            @csrf
+                            <button type="submit"
+                                class="block w-full text-left py-2 text-gray-600 hover:text-gray-900">Log out</button>
+                        </form>
+                    </div>
+                    @endif
                 @else
                     <div class="flex flex-col space-y-4">
                         <a href="{{ route('LogIn') }}"
