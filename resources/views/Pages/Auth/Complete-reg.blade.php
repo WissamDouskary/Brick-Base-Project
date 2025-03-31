@@ -20,7 +20,7 @@
             <h2 class="text-2xl font-semibold text-gray-800 mb-2">Hello Worker!</h2>
             <p class="text-gray-600 mb-6">Please fill all required Data to complete your registration as a Worker!</p>
             
-            <form method="POST" action="">
+            <form method="POST" action="{{ route('completeRegistration') }}">
                 @csrf
                 
                 <!-- Bio field -->

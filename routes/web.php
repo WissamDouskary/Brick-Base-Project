@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -41,3 +42,8 @@ Route::get('/LogIn', function(){
 Route::get('/CompleteRegistration', function(){
     return view('Pages.Auth.Complete-reg');
 })->name('CompleteRegistration');
+
+//auth
+Route::post('/register', [UserController::class, 'register'])->name('register');
+Route::post('/complete', [UserController::class, 'completeRegistration'])->name('completeRegistration');
+Route::post('/Logout', [UserController::class, 'Logout'])->name('logout');

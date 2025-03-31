@@ -22,7 +22,7 @@
         <div class="w-full max-w-md">
             <h2 class="text-2xl font-semibold text-gray-800 mb-6">Sign up now</h2>
             
-            <form method="POST" action="" enctype="multipart/form-data">
+            <form method="POST" action="{{ route('register') }}" enctype="multipart/form-data">
                 @csrf
                 
                 <!-- Name fields -->
@@ -92,8 +92,8 @@
                             required
                         >
                             <option value="" disabled {{ old('role') ? '' : 'selected' }}>Select Your Role</option>
-                            <option value="Worker" {{ old('role') == 'Worker' ? 'selected' : '' }}>Worker</option>
-                            <option value="Client" {{ old('role') == 'Client' ? 'selected' : '' }}>Client</option>
+                            <option value="1" {{ old('role') == 'Worker' ? 'selected' : '' }}>Worker</option>
+                            <option value="2" {{ old('role') == 'Client' ? 'selected' : '' }}>Client</option>
                         </select>
                         <div class="absolute inset-y-0 right-0 flex items-center px-2 pointer-events-none">
                             <svg class="w-4 h-4 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
