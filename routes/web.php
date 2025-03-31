@@ -47,3 +47,4 @@ Route::get('/CompleteRegistration', function(){
 Route::post('/register', [UserController::class, 'register'])->name('register');
 Route::post('/complete', [UserController::class, 'completeRegistration'])->name('completeRegistration');
 Route::post('/Logout', [UserController::class, 'Logout'])->name('logout');
+Route::post('/Login', [UserController::class, 'Login'])->name('Login');

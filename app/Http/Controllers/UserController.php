@@ -48,6 +48,22 @@ class UserController extends Controller
         return redirect()->route('Home');
     }
 
+    public function login(Request $request){
+
+        $fields = $request->validate([
+            'email' => 'required|exists:users,email',
+            'password' => 'required'
+        ]);
+
+        if(Auth::attempt($fields)){
+            $request->session()->regenerate();
+
+            return redirect()->route('Home');
+        }
+
+        return back()->with('error', 'email or password invalide!');
+    }
+
     public function completeRegistration(Request $request)
     {
         $fields = $request->validate([
