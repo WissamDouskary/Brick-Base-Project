@@ -1,23 +1,23 @@
-<footer class="bg-white py-12 px-6">
+<footer class="bg-white py-8 md:py-12 px-4 md:px-6">
     <!-- Newsletter Section -->
-    <div class="max-w-6xl mx-auto mb-12">
-        <div class="flex flex-wrap items-center justify-between">
-            <div>
+    <div class="max-w-6xl mx-auto mb-8 md:mb-12">
+        <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-6">
+            <div class="text-center md:text-left">
                 <h3 class="text-lg font-bold">Our Newsletter</h3>
                 <p class="text-gray-600 text-sm">Sign up for industry news & insights</p>
             </div>
-            <div class="flex gap-4">
-                <form action="">
+            <div class="flex flex-col md:flex-row gap-6 w-full md:w-auto">
+                <form action="" class="flex flex-col sm:flex-row gap-3 w-full">
                     <input type="text" placeholder="Your Name"
-                        class="px-4 py-2 rounded focus:border focus:border-yellow-300 focus:outline-none mr-2" />
+                        class="px-4 py-2 rounded focus:border focus:border-yellow-300 focus:outline-none w-full" />
                     <input type="email" placeholder="Your Email Address"
-                        class="px-4 py-2 rounded focus:border focus:border-yellow-300 focus:outline-none mr-2" />
-                    <button type="submit" class="bg-amber-400 text-white px-6 py-2 rounded cursor-pointer">Submit
+                        class="px-4 py-2 rounded focus:border focus:border-yellow-300 focus:outline-none w-full" />
+                    <button type="submit" class="bg-amber-400 text-white px-6 py-2 rounded cursor-pointer w-full sm:w-auto">Submit
                         Now</button>
                 </form>
 
                 <!-- Social Icons -->
-                <div class="flex items-center gap-4 ml-4">
+                <div class="flex items-center justify-center md:justify-start gap-4 mt-4 md:mt-0 md:ml-4">
                     <a href="#" class="text-gray-600 hover:text-gray-900">
                         <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
                             <path
@@ -42,10 +42,10 @@
     </div>
 
     <!-- Main Footer Content -->
-    <div class="max-w-6xl mx-auto grid grid-cols-4 gap-8">
+    <div class="max-w-6xl mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
         <!-- Company Info -->
         <div class="col-span-1">
-            <img src="{{ asset('storage/photos/LOGO.png') }}" alt="Brick Base" class="mb-6 w-40" />
+            <img src="{{ asset('storage/photos/LOGO.png') }}" alt="Brick Base" class="mb-6 w-40 mx-auto sm:mx-0" />
             <p class="text-sm text-gray-600 mb-6">
                 Brick Base, we are committed to building strong foundations for the future. As a leading
                 construction company, we specialize in delivering high-quality, reliable, and innovative
@@ -61,8 +61,8 @@
 
         <!-- Who We Are -->
         <div class="col-span-1">
-            <h3 class="font-bold mb-4">Who We Are</h3>
-            <ul class="space-y-2 text-sm text-gray-600">
+            <h3 class="font-bold mb-4 text-center sm:text-left">Who We Are</h3>
+            <ul class="space-y-2 text-sm text-gray-600 text-center sm:text-left">
                 <li><a href="#" class="hover:text-gray-900">About Us</a></li>
                 <li><a href="#" class="hover:text-gray-900">Our Products</a></li>
                 <li><a href="#" class="hover:text-gray-900">Our Gallery</a></li>
@@ -73,8 +73,8 @@
 
         <!-- What We Do -->
         <div class="col-span-1">
-            <h3 class="font-bold mb-4">What We Do</h3>
-            <ul class="space-y-2 text-sm text-gray-600">
+            <h3 class="font-bold mb-4 text-center sm:text-left">What We Do</h3>
+            <ul class="space-y-2 text-sm text-gray-600 text-center sm:text-left">
                 <li><a href="#" class="hover:text-gray-900">Construction Products</a></li>
                 <li><a href="#" class="hover:text-gray-900">Water Proofing</a></li>
                 <li><a href="#" class="hover:text-gray-900">Cement Additives</a></li>
@@ -86,8 +86,8 @@
 
         <!-- Who We Serve -->
         <div class="col-span-1">
-            <h3 class="font-bold mb-4">Who We Serve</h3>
-            <ul class="space-y-2 text-sm text-gray-600">
+            <h3 class="font-bold mb-4 text-center sm:text-left">Who We Serve</h3>
+            <ul class="space-y-2 text-sm text-gray-600 text-center sm:text-left">
                 <li><a href="#" class="hover:text-gray-900">Building & Civil</a></li>
                 <li><a href="#" class="hover:text-gray-900">Sciences & Healthcare</a></li>
                 <li><a href="#" class="hover:text-gray-900">Industrial & Chemical</a></li>
@@ -99,7 +99,7 @@
     </div>
 
     <!-- Copyright -->
-    <div class="max-w-6xl mx-auto mt-12 pt-8 border-t border-gray-200">
+    <div class="max-w-6xl mx-auto mt-8 md:mt-12 pt-6 md:pt-8 border-t border-gray-200 text-center sm:text-left">
         <p class="text-sm text-gray-600">© {{ date('Y') }} Copyright <span class="text-amber-400">Brick Base</span>
         </p>
     </div>

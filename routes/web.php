@@ -29,3 +29,15 @@ Route::get('/Workers/Preview', function(){
 Route::get('/Products/Preview', function(){
     return view('Pages.Product-preview');
 })->name('ProductPreview');
+
+Route::get('/SignUp', function(){
+    return view('Pages.Auth.Sign-up');
+})->name('SignUp');
+
+Route::get('/LogIn', function(){
+    return view('Pages.Auth.Log-In');
+})->name('LogIn');
+
+Route::get('/CompleteRegistration', function(){
+    return view('Pages.Auth.Complete-reg');
+})->name('CompleteRegistration');

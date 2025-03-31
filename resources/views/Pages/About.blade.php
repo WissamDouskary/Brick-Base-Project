@@ -19,8 +19,7 @@
     </section>
 
     <!-- About Section -->
-    <section class="py-12 md:py-16" data-aos="fade-up"
-    data-aos-anchor-placement="top-bottom">
+    <section class="py-12 md:py-16" data-aos="fade-up" data-aos-anchor-placement="top-bottom">
         <div class="container mx-auto px-4 md:px-8 lg:px-16">
             <div class="flex flex-col md:flex-row gap-8 md:gap-12">
                 <!-- Text Content -->
@@ -44,7 +43,7 @@
                 </div>
 
                 <!-- Building Image with Stats Box -->
-                <div class="w-full md:w-1/2 flex flex-col">
+                <div class="w-full md:w-1/2 flex flex-col mt-6 md:mt-0">
                     <div class="rounded-lg">
                         <img src="{{ asset('storage/photos/1.jpg.png') }}" alt="Modern building perspective"
                             class="w-full object-cover">
@@ -54,101 +53,96 @@
         </div>
     </section>
 
-        {{-- why choose us section --}}
-        <section class="grid grid-cols-2 mb-16 mt-6" data-aos="fade-up"
-        data-aos-anchor-placement="top-bottom">
-            <div class="h-[550px]">
-                <img class="w-full h-full" src="{{ asset('storage/photos/worker.png') }}" alt="helmet photo">
-            </div>
+    {{-- why choose us section --}}
+    <section class="grid grid-cols-1 lg:grid-cols-2 mb-10 sm:mb-16 mt-6" data-aos="fade-up" data-aos-anchor-placement="top-bottom">
+        <div class="h-[300px] sm:h-[400px] md:h-[450px] lg:h-[550px]">
+            <img class="w-full h-full object-cover" src="{{ asset('storage/photos/worker.png') }}" alt="Worker photo">
+        </div>
 
-            <div class="bg-amber-400 p-16 flex flex-col justify-center">
-                <h2 class="text-white text-4xl font-bold mb-4">
-                    The Artist<br />
-                    Is Always Brick Base!
-                </h2>
+        <div class="bg-amber-400 p-6 sm:p-10 md:p-16 flex flex-col justify-center">
+            <h2 class="text-white text-2xl sm:text-3xl md:text-4xl font-bold mb-4">
+                The Artist<br />
+                Is Always Brick Base!
+            </h2>
 
-                <p class="text-white mb-12 text-sm">
-                    At Brick Base, we are committed to building strong foundations for the future. As a leading
-                    construction company, we specialize in delivering high-quality, reliable, and innovative
-                    construction solutions for residential, commercial, and industrial projects. Our team of experienced
-                    professionals is dedicated to bringing your vision to life with precision...
-                </p>
+            <p class="text-white mb-8 sm:mb-12 text-sm">
+                At Brick Base, we are committed to building strong foundations for the future. As a leading
+                construction company, we specialize in delivering high-quality, reliable, and innovative
+                construction solutions for residential, commercial, and industrial projects. Our team of experienced
+                professionals is dedicated to bringing your vision to life with precision...
+            </p>
 
-                {{-- les statistique --}}
-                <div class="grid grid-cols-3 gap-8">
-                    <div class="text-white">
-                        <div class="text-5xl font-bold mb-2">4</div>
-                        <div class="text-sm">Consolidated Turnover in 2019</div>
-                    </div>
-
-                    <div class="text-white">
-                        <div class="text-5xl font-bold mb-2">1,879</div>
-                        <div class="text-sm">Employee</div>
-                    </div>
-
-                    <div class="text-white">
-                        <div class="text-5xl font-bold mb-2">178</div>
-                        <div class="text-sm">New formulations by Brick Base every year</div>
-                    </div>
+            {{-- les statistique --}}
+            <div class="grid grid-cols-1 sm:grid-cols-3 gap-6 sm:gap-8">
+                <div class="text-white">
+                    <div class="text-3xl sm:text-4xl md:text-5xl font-bold mb-2">4</div>
+                    <div class="text-sm">Consolidated Turnover in 2019</div>
                 </div>
 
-                <div class="mt-12 text-white text-sm">
-                    <p>Whether the job is water proofing, grouting, sealing or any other construction and building needs,</p>
-                    <p>The artist is always Brick Base!</p>
+                <div class="text-white">
+                    <div class="text-3xl sm:text-4xl md:text-5xl font-bold mb-2">1,879</div>
+                    <div class="text-sm">Employee</div>
+                </div>
+
+                <div class="text-white">
+                    <div class="text-3xl sm:text-4xl md:text-5xl font-bold mb-2">178</div>
+                    <div class="text-sm">New formulations by Brick Base every year</div>
                 </div>
             </div>
-        </section>
 
-            <!-- Partners Section -->
-    <section class="py-16 px-8 bg-gray-50 mb-16" data-aos="fade-up"
-    data-aos-anchor-placement="top-bottom">
+            <div class="mt-8 sm:mt-12 text-white text-sm">
+                <p>Whether the job is water proofing, grouting, sealing or any other construction and building needs,</p>
+                <p>The artist is always Brick Base!</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Partners Section -->
+    <section class="py-10 sm:py-16 px-4 sm:px-8 bg-gray-50 mb-10 sm:mb-16" data-aos="fade-up" data-aos-anchor-placement="top-bottom">
         <div class="max-w-6xl mx-auto">
-            <div class="grid grid-cols-6 gap-8 items-center">
-
+            <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-8 items-center">
                 <div class="flex items-center justify-center">
                     <img src="{{ asset('storage/photos/Mercedes-Benz-Logo.png') }}" alt="Mercedes"
-                        class="h-16 object-contain grayscale hover:grayscale-0 transition-all" />
+                        class="h-12 sm:h-16 object-contain grayscale hover:grayscale-0 transition-all" />
                 </div>
 
                 <div class="flex items-center justify-center">
                     <img src="{{ asset('storage/photos/Logo-Linkedin.png') }}" alt="linkdin"
-                        class="h-16 object-contain grayscale hover:grayscale-0 transition-all" />
+                        class="h-12 sm:h-16 object-contain grayscale hover:grayscale-0 transition-all" />
                 </div>
 
                 <div class="flex items-center justify-center">
                     <img src="{{ asset('storage/photos/logo-Bic.png') }}" alt="Bic"
-                        class="h-16 object-contain grayscale hover:grayscale-0 transition-all" />
+                        class="h-12 sm:h-16 object-contain grayscale hover:grayscale-0 transition-all" />
                 </div>
 
                 <div class="flex items-center justify-center">
                     <img src="{{ asset('storage/photos/IKEA-Logo.png') }}" alt="IKEA-Logo"
-                        class="h-16 object-contain grayscale hover:grayscale-0 transition-all" />
+                        class="h-12 sm:h-16 object-contain grayscale hover:grayscale-0 transition-all" />
                 </div>
 
                 <div class="flex items-center justify-center">
                     <img src="{{ asset('storage/photos/Lenovo-Logo.jpg') }}" alt="Lenovo-Logo"
-                        class="h-16 object-contain grayscale hover:grayscale-0 transition-all" />
+                        class="h-12 sm:h-16 object-contain grayscale hover:grayscale-0 transition-all" />
                 </div>
 
                 <div class="flex items-center justify-center">
                     <img src="{{ asset('storage/photos/CAT-logo.png') }}" alt="CAT-logo"
-                        class="h-16 object-contain grayscale hover:grayscale-0 transition-all" />
+                        class="h-12 sm:h-16 object-contain grayscale hover:grayscale-0 transition-all" />
                 </div>
             </div>
         </div>
     </section>
 
     {{-- our Location --}}
-    <section class="bg-white mb-16" data-aos="fade-up"
-    data-aos-anchor-placement="top-bottom">
+    <section class="bg-white mb-10 sm:mb-16 px-4 sm:px-8" data-aos="fade-up" data-aos-anchor-placement="top-bottom">
         <div class="max-w-6xl mx-auto">
-
             <div class="bg-[#14213D] p-4">
                 <h2 class="text-white text-lg">Our Locations</h2>
             </div>
 
-            <div class="p-6 bg-white">
-                <h3 class="text-amber-400 font-medium mb-6">Brick Base Office & Showroom</h3>
+            <div class="p-4 sm:p-6 bg-white">
+                <h3 class="text-amber-400 font-medium mb-4 sm:mb-6">Brick Base Office & Showroom</h3>
 
                 <div class="space-y-3 mb-6">
                     <div class="flex gap-2">
@@ -157,7 +151,7 @@
                     </div>
                     <div class="flex gap-2">
                         <span class="text-sm">• Email:</span>
-                        <span class="text-sm">douskary.wissam@gmail.com</span>
+                        <span class="text-sm break-all">douskary.wissam@gmail.com</span>
                     </div>
                     <div class="flex gap-2">
                         <span class="text-sm">• Address:</span>
@@ -170,7 +164,7 @@
                 </div>
 
                 <!-- Map -->
-                <div class="w-full h-48">
+                <div class="w-full h-48 sm:h-56 md:h-64">
                     <iframe
                         src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d9147.137252722036!2d2.495153541462481!3d39.524897396161094!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x1297899778d440bf%3A0xcd98c8f652432f13!2sVillas%20Cala%20del%20Sol%20S.L.!5e1!3m2!1sar!2sma!4v1740332853850!5m2!1sar!2sma"
                         width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy">

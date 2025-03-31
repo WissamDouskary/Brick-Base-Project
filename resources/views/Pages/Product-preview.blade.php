@@ -84,9 +84,9 @@
         </div>
     </section>
     
-    <!-- Similar Workers Section -->
+    <!-- Similar Products Section -->
     <section class="mb-12">
-        <h2 class="text-2xl font-bold text-center text-gray-800 mb-8">Similar Workers</h2>
+        <h2 class="text-2xl font-bold text-center text-gray-800 mb-8">Similar Products</h2>
         
         <div class="relative">
             
