@@ -64,14 +64,21 @@
                     <label for="category" class="block text-sm font-medium text-gray-700 mb-1">
                         Category
                     </label>
-                    <input
-                        type="text"
+                    <select
+                    type="text"
                         id="category"
                         name="category"
                         value="{{ old('category') }}"
                         class="w-full p-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-amber-400 @error('category') border-red-500 @enderror"
-                        required
+                    required
                     >
+                        <option value="" disabled selected>Select Your Categorie</option>
+                        <option value="Residential construction" >Residential construction</option>
+                        <option value="Commercial construction">Commercial construction</option>
+                        <option value="Industrial construction">Industrial construction</option>
+                        <option value="Infrastructure construction">Infrastructure construction</option>
+                        <option value="Non-combustible">Non-combustible</option>
+                    </select>
                     @error('category')
                         <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
                     @enderror

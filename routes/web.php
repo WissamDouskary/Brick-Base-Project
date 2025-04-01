@@ -5,6 +5,7 @@ use App\Http\Middleware\checkUserRole;
 use App\Http\Controllers\UserController;
 use App\Http\Middleware\CheckUserActive;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\WorkerProfileController;
 
 Route::get('/SignUp', function () {
     return view('Pages.Auth.Sign-up');
@@ -51,6 +52,12 @@ Route::middleware(['auth', checkUserRole::class, CheckUserActive::class])->group
 Route::get('/CompleteRegistration', function () {
     return view('Pages.Auth.Complete-reg');
 })->name('CompleteRegistration')->middleware('auth');
+
+Route::get('/Worker/Profile', function(){
+    return view('Pages.Profiles.worker-profile');
+})->name('workerprofile');
+
+Route::put('/profile/update', [WorkerProfileController::class, 'update'])->name('worker.profile.edit')->middleware('auth');
 
 Route::post('/register', [UserController::class, 'register'])->name('register');
 Route::post('/complete', [UserController::class, 'completeRegistration'])->name('completeRegistration');

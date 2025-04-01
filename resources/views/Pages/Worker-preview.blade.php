@@ -67,11 +67,9 @@
         <div class="mt-10">
             
             <div class="flex justify-end gap-4">
-                <img src="{{ asset('storage/photos/workerphoto.avif') }}" alt="Thumbnail 1" class="w-24 h-20 object-cover rounded border border-gray-300 cursor-pointer hover:border-yellow-400"/>
-                <img src="{{ asset('storage/photos/workerphoto.avif') }}" alt="Thumbnail 2" class="w-24 h-20 object-cover rounded border border-gray-300 cursor-pointer hover:border-yellow-400"/>
-                <img src="{{ asset('storage/photos/workerphoto.avif') }}" alt="Thumbnail 3" class="w-24 h-20 object-cover rounded border border-gray-300 cursor-pointer hover:border-yellow-400"/>
-                <img src="{{ asset('storage/photos/workerphoto.avif') }}" alt="Thumbnail 4" class="w-24 h-20 object-cover rounded border border-gray-300 cursor-pointer hover:border-yellow-400"/>
-                <img src="{{ asset('storage/photos/workerphoto.avif') }}" alt="Thumbnail 5" class="w-24 h-20 object-cover rounded border border-gray-300 cursor-pointer hover:border-yellow-400"/>
+              @foreach ($worker->images as $image)
+                <img src="{{ asset('storage/'. $image->image_path) }}" alt="Thumbnail" class="w-24 h-20 object-cover rounded border border-gray-300 cursor-pointer hover:border-yellow-400"/>
+              @endforeach
             </div>
         </div>
     </section>
