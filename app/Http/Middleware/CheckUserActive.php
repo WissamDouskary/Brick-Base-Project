@@ -18,6 +18,10 @@ class CheckUserActive
     {
         $user = Auth::user();
 
+        if ($request->route()->getName() === 'CompleteRegistration') {
+            return $next($request);
+        }
+
         if ($user && !$user->is_active) {
             return redirect()->route('in-active');
         }

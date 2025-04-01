@@ -18,7 +18,7 @@ Route::get('/Inactive', function () {
     return view('Pages.Auth.in-active');
 })->name('in-active');
 
-Route::middleware(['auth', CheckUserActive::class])->group(function () {
+Route::middleware(['auth', CheckUserActive::class])->group(function(){
     Route::get('/Workers', [UserController::class, 'getWorkers'])->name('Workers');
 
     Route::get('/', function () {
@@ -42,16 +42,15 @@ Route::middleware(['auth', CheckUserActive::class])->group(function () {
     Route::get('/Products/Preview', function () {
         return view('Pages.Product-preview');
     })->name('ProductPreview');
-
-    Route::get('/CompleteRegistration', function () {
-        return view('Pages.Auth.Complete-reg');
-    })->name('CompleteRegistration');
-
 });
 
 Route::middleware(['auth', checkUserRole::class, CheckUserActive::class])->group(function(){
     Route::get('/Product/List', [ProductController::class, 'index'])->name('product_list');
 });
+
+Route::get('/CompleteRegistration', function () {
+    return view('Pages.Auth.Complete-reg');
+})->name('CompleteRegistration')->middleware('auth');
 
 Route::post('/register', [UserController::class, 'register'])->name('register');
 Route::post('/complete', [UserController::class, 'completeRegistration'])->name('completeRegistration');

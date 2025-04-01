@@ -3,16 +3,22 @@
 namespace App\Http\Controllers;
 
 use App\Models\Role;
-use App\Models\User;
 use Illuminate\Http\Request;
+use App\Services\UserService;
 use Illuminate\Support\Facades\Auth;
-
 
 class UserController extends Controller
 {
+    protected $userService;
+
+    public function __construct(UserService $userService)
+    {
+        $this->userService = $userService;
+    }
+
     public function register(Request $request)
     {
-        $fields = $request->validate([
+        $data = $request->validate([
             'first_name' => 'required|min:3|max:10|string',
             'last_name' => 'required|min:3|max:10|string',
             'email' => 'required|email|unique:users,email',
@@ -22,56 +28,65 @@ class UserController extends Controller
             'password' => 'required|min:8',
             'terms' => 'accepted'
         ]);
-
-        $role = Role::where('id', $fields['role'])->first();
-
-        $photo = $request->file('profile_photo')->store('profile_photos', 'public');
-
-        $user = User::create([
-            'first_name' => $request->first_name,
-            'last_name' => $request->last_name,
-            'email' => $request->email,
-            'role_id' => $request->role,
-            'profile_photo' => $photo,
-            'city' => $request->city,
-            'password' => $request->password,
-            'terms' => $request->terms,
-            'is_active' => true,
-        ]);
-
-        auth()->login($user);
-
+    
+        $role = Role::where('id', $data['role'])->first();
+    
+        $user = $this->userService->registerUser($data);
+    
         if ($role->id == 1) {
             return redirect()->route('CompleteRegistration');
         }
+    
         return redirect()->route('Home');
     }
-
-    public function login(Request $request){
-
-        $fields = $request->validate([
+    
+    public function login(Request $request)
+    {
+        $credentials = $request->validate([
             'email' => 'required|exists:users,email',
             'password' => 'required'
         ]);
 
-        if(Auth::attempt($fields)){
+        if ($this->userService->loginUser($credentials)) {
             $request->session()->regenerate();
-
             return redirect()->route('Home');
         }
 
-        return back()->with('error', 'email or password invalide!');
+        return back()->with('error', 'Email ou mot de passe invalide !');
+    }
+
+    public function logout()
+    {
+        $this->userService->logoutUser();
+        return redirect()->route('SignUp');
+    }
+
+    public function getWorkers()
+    {
+        $workers = $this->userService->getWorkers();
+        return view('Pages.Workers', compact('workers'));
+    }
+
+    public function find($id)
+    {
+        $worker = $this->userService->findWorker($id);
+        return view('Pages.Worker-preview', compact('worker'));
     }
 
     public function completeRegistration(Request $request)
     {
+        $user = Auth::user();
+        $role = $user->role_id;
+
+        if ($role == 2) {
+            return redirect()->route('Home');
+        }
+    
         $fields = $request->validate([
             'bio' => 'required',
             'job_title' => 'required',
             'category' => 'required'
         ]);
-
-        $user = Auth::user();
 
         $user->update([
             'bio' => $request->bio,
@@ -79,31 +94,7 @@ class UserController extends Controller
             'category' => $request->category,
             'is_active' => false,
         ]);
-
-        $user->save();
-
+    
         return redirect()->route('Home');
-    }
-
-    public function logout()
-    {
-        Auth::logout();
-
-        request()->session()->invalidate();
-        request()->session()->regenerateToken();
-
-        return redirect()->route('SignUp');
-    }
-
-    public function getWorkers(){
-        $workers = User::where('role_id', 1)->where('is_active', true)->where('id', '!=', Auth::id())->paginate(9);
-
-        return view('Pages.Workers', compact('workers'));
-    }
-
-    public function find($id){
-        $worker = User::find($id)->where('id', '!=', Auth::id())->first();
-
-        return view('Pages.Worker-preview', compact('worker'));
     }
 }
