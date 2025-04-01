@@ -145,6 +145,8 @@
                             <option value="" disabled {{ old('city') ? '' : 'selected' }}>Select Your City</option>
                             <option value="Casablanca" {{ old('city') == 'Casablanca' ? 'selected' : '' }}>Casablanca</option>
                             <option value="Safi" {{ old('city') == 'Safi' ? 'selected' : '' }}>Safi</option>
+                            <option value="Agadir" {{ old('city') == 'Agadir' ? 'selected' : '' }}>Agadir</option>
+                            <option value="Oujda" {{ old('city') == 'Oujda' ? 'selected' : '' }}>Oujda</option>
                         </select>
                         <div class="absolute inset-y-0 right-0 flex items-center px-2 pointer-events-none">
                             <svg class="w-4 h-4 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
@@ -227,7 +229,7 @@
                         Sign up
                     </button>
                     <div class="text-sm">
-                        Already have an account? <a href="{{ route('LogIn') }}" class="text-black font-medium">Log in</a>
+                        Already have an account? <a href="{{ route('login') }}" class="text-black font-medium">Log in</a>
                     </div>
                 </div>
             </form>

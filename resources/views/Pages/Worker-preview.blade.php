@@ -14,8 +14,8 @@
 
     <!-- Hero Content -->
     <div class="container mx-auto px-4 h-full flex flex-col justify-center items-start ml-6 relative z-10">
-        <h1 class="text-white text-3xl md:text-5xl font-bold text-center">KERASET</h1>
-        <p class="text-gray-200 text-sm md:text-base text-center mb-2">Home > Our Workers > KERASET</p>
+        <h1 class="text-white text-3xl md:text-5xl font-bold text-center">{{$worker->first_name . " " . $worker->last_name}}</h1>
+        <p class="text-gray-200 text-sm md:text-base text-center mb-2">Home > Our Workers > {{$worker->first_name . " " . $worker->last_name}}</p>
     </div>
 </section>
 
@@ -23,14 +23,14 @@
     <!-- Product Information Section -->
     <section class="mb-12">
         <div class="text-start mb-2">
-            <p class="text-yellow-500 text-sm">Ceramics and Stone Material</p>
-            <h1 class="text-3xl font-bold text-gray-800 mt-1">KERASET</h1>
+            <p class="text-yellow-500 text-sm">{{ $worker->category }}</p>
+            <h1 class="text-3xl font-bold text-gray-800 mt-1">{{$worker->first_name . " " . $worker->last_name}}</h1>
         </div>
-
+            {{ $worker->bio }}
         <div class="flex flex-col md:flex-row mt-6 gap-8">
             <div class="md:w-1/2">
                 <p class="text-gray-700">
-                    Keraset is a grey or white powder composed of cement, sands of selected granulometry, synthetic resins and special admixtures according to a formula developed in MAPEI's Research Laboratories.
+                    
                 </p>
                 
                 <div class="mt-8 space-y-4">
@@ -42,15 +42,7 @@
                             </svg>
                         </button>
                         <div id="productDescription" class="mt-2 text-gray-600 text-sm hidden">
-                            <p class="mb-2">KERASET is a cementitious adhesive used for interior and exterior installation of ceramic tiles and natural stone materials on floors, walls and ceilings.</p>
-                            <p class="mb-2">Features and benefits:</p>
-                            <ul class="list-disc pl-5 mb-2">
-                                <li>Easy to apply</li>
-                                <li>Excellent adhesion to most common substrates</li>
-                                <li>No vertical slip, suitable for wall applications</li>
-                                <li>Extended open time</li>
-                            </ul>
-                            <p>Suitable for ceramic tiles of all types on both indoor and outdoor surfaces, including floors, walls, and swimming pools.</p>
+                            {{ $worker->bio }}
                         </div>
                     </div>
                 </div>
@@ -64,7 +56,7 @@
             
             <div class="md:w-1/2 mt-6 md:mt-0">
                 <div class="relative">
-                    <img src="{{ asset('storage/photos/workerphoto.avif') }}" alt="Workers applying Keraset" class="w-full h-auto rounded-md shadow-md"/>
+                    <img src="{{ asset('storage/'. $worker->profile_photo) }}" alt="Workers applying Keraset" class="w-full h-auto rounded-md shadow-md"/>
                     <span class="absolute bottom-3 right-3 bg-yellow-400 text-white text-xs px-2 py-1 rounded-sm">
                         Ceramics and Stone Material
                     </span>
@@ -103,6 +95,15 @@
                     <p class="text-gray-600 text-sm mt-1">
                         Flexible latex additive to be mixed with Kerabond, Kerafloor or Adesilex P10.
                     </p>
+                    <a href="{{ route('Preview', ['id' => $worker->id]) }}"
+                      class="inline-flex items-center text-blue-600 hover:text-blue-800 text-xs sm:text-sm">
+                      View Details
+                      <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3 sm:h-4 sm:w-4 ml-1"
+                          fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2"
+                              d="M9 5l7 7-7 7" />
+                      </svg>
+                  </a>
                 </div>
                 
                 <!-- Product 2 -->
@@ -117,6 +118,15 @@
                     <p class="text-gray-600 text-sm mt-1">
                         Fuga Fresca is a polymer paint for bringing back the original appearance of grout joints.
                     </p>
+                    <a href="{{ route('Preview', ['id' => $worker->id]) }}"
+                      class="inline-flex items-center text-blue-600 hover:text-blue-800 text-xs sm:text-sm">
+                      View Details
+                      <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3 sm:h-4 sm:w-4 ml-1"
+                          fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2"
+                              d="M9 5l7 7-7 7" />
+                      </svg>
+                  </a>
                 </div>
                 
                 <!-- Product 3 -->
@@ -131,6 +141,15 @@
                     <p class="text-gray-600 text-sm mt-1">
                         Fuga Fresca is a polymer paint for bringing back the original appearance of grout joints.
                     </p>
+                    <a href="{{ route('Preview', ['id' => $worker->id]) }}"
+                      class="inline-flex items-center text-blue-600 hover:text-blue-800 text-xs sm:text-sm">
+                      View Details
+                      <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3 sm:h-4 sm:w-4 ml-1"
+                          fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2"
+                              d="M9 5l7 7-7 7" />
+                      </svg>
+                  </a>
                 </div>
             </div>
         </div>

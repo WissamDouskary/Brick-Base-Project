@@ -72,7 +72,7 @@
 
                     <div class="py-1">
                         <a href="" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-50">View profile</a>
-                        <a href="" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-50">List Product</a>
+                        <a href="{{ route('product_list') }}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-50">List Product</a>
                         <a href="" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-50">View Offers</a>
                         <a href="" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-50">Settings</a>
                     </div>
@@ -135,7 +135,7 @@
             </div>
         @else
             <div class="flex items-center gap-4">
-                <a href="{{ route('LogIn') }}"><button class="cursor-pointer">Log In</button></a>
+                <a href="{{ route('login') }}"><button class="cursor-pointer">Log In</button></a>
                 <a href="{{ route('SignUp') }}"><button
                         class="bg-amber-400 text-white px-5 py-2 rounded-full hover:bg-amber-500 cursor-pointer duration-200">Sign
                         Up</button></a>
@@ -192,7 +192,7 @@
                         </div>
 
                         <a href="" class="block py-2 text-gray-600 hover:text-gray-900">View profile</a>
-                        <a href="" class="block py-2 text-gray-600 hover:text-gray-900">List Product</a>
+                        <a href="{{ route('product_list') }}" class="block py-2 text-gray-600 hover:text-gray-900">List Product</a>
                         <a href="" class="block py-2 text-gray-600 hover:text-gray-900">View Offers</a>
                         <a href="" class="block py-2 text-gray-600 hover:text-gray-900">Settings</a>
                         <a href="" class="block py-2 text-gray-600 hover:text-gray-900">Support</a>
@@ -232,7 +232,7 @@
                     @endif
                 @else
                     <div class="flex flex-col space-y-4">
-                        <a href="{{ route('LogIn') }}"
+                        <a href="{{ route('login') }}"
                             class="text-center py-2 border border-gray-300 rounded-full text-gray-600 hover:bg-gray-50 cursor-pointer duration-200">Log
                             In</a>
                         <a href="{{ route('SignUp') }}"

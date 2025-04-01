@@ -59,20 +59,20 @@
                     @enderror
                 </div>
 
-                <!-- Category field -->
+                <!-- category field -->
                 <div class="mb-6">
-                    <label for="Category" class="block text-sm font-medium text-gray-700 mb-1">
+                    <label for="category" class="block text-sm font-medium text-gray-700 mb-1">
                         Category
                     </label>
                     <input
                         type="text"
-                        id="Category"
-                        name="Category"
-                        value="{{ old('Category') }}"
-                        class="w-full p-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-amber-400 @error('Category') border-red-500 @enderror"
+                        id="category"
+                        name="category"
+                        value="{{ old('category') }}"
+                        class="w-full p-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-amber-400 @error('category') border-red-500 @enderror"
                         required
                     >
-                    @error('Category')
+                    @error('category')
                         <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
                     @enderror
                 </div>

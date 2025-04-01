@@ -44,8 +44,6 @@ class UserController extends Controller
         if ($role->id == 1) {
             return redirect()->route('CompleteRegistration');
         }
-        
-
         return redirect()->route('Home');
     }
 
@@ -70,7 +68,7 @@ class UserController extends Controller
         $fields = $request->validate([
             'bio' => 'required',
             'job_title' => 'required',
-            'Category' => 'required'
+            'category' => 'required'
         ]);
 
         $user = Auth::user();
@@ -98,8 +96,14 @@ class UserController extends Controller
     }
 
     public function getWorkers(){
-        $workers = User::where('role_id', 1)->paginate(9);
+        $workers = User::where('role_id', 1)->where('is_active', true)->where('id', '!=', Auth::id())->paginate(9);
 
         return view('Pages.Workers', compact('workers'));
+    }
+
+    public function find($id){
+        $worker = User::find($id)->where('id', '!=', Auth::id())->first();
+
+        return view('Pages.Worker-preview', compact('worker'));
     }
 }
