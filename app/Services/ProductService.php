@@ -19,6 +19,6 @@ Class ProductService {
     }
 
     public function getall(){
-       
+       return $this->productrepository->getall();
     }
 }

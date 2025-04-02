@@ -30,9 +30,7 @@ Route::middleware(['auth', CheckUserActive::class])->group(function(){
         return view('Pages.About');
     })->name('About');
     
-    Route::get('/products', function () {
-        return view('Pages.Products');
-    })->name('Products');
+    Route::get('/products', [ProductController::class, 'getall'])->name('Products');
     
     Route::get('/Contact', function () {
         return view('Pages.Contact');

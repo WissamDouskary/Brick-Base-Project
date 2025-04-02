@@ -19,6 +19,11 @@ class ProductController extends Controller
         return view('Pages.Product.list-product');
     }
 
+    public function getall(){
+        $products = $this->productservice->getall();
+        return view('Pages.Products', compact('products'));
+    }
+
     public function store(Request $request){
         $data = $request->validate([
             'title' => 'required|min:5|max:40',

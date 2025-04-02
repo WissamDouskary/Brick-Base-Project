@@ -33,6 +33,6 @@ class ProductRepository implements ProductRepositoryInterface
 
     public function getall()
     {
-        return Product::all();
+        return Product::where('worker_id', '!=', Auth::id())->paginate(9);
     }
 }
