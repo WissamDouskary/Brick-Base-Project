@@ -26,7 +26,7 @@
                 <!-- Bio field -->
                 <div class="mb-4">
                     <label for="bio" class="block text-sm font-medium text-gray-700 mb-1">
-                        Bio
+                        Description
                     </label>
                     <textarea
                         id="bio"
