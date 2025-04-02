@@ -128,6 +128,31 @@
                 @enderror
             </div>
 
+            <!-- category field -->
+            <div class="mb-6">
+                <label for="category" class="block text-sm font-medium text-gray-700">
+                    Category <span class="text-red-500">*</span>
+                </label>
+                <select
+                type="text"
+                    id="category"
+                    name="category"
+                    value="{{ old('category') }}"
+                    class="w-full p-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-amber-400 pr-2"
+                required
+                >
+                    <option value="" class="block text-sm font-medium text-gray-500 mb-1" disabled selected>Select Your Categorie</option>
+                    <option value="Residential construction" >Residential construction</option>
+                    <option value="Commercial construction">Commercial construction</option>
+                    <option value="Industrial construction">Industrial construction</option>
+                    <option value="Infrastructure construction">Infrastructure construction</option>
+                    <option value="Non-combustible">Non-combustible</option>
+                </select>
+                @error('category')
+                    <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
+                @enderror
+            </div>
+
             <div class="flex justify-end">
                 <button type="submit"
                     class="cursor-pointer inline-flex justify-center py-3 px-6 border border-transparent shadow-sm text-base font-medium rounded-full text-white bg-amber-400 hover:bg-amber-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-amber-500 transition duration-200">

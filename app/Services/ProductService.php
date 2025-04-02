@@ -17,4 +17,8 @@ Class ProductService {
     public function create($data){
         return $this->productrepository->create($data);
     }
+
+    public function getall(){
+       
+    }
 }

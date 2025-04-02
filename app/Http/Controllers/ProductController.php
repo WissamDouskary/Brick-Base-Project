@@ -26,6 +26,7 @@ class ProductController extends Controller
             'photos.*' => 'image|max:10240',
             'description' => 'required|max:255|min:40',
             'price' => 'required',
+            'category' => 'required'
         ]);
 
         if($request->hasFile('photos')){
