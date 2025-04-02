@@ -47,6 +47,7 @@ Route::middleware(['auth', CheckUserActive::class])->group(function(){
 
 Route::middleware(['auth', checkUserRole::class, CheckUserActive::class])->group(function(){
     Route::get('/Product/List', [ProductController::class, 'index'])->name('product_list');
+    Route::post('/Product/create', [ProductController::class, 'store'])->name('product.create');
 });
 
 Route::get('/CompleteRegistration', function () {

@@ -84,7 +84,7 @@
                     </label>
                     
                     <div class="mt-2">
-                        <!-- File input -->
+                        <!-- photo input -->
                         <div class="flex items-center justify-center w-full">
                             <label for="photos" class="flex flex-col items-center justify-center w-full h-32 border-2 border-dashed border-gray-300 rounded-lg cursor-pointer bg-gray-50 hover:bg-gray-100">
                                 <div class="flex flex-col items-center justify-center pt-5 pb-6">

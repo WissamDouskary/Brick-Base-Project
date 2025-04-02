@@ -4,6 +4,7 @@ namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 use App\Models\Role;
+use App\Models\Product;
 use App\Models\WorkerImage;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -64,5 +65,9 @@ class User extends Authenticatable
     public function images()
     {
         return $this->hasMany(WorkerImage::class, 'worker_id');
+    }
+
+    public function product(){
+        return $this->hasMany(Product::class, 'worker_id');
     }
 }
