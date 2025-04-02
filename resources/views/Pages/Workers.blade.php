@@ -25,7 +25,7 @@
             <div class="flex flex-wrap gap-2 sm:gap-3 w-full md:w-auto">
                 <div class="relative w-full sm:w-auto">
                     <select
-                        class="w-full sm:w-auto bg-white border border-gray-200 text-gray-700 rounded-lg px-3 sm:px-4 py-2 sm:py-2.5 pr-10 appearance-none cursor-pointer focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent shadow-sm hover:border-gray-300 transition-colors">
+                        class="w-full sm:w-auto bg-white border border-gray-200 text-gray-700 rounded-lg px-3 sm:px-4 py-2 sm:py-2.5 pr-10 appearance-none cursor-pointer focus:outline-none focus:ring-2 focus:ring-yellow-500 focus:border-transparent shadow-sm hover:border-gray-300 transition-colors">
                         <option>Reviews</option>
                         <option>Highest</option>
                         <option>Lowest</option>
@@ -40,7 +40,7 @@
 
                 <div class="relative w-full sm:w-auto">
                     <select
-                        class="w-full sm:w-auto bg-white border border-gray-200 text-gray-700 rounded-lg px-3 sm:px-4 py-2 sm:py-2.5 pr-10 appearance-none cursor-pointer focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent shadow-sm hover:border-gray-300 transition-colors">
+                        class="w-full sm:w-auto bg-white border border-gray-200 text-gray-700 rounded-lg px-3 sm:px-4 py-2 sm:py-2.5 pr-10 appearance-none cursor-pointer focus:outline-none focus:ring-2 focus:ring-yellow-500 focus:border-transparent shadow-sm hover:border-gray-300 transition-colors">
                         <option>Popularity</option>
                         <option>Most Popular</option>
                         <option>Least Popular</option>
@@ -55,7 +55,7 @@
 
                 <div class="relative w-full sm:w-auto">
                     <select
-                        class="w-full sm:w-auto bg-white border border-gray-200 text-gray-700 rounded-lg px-3 sm:px-4 py-2 sm:py-2.5 pr-10 appearance-none cursor-pointer focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent shadow-sm hover:border-gray-300 transition-colors">
+                        class="w-full sm:w-auto bg-white border border-gray-200 text-gray-700 rounded-lg px-3 sm:px-4 py-2 sm:py-2.5 pr-10 appearance-none cursor-pointer focus:outline-none focus:ring-2 focus:ring-yellow-500 focus:border-transparent shadow-sm hover:border-gray-300 transition-colors">
                         <option>Category</option>
                         <option>Restaurants</option>
                         <option>Hotels</option>
@@ -71,7 +71,7 @@
 
                 <div class="relative w-full sm:w-auto">
                     <select
-                        class="w-full sm:w-auto bg-white border border-gray-200 text-gray-700 rounded-lg px-3 sm:px-4 py-2 sm:py-2.5 pr-10 appearance-none cursor-pointer focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent shadow-sm hover:border-gray-300 transition-colors">
+                        class="w-full sm:w-auto bg-white border border-gray-200 text-gray-700 rounded-lg px-3 sm:px-4 py-2 sm:py-2.5 pr-10 appearance-none cursor-pointer focus:outline-none focus:ring-2 focus:ring-yellow-500 focus:border-transparent shadow-sm hover:border-gray-300 transition-colors">
                         <option>City</option>
                         <option>All</option>
                         <option>New York</option>
