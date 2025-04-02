@@ -74,6 +74,9 @@
                         <a href="{{ route('workerprofile') }}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-50">View profile</a>
                         <a href="{{ route('product_list') }}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-50">List Product</a>
                         <a href="" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-50">View Offers</a>
+                        @if (Auth::user()->category == null)
+                        <a href="{{ route('CompleteRegistration')}}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-50">Complete Registration</a>
+                        @endif
                         <a href="" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-50">Settings</a>
                     </div>
 
@@ -194,6 +197,9 @@
                         <a href="{{ route('workerprofile') }}" class="block py-2 text-gray-600 hover:text-gray-900">View profile</a>
                         <a href="{{ route('product_list') }}" class="block py-2 text-gray-600 hover:text-gray-900">List Product</a>
                         <a href="" class="block py-2 text-gray-600 hover:text-gray-900">View Offers</a>
+                        @if (Auth::user()->category == null)
+                        <a href="{{ route('CompleteRegistration')}}" class="block py-2 text-gray-600 hover:text-gray-900">Complete Registration</a>
+                        @endif
                         <a href="" class="block py-2 text-gray-600 hover:text-gray-900">Settings</a>
                         <a href="" class="block py-2 text-gray-600 hover:text-gray-900">Support</a>
 

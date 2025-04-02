@@ -23,7 +23,7 @@
     <!-- Product Information Section -->
     <section class="mb-12">
         <div class="text-start mb-2">
-            <p class="text-yellow-500 text-sm">{{ $worker->category }}</p>
+            <p class="text-yellow-500 text-sm">{{ $worker->job_title }}</p>
             <h1 class="text-3xl font-bold text-gray-800 mt-1">{{$worker->first_name . " " . $worker->last_name}}</h1>
         </div>
             {{ $worker->bio }}
@@ -58,7 +58,7 @@
                 <div class="relative">
                     <img src="{{ asset('storage/'. $worker->profile_photo) }}" alt="Workers applying Keraset" class="w-full h-auto rounded-md shadow-md"/>
                     <span class="absolute bottom-3 right-3 bg-yellow-400 text-white text-xs px-2 py-1 rounded-sm">
-                        Ceramics and Stone Material
+                      {{ $worker->category }}
                     </span>
                 </div>
             </div>

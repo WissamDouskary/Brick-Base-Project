@@ -21,6 +21,11 @@
             <p class="text-gray-600 mb-6">
                 Your account is currently <span class="font-semibold text-yellow-600">inactive</span>. An administrator needs to review and approve your registration before you can access your account.
             </p>
+            @if (Auth::user()->category == null)
+            <p class="text-gray-600 mb-6">
+                Please Complete Your <a href="{{ route('CompleteRegistration') }}" class="font-semibold text-red-600">registration</a>. Before review send to admin.
+            </p>
+            @endif
             <div class="bg-gray-50 p-4 rounded-lg mb-6">
                 <p class="text-sm text-gray-500">We'll notify you by email once your account has been activated. This process usually takes 24-48 hours.</p>
             </div>

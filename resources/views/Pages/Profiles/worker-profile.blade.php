@@ -94,7 +94,7 @@
                                     <p class="mb-1 text-sm text-gray-500">Click to upload photos</p>
                                     <p class="text-xs text-gray-500">PNG, JPG, GIF (MAX. 6 photos)</p>
                                 </div>
-                                <input id="photos" name="photos[]" type="file" class="hidden" multiple onchange="previewPhotos(this)"/>
+                                <input id="photos" name="photos[]" type="file" class="hidden" multiple accept="image/*" onchange="previewPhotos(this)"/>
                             </label>
                         </div>
                         
