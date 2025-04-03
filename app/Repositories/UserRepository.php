@@ -30,6 +30,7 @@ class UserRepository implements UserRepositoryInterface
     {
         return User::where('role_id', '1')
             ->where('id', '!=', $id)
+            ->where('is_active', true)
             ->limit(3)
             ->get();
     }
