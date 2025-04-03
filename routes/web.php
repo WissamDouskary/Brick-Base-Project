@@ -38,9 +38,7 @@ Route::middleware(['auth', CheckUserActive::class])->group(function(){
 
     Route::get('/Workers/Preview/{id}', [UserController::class, 'find'])->name('Preview');
 
-    Route::get('/Products/Preview', function () {
-        return view('Pages.Product-preview');
-    })->name('ProductPreview');
+    Route::get('/Products/Preview/{id}', [ProductController::class, 'find'])->name('ProductPreview');
 });
 
 Route::middleware(['auth', checkUserRole::class, CheckUserActive::class])->group(function(){

@@ -53,4 +53,8 @@ class UserService
     {
         return $this->userRepository->findById($id);
     }
+
+    public function get3workers($id){
+        return $this->userRepository->get3workers($id);
+    }
 }

@@ -10,7 +10,7 @@
             <form method="POST" action="{{ route('sign_in') }}" class="space-y-6">
                 @csrf
 
-                <!-- Email/Username field -->
+                <!-- Email field -->
                 <div>
                     <label for="email" class="block text-sm font-medium text-gray-700 mb-1">
                         Email address or user name

@@ -11,4 +11,5 @@ interface ProductRepositoryInterface
     public function destroy($id);
     public function findById($id);
     public function getall();
+    public function get3($id);
 }

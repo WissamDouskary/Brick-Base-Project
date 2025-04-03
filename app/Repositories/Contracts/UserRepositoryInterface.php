@@ -9,4 +9,5 @@ interface UserRepositoryInterface
     public function create(array $data);
     public function findById($id);
     public function getWorkers();
+    public function get3workers($id);
 }

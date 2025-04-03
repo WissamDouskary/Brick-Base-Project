@@ -55,4 +55,10 @@ class ProductController extends Controller
         return back()->with('success', 'you have listed product successfully');
     }
 
+    public function find($id){
+        $products = $this->productservice->get3($id);
+        
+        $product = $this->productservice->findById($id);
+        return view('Pages.Product-preview', compact('product', 'products'));
+    }
 }

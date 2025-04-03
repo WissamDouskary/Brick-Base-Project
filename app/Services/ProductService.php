@@ -21,4 +21,12 @@ Class ProductService {
     public function getall(){
        return $this->productrepository->getall();
     }
+
+    public function findById($id){
+        return $this->productrepository->findById($id);
+    }
+
+    public function get3($id){
+        return $this->productrepository->get3($id);
+    }
 }

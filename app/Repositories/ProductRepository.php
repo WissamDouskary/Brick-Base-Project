@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Repositories;
 
 use App\Models\Product;
@@ -8,7 +9,7 @@ use Illuminate\Support\Facades\Auth;
 
 class ProductRepository implements ProductRepositoryInterface
 {
-    
+
     public function create(array $data)
     {
         return Auth::user()->product()->create($data);
@@ -34,5 +35,13 @@ class ProductRepository implements ProductRepositoryInterface
     public function getall()
     {
         return Product::where('worker_id', '!=', Auth::id())->paginate(9);
+    }
+
+    public function get3($id)
+    {
+        return Product::where('worker_id', '!=', Auth::id())
+            ->where('id', '!=', $id)
+            ->limit(3)
+            ->get();
     }
 }

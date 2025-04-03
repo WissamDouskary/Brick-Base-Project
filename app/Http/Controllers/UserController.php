@@ -70,7 +70,9 @@ class UserController extends Controller
     public function find($id)
     {
         $worker = $this->userService->findWorker($id);
-        return view('Pages.Worker-preview', compact('worker'));
+        $workers = $this->userService->get3workers($id);
+
+        return view('Pages.Worker-preview', compact('worker', 'workers'));
     }
 
     public function completeRegistration(Request $request)
@@ -83,7 +85,7 @@ class UserController extends Controller
         }
     
         $fields = $request->validate([
-            'bio' => 'required',
+            'bio' => 'required|mix:40|max:255',
             'job_title' => 'required',
             'category' => 'required'
         ]);

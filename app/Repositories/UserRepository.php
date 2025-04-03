@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Repositories;
 
 use App\Models\User;
@@ -20,8 +21,16 @@ class UserRepository implements UserRepositoryInterface
     public function getWorkers()
     {
         return User::where('role_id', 1)
-                   ->where('is_active', true)
-                   ->where('id', '!=', Auth::id())
-                   ->paginate(9);
+            ->where('is_active', true)
+            ->where('id', '!=', Auth::id())
+            ->paginate(9);
+    }
+
+    public function get3workers($id)
+    {
+        return User::where('role_id', '1')
+            ->where('id', '!=', $id)
+            ->limit(3)
+            ->get();
     }
 }
