@@ -18,6 +18,14 @@ Class ProductService {
         return $this->productrepository->create($data);
     }
 
+    public function update(array $data, int $id){
+        return $this->productrepository->update($data, $id);
+    }
+
+    public function delete(int $id){
+        return $this->productrepository->destroy($id);
+    }
+
     public function getall(){
        return $this->productrepository->getall();
     }
@@ -28,5 +36,9 @@ Class ProductService {
 
     public function get3($id){
         return $this->productrepository->get3($id);
+    }
+
+    public function getWorkerProducts(){
+        return $this->productrepository->getWorkerProducts();
     }
 }
