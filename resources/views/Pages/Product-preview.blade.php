@@ -121,13 +121,13 @@
                     <div class="w-full md:w-1/3">
                         <div class="relative">
                             <img src="{{ asset('storage/'.$prod->main_image) }}" alt="{{ $prod->title }}"
-                                class="w-full h-auto rounded-md shadow-md" />
+                                class="w-full h-58 object-cover rounded-md" />
                             <span class="absolute bottom-3 right-3 bg-yellow-400 text-white text-xs px-2 py-1 rounded-sm">
                                 {{ $prod->category }}
                             </span>
                         </div>
                         <h3 class="mt-3 font-bold text-gray-800">{{ $prod->title }}</h3>
-                        <p class="text-gray-600 text-sm mt-1">
+                        <p class="text-gray-600 text-sm mt-1 truncate">
                             {{ $prod->description }}
                         </p>
                         <a href="{{ route('ProductPreview', ['id' => $prod->id]) }}"
