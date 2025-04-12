@@ -6,6 +6,7 @@ use App\Repositories\UserRepository;
 use Illuminate\Support\ServiceProvider;
 use App\Repositories\Contracts\UserRepositoryInterface;
 use App\Repositories\Contracts\ProductRepositoryInterface;
+use Illuminate\Support\Facades\Validator;
 use App\Repositories\ProductRepository;
 
 class AppServiceProvider extends ServiceProvider
