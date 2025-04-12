@@ -29,6 +29,7 @@ class UserRepository implements UserRepositoryInterface
     public function get3workers($id)
     {
         return User::where('role_id', '1')
+            ->where('id', '!=', Auth::id())
             ->where('id', '!=', $id)
             ->where('is_active', true)
             ->limit(3)
