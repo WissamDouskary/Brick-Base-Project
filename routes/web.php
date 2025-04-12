@@ -6,6 +6,7 @@ use App\Http\Controllers\UserController;
 use App\Http\Middleware\CheckUserActive;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\WorkerProfileController;
+use App\Http\Middleware\checkWorkerActivated;
 
 Route::get('/SignUp', function () {
     return view('Pages.Auth.Sign-up');
@@ -17,7 +18,7 @@ Route::get('/Login', function () {
 
 Route::get('/Inactive', function () {
     return view('Pages.Auth.in-active');
-})->name('in-active');
+})->name('in-active')->middleware(checkWorkerActivated::class);
 
 Route::middleware(['auth', CheckUserActive::class])->group(function(){
     Route::get('/Workers', [UserController::class, 'getWorkers'])->name('Workers');
@@ -44,15 +45,15 @@ Route::middleware(['auth', CheckUserActive::class])->group(function(){
 Route::middleware(['auth', checkUserRole::class, CheckUserActive::class])->group(function(){
     Route::get('/Product/List', [ProductController::class, 'index'])->name('product_list');
     Route::post('/Product/create', [ProductController::class, 'store'])->name('product.create');
+    Route::put('/Product/update/{id}', [ProductController::class, 'update'])->name('product.update');
+    Route::delete('/Product/destory/{id}', [ProductController::class, 'destroy'])->name('product.delete');
 });
 
 Route::get('/CompleteRegistration', function () {
     return view('Pages.Auth.Complete-reg');
 })->name('CompleteRegistration')->middleware('auth');
 
-Route::get('/Worker/Profile', function(){
-    return view('Pages.Profiles.worker-profile');
-})->name('workerprofile');
+Route::get('/Worker/Profile', [ProductController::class, 'getWorkerProducts'])->name('workerprofile');
 
 Route::put('/profile/update', [WorkerProfileController::class, 'update'])->name('worker.profile.edit')->middleware('auth');
 
