@@ -28,11 +28,11 @@
                 <p class="text-yellow-500 text-sm">{{ $worker->job_title }}</p>
                 <h1 class="text-3xl font-bold text-gray-800 mt-1">{{ $worker->first_name . ' ' . $worker->last_name }}</h1>
             </div>
-            {{ $worker->bio }}
+            
             <div class="flex flex-col md:flex-row mt-6 gap-8">
                 <div class="md:w-1/2">
                     <p class="text-gray-700">
-
+                      {{ $worker->bio }}
                     </p>
 
                     <div class="mt-8 space-y-4">
