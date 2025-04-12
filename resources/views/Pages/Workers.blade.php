@@ -161,41 +161,73 @@
             @endif
         </div>
     </div>
-    @if (count($workers) > 0)
         <!-- Pagination -->
-        <div class="flex justify-center mt-8 md:mt-10 px-2">
-            <nav class="inline-flex flex-wrap justify-center rounded-md shadow">
-                <a href="#"
-                    class="py-2 px-2 sm:px-4 border border-gray-300 bg-white rounded-l-md text-xs sm:text-sm font-medium text-gray-700 hover:bg-gray-50 flex items-center">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3 sm:h-4 sm:w-4 mr-0 sm:mr-1 inline-block"
-                        fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
-                    </svg>
-                    <span class="hidden sm:inline">Previous</span>
-                </a>
-                <a href="#"
-                    class="py-2 px-3 sm:px-4 border border-gray-300 text-yellow-400 text-white text-xs sm:text-sm font-medium">1</a>
-                <a href="#"
-                    class="py-2 px-3 sm:px-4 border border-gray-300 bg-white text-xs sm:text-sm font-medium text-gray-700 hover:bg-gray-50">2</a>
-                <a href="#"
-                    class="py-2 px-3 sm:px-4 border border-gray-300 bg-white text-xs sm:text-sm font-medium text-gray-700 hover:bg-gray-50 hidden xs:inline-block">3</a>
-                <span
-                    class="py-2 px-3 sm:px-4 border border-gray-300 bg-white text-xs sm:text-sm font-medium text-gray-700 hidden sm:inline-block">...</span>
-                <a href="#"
-                    class="py-2 px-3 sm:px-4 border border-gray-300 bg-white text-xs sm:text-sm font-medium text-gray-700 hover:bg-gray-50 hidden md:inline-block">67</a>
-                <a href="#"
-                    class="py-2 px-3 sm:px-4 border border-gray-300 bg-white text-xs sm:text-sm font-medium text-gray-700 hover:bg-gray-50">68</a>
-                <a href="#"
-                    class="py-2 px-2 sm:px-4 border border-gray-300 bg-white rounded-r-md text-xs sm:text-sm font-medium text-gray-700 hover:bg-gray-50 flex items-center">
-                    <span class="hidden sm:inline">Next</span>
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3 sm:h-4 sm:w-4 ml-0 sm:ml-1 inline-block"
-                        fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
-                    </svg>
-                </a>
-            </nav>
-        </div>
-    @endif
+        @if ($workers->hasPages())
+            <div class="flex justify-center mt-8 md:mt-10 px-2">
+                <nav class="inline-flex flex-wrap justify-center rounded-md shadow">
+                    {{-- Lien Précédent --}}
+                    @if ($workers->onFirstPage())
+                        <span
+                            class="py-2 px-2 sm:px-4 border border-gray-300 bg-gray-200 rounded-l-md text-xs sm:text-sm font-medium text-gray-500 cursor-not-allowed flex items-center">
+                            <svg xmlns="http://www.w3.org/2000/svg"
+                                class="h-3 w-3 sm:h-4 sm:w-4 mr-0 sm:mr-1 inline-block" fill="none"
+                                viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M15 19l-7-7 7-7" />
+                            </svg>
+                            <span class="hidden sm:inline">Previous</span>
+                        </span>
+                    @else
+                        <a href="{{ $workers->previousPageUrl() }}"
+                            class="py-2 px-2 sm:px-4 border border-gray-300 bg-white rounded-l-md text-xs sm:text-sm font-medium text-gray-700 hover:bg-gray-50 flex items-center">
+                            <svg xmlns="http://www.w3.org/2000/svg"
+                                class="h-3 w-3 sm:h-4 sm:w-4 mr-0 sm:mr-1 inline-block" fill="none"
+                                viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M15 19l-7-7 7-7" />
+                            </svg>
+                            <span class="hidden sm:inline">Previous</span>
+                        </a>
+                    @endif
+
+                    @foreach ($workers->getUrlRange(1, $workers->lastPage()) as $page => $url)
+                        @if ($page == $workers->currentPage())
+                            <span
+                                class="py-2 px-3 sm:px-4 border border-gray-300 text-yellow-400 text-xs sm:text-sm font-medium">
+                                {{ $page }}
+                            </span>
+                        @else
+                            <a href="{{ $url }}"
+                                class="py-2 px-3 sm:px-4 border border-gray-300 bg-white text-xs sm:text-sm font-medium text-gray-700 hover:bg-gray-50">
+                                {{ $page }}
+                            </a>
+                        @endif
+                    @endforeach
+
+                    @if ($workers->hasMorePages())
+                        <a href="{{ $workers->nextPageUrl() }}"
+                            class="py-2 px-2 sm:px-4 border border-gray-300 bg-white rounded-r-md text-xs sm:text-sm font-medium text-gray-700 hover:bg-gray-50 flex items-center">
+                            <span class="hidden sm:inline">Next</span>
+                            <svg xmlns="http://www.w3.org/2000/svg"
+                                class="h-3 w-3 sm:h-4 sm:w-4 ml-0 sm:ml-1 inline-block" fill="none"
+                                viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                            </svg>
+                        </a>
+                    @else
+                        <span
+                            class="py-2 px-2 sm:px-4 border border-gray-300 bg-gray-200 rounded-r-md text-xs sm:text-sm font-medium text-gray-500 cursor-not-allowed flex items-center">
+                            <span class="hidden sm:inline">Next</span>
+                            <svg xmlns="http://www.w3.org/2000/svg"
+                                class="h-3 w-3 sm:h-4 sm:w-4 ml-0 sm:ml-1 inline-block" fill="none"
+                                viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                            </svg>
+                        </span>
+                    @endif
+                </nav>
+            </div>
+        @endif
 
     {{-- why choose us section --}}
     <section class="grid grid-cols-1 lg:grid-cols-2 mb-10 md:mb-16 mt-10 md:mt-16" data-aos="fade-up"
