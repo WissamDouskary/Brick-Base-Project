@@ -44,4 +44,9 @@ class ProductRepository implements ProductRepositoryInterface
             ->limit(3)
             ->get();
     }
+
+    public function getWorkerProducts()
+    {
+        return Product::where('worker_id', Auth::id())->paginate(3);
+    }
 }
