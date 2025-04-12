@@ -84,8 +84,8 @@ class UserController extends Controller
             return redirect()->route('Home');
         }
     
-        $fields = $request->validate([
-            'bio' => 'required|mix:40|max:255',
+        $request->validate([
+            'bio' => 'required|min:40|max:255',
             'job_title' => 'required',
             'category' => 'required'
         ]);
