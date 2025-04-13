@@ -185,6 +185,14 @@
 
                                 <p class="text-sm text-gray-600 mb-4 truncate">{{ $product->description }}</p>
 
+                                <div class="mb-2">
+                                    @if (isset($product->in_stock) && $product->in_stock)
+                                        <p class="mt-1 text-sm text-green-600">In Stock</p>
+                                    @else
+                                        <p class="mt-1 text-sm text-red-600">Out of Stock</p>
+                                    @endif
+                                </div>
+
                                 <div class="flex gap-4">
                                     <button onclick="openModal({{ $product->id }})"
                                         class="flex-1 cursor-pointer bg-green-500 text-white text-center py-1 rounded hover:bg-green-600 transition duration-200">
@@ -192,37 +200,41 @@
                                     </button>
                                     <button type="submit" onclick="openDeleteModal({{ $product->id }})"
                                         class="w-1/2 cursor-pointer bg-red-500 text-white text-center py-1 rounded hover:bg-red-600 transition duration-200">
-                                         Delete
+                                        Delete
                                     </button>
                                 </div>
                             </div>
                         </div>
 
-                        <div id="deleteModal-{{ $product->id }}" class="fixed inset-0 z-50 hidden items-center justify-center bg-black/70">
+                        <div id="deleteModal-{{ $product->id }}"
+                            class="fixed inset-0 z-50 hidden items-center justify-center bg-black/70">
                             <div class="bg-white rounded-lg shadow-md max-w-sm w-full">
-                              <div class="p-4 border-b">
-                                <h3 class="text-lg font-medium">Delete Confirmation</h3>
-                              </div>
-                              
-                              <div class="p-4">
-                                <p>Are you sure you want to delete this Product?</p>
-                              </div>
-                              
-                              <div class="p-4 bg-gray-50 flex justify-end space-x-3">
-                                <button onclick="closeDeleteModal({{ $product->id }})" class="px-4 cursor-pointer py-2 bg-gray-200 rounded text-gray-800 hover:bg-gray-300">
-                                  Cancel
-                                </button>
+                                <div class="p-4 border-b">
+                                    <h3 class="text-lg font-medium">Delete Confirmation</h3>
+                                </div>
 
-                                <form action="{{ route('product.delete', ['id' => $product->id]) }}" method="POST" class="">
-                                    @csrf
-                                    @method('DELETE')
-                                <button class="px-4 py-2 cursor-pointer bg-red-600 rounded text-white hover:bg-red-700">
-                                  Delete
-                                </button>
-                                </form>
-                              </div>
+                                <div class="p-4">
+                                    <p>Are you sure you want to delete this Product?</p>
+                                </div>
+
+                                <div class="p-4 bg-gray-50 flex justify-end space-x-3">
+                                    <button onclick="closeDeleteModal({{ $product->id }})"
+                                        class="px-4 cursor-pointer py-2 bg-gray-200 rounded text-gray-800 hover:bg-gray-300">
+                                        Cancel
+                                    </button>
+
+                                    <form action="{{ route('product.delete', ['id' => $product->id]) }}" method="POST"
+                                        class="">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button
+                                            class="px-4 py-2 cursor-pointer bg-red-600 rounded text-white hover:bg-red-700">
+                                            Delete
+                                        </button>
+                                    </form>
+                                </div>
                             </div>
-                          </div>
+                        </div>
 
                         <!-- Modal Body -->
                         <div id="deleteModal-{{ $product->id }}"
@@ -287,6 +299,48 @@
                                             class="w-full px-4 py-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-yellow-500 focus:border-yellow-500 outline-none transition-all resize-none">{{ $product->description }}</textarea>
                                     </div>
 
+                                    <div class="mb-6">
+                                        <label for="price" class="block text-sm font-medium text-gray-700 mb-1">
+                                            Price
+                                        </label>
+                                        <div class="mt-1 relative rounded-md shadow-sm">
+                                            <div
+                                                class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                                                <span class="text-gray-500 sm:text-sm">$</span>
+                                            </div>
+                                            <input type="text" name="price" id="price"
+                                                placeholder="Enter Price" value="{{ $product->price }}"
+                                                class="block w-full pl-7 pr-12 p-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-amber-400"
+                                                required>
+                                            <div
+                                                class="absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none">
+                                                <span class="text-gray-500 sm:text-sm">USD</span>
+                                            </div>
+                                        </div>
+                                        @error('price')
+                                            <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
+                                        @enderror
+                                    </div>
+
+                                    <div class="flex items-center justify-between py-3 mb-2 border-gray-200">
+                                        <div>
+                                            <label for="in_stock"
+                                                class="block text-sm font-medium text-gray-700 mb-1">Product
+                                                Availability</label>
+                                            <p class="text-sm text-gray-600">Is this product currently in stock?</p>
+                                        </div>
+                                        <div class="relative inline-block w-12 mr-2 align-middle select-none">
+                                            <input type="hidden" name="in_stock" value="0">
+
+                                            <input type="checkbox" id="in_stock" name="in_stock" value="1"
+                                                {{ $product->in_stock ? 'checked' : '' }}
+                                                class="absolute block w-6 h-6 bg-white border-4 border-gray-300 rounded-full appearance-none cursor-pointer checked:right-0 checked:border-yellow-400 transition-all duration-200 peer" />
+                                            <label for="in_stock"
+                                                class="block h-6 overflow-hidden bg-gray-200 rounded-full cursor-pointer peer-checked:bg-yellow-100">
+                                            </label>
+                                        </div>
+                                    </div>
+
                                     <!-- Image upload field -->
                                     <div class="mb-5">
                                         <label class="block text-sm font-medium text-gray-700 mb-1.5">Image</label>
@@ -344,73 +398,73 @@
             </div>
             <!-- Pagination -->
             @if ($products->hasPages())
-            <div class="flex justify-center mt-8 md:mt-10 px-2">
-                <nav class="inline-flex flex-wrap justify-center rounded-md shadow">
-                    {{-- Lien Précédent --}}
-                    @if ($products->onFirstPage())
-                        <span
-                            class="py-2 px-2 sm:px-4 border border-gray-300 bg-gray-200 rounded-l-md text-xs sm:text-sm font-medium text-gray-500 cursor-not-allowed flex items-center">
-                            <svg xmlns="http://www.w3.org/2000/svg"
-                                class="h-3 w-3 sm:h-4 sm:w-4 mr-0 sm:mr-1 inline-block" fill="none"
-                                viewBox="0 0 24 24" stroke="currentColor">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                    d="M15 19l-7-7 7-7" />
-                            </svg>
-                            <span class="hidden sm:inline">Previous</span>
-                        </span>
-                    @else
-                        <a href="{{ $products->previousPageUrl() }}"
-                            class="py-2 px-2 sm:px-4 border border-gray-300 bg-white rounded-l-md text-xs sm:text-sm font-medium text-gray-700 hover:bg-gray-50 flex items-center">
-                            <svg xmlns="http://www.w3.org/2000/svg"
-                                class="h-3 w-3 sm:h-4 sm:w-4 mr-0 sm:mr-1 inline-block" fill="none"
-                                viewBox="0 0 24 24" stroke="currentColor">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                    d="M15 19l-7-7 7-7" />
-                            </svg>
-                            <span class="hidden sm:inline">Previous</span>
-                        </a>
-                    @endif
-
-                    @foreach ($products->getUrlRange(1, $products->lastPage()) as $page => $url)
-                        @if ($page == $products->currentPage())
+                <div class="flex justify-center mt-8 md:mt-10 px-2">
+                    <nav class="inline-flex flex-wrap justify-center rounded-md shadow">
+                        {{-- Lien Précédent --}}
+                        @if ($products->onFirstPage())
                             <span
-                                class="py-2 px-3 sm:px-4 border border-gray-300 text-yellow-400 text-xs sm:text-sm font-medium">
-                                {{ $page }}
+                                class="py-2 px-2 sm:px-4 border border-gray-300 bg-gray-200 rounded-l-md text-xs sm:text-sm font-medium text-gray-500 cursor-not-allowed flex items-center">
+                                <svg xmlns="http://www.w3.org/2000/svg"
+                                    class="h-3 w-3 sm:h-4 sm:w-4 mr-0 sm:mr-1 inline-block" fill="none"
+                                    viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M15 19l-7-7 7-7" />
+                                </svg>
+                                <span class="hidden sm:inline">Previous</span>
                             </span>
                         @else
-                            <a href="{{ $url }}"
-                                class="py-2 px-3 sm:px-4 border border-gray-300 bg-white text-xs sm:text-sm font-medium text-gray-700 hover:bg-gray-50">
-                                {{ $page }}
+                            <a href="{{ $products->previousPageUrl() }}"
+                                class="py-2 px-2 sm:px-4 border border-gray-300 bg-white rounded-l-md text-xs sm:text-sm font-medium text-gray-700 hover:bg-gray-50 flex items-center">
+                                <svg xmlns="http://www.w3.org/2000/svg"
+                                    class="h-3 w-3 sm:h-4 sm:w-4 mr-0 sm:mr-1 inline-block" fill="none"
+                                    viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M15 19l-7-7 7-7" />
+                                </svg>
+                                <span class="hidden sm:inline">Previous</span>
                             </a>
                         @endif
-                    @endforeach
 
-                    @if ($products->hasMorePages())
-                        <a href="{{ $products->nextPageUrl() }}"
-                            class="py-2 px-2 sm:px-4 border border-gray-300 bg-white rounded-r-md text-xs sm:text-sm font-medium text-gray-700 hover:bg-gray-50 flex items-center">
-                            <span class="hidden sm:inline">Next</span>
-                            <svg xmlns="http://www.w3.org/2000/svg"
-                                class="h-3 w-3 sm:h-4 sm:w-4 ml-0 sm:ml-1 inline-block" fill="none"
-                                viewBox="0 0 24 24" stroke="currentColor">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                    d="M9 5l7 7-7 7" />
-                            </svg>
-                        </a>
-                    @else
-                        <span
-                            class="py-2 px-2 sm:px-4 border border-gray-300 bg-gray-200 rounded-r-md text-xs sm:text-sm font-medium text-gray-500 cursor-not-allowed flex items-center">
-                            <span class="hidden sm:inline">Next</span>
-                            <svg xmlns="http://www.w3.org/2000/svg"
-                                class="h-3 w-3 sm:h-4 sm:w-4 ml-0 sm:ml-1 inline-block" fill="none"
-                                viewBox="0 0 24 24" stroke="currentColor">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                    d="M9 5l7 7-7 7" />
-                            </svg>
-                        </span>
-                    @endif
-                </nav>
-            </div>
-        @endif
+                        @foreach ($products->getUrlRange(1, $products->lastPage()) as $page => $url)
+                            @if ($page == $products->currentPage())
+                                <span
+                                    class="py-2 px-3 sm:px-4 border border-gray-300 text-yellow-400 text-xs sm:text-sm font-medium">
+                                    {{ $page }}
+                                </span>
+                            @else
+                                <a href="{{ $url }}"
+                                    class="py-2 px-3 sm:px-4 border border-gray-300 bg-white text-xs sm:text-sm font-medium text-gray-700 hover:bg-gray-50">
+                                    {{ $page }}
+                                </a>
+                            @endif
+                        @endforeach
+
+                        @if ($products->hasMorePages())
+                            <a href="{{ $products->nextPageUrl() }}"
+                                class="py-2 px-2 sm:px-4 border border-gray-300 bg-white rounded-r-md text-xs sm:text-sm font-medium text-gray-700 hover:bg-gray-50 flex items-center">
+                                <span class="hidden sm:inline">Next</span>
+                                <svg xmlns="http://www.w3.org/2000/svg"
+                                    class="h-3 w-3 sm:h-4 sm:w-4 ml-0 sm:ml-1 inline-block" fill="none"
+                                    viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M9 5l7 7-7 7" />
+                                </svg>
+                            </a>
+                        @else
+                            <span
+                                class="py-2 px-2 sm:px-4 border border-gray-300 bg-gray-200 rounded-r-md text-xs sm:text-sm font-medium text-gray-500 cursor-not-allowed flex items-center">
+                                <span class="hidden sm:inline">Next</span>
+                                <svg xmlns="http://www.w3.org/2000/svg"
+                                    class="h-3 w-3 sm:h-4 sm:w-4 ml-0 sm:ml-1 inline-block" fill="none"
+                                    viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M9 5l7 7-7 7" />
+                                </svg>
+                            </span>
+                        @endif
+                    </nav>
+                </div>
+            @endif
         </div>
     </div>
 @endsection
