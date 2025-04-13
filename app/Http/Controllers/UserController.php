@@ -87,7 +87,8 @@ class UserController extends Controller
         $request->validate([
             'bio' => 'required|min:40|max:255',
             'job_title' => 'required',
-            'category' => 'required'
+            'category' => 'required',
+            'price' => 'required'
         ]);
 
         $user->update([
@@ -95,6 +96,7 @@ class UserController extends Controller
             'job_title' => $request->job_title,
             'category' => $request->category,
             'is_active' => false,
+            'price' => $request->price
         ]);
     
         return redirect()->route('Home');
