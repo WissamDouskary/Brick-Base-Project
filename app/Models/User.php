@@ -32,6 +32,7 @@ class User extends Authenticatable
         'job_title',
         'bio',
         'category',
+        'price'
     ];
 
     /**
@@ -69,5 +70,13 @@ class User extends Authenticatable
 
     public function product(){
         return $this->hasMany(Product::class, 'worker_id');
+    }
+
+    public function recievedReservations(){
+        return $this->hasMany(Reservation::class, 'worker_id');
+    }
+
+    public function madeReservations(){
+        return $this->hasMany(Reservation::class, 'client_id');
     }
 }
