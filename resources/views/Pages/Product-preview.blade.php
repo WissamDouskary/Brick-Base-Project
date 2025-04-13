@@ -76,6 +76,19 @@
                             </div>
                         </div>
 
+                        <!-- Price Section Added Here -->
+                        <div class="mt-8 mb-4">
+                            <div class="flex items-center">
+                                <span class="text-3xl font-bold text-gray-900">${{ number_format($product->price, 2) }}</span>
+                            </div>
+                            
+                            @if(isset($product->in_stock) && $product->in_stock)
+                                <p class="mt-1 text-sm text-green-600">In Stock</p>
+                            @else
+                                <p class="mt-1 text-sm text-red-600">Out of Stock</p>
+                            @endif
+                        </div>
+
                         <div class="mt-8">
                             <button
                                 class="bg-yellow-400 hover:bg-yellow-500 text-white font-medium py-3 px-6 rounded-sm transition duration-300">
