@@ -92,6 +92,27 @@
                             <option value="Oujda" {{ Auth::user()->city == 'Oujda' ? 'selected' : '' }}>Oujda</option>
                         </select>
                     </div>
+
+                    <div class="mb-6">
+                        <label for="job_title" class="block text-sm font-medium text-gray-700 mb-1">
+                            Price per Day
+                        </label>
+                        <div class="mt-1 relative rounded-md shadow-sm">
+                            <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                                <span class="text-gray-500 sm:text-sm">$</span>
+                            </div>
+                            <input type="text" name="price" id="price" placeholder="Enter Price"
+                                value="{{ Auth::user()->price }}"
+                                class="block w-full pl-7 pr-12 p-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-amber-400"
+                                required>
+                            <div class="absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none">
+                                <span class="text-gray-500 sm:text-sm">USD</span>
+                            </div>
+                        </div>
+                        @error('job_title')
+                            <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
+                        @enderror
+                    </div>
                 </div>
 
                 <div class="mb-8 mt-8">
