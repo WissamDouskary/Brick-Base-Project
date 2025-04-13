@@ -44,6 +44,7 @@ class ProductController extends Controller
 
             $mainImagePath = $photos[0]->store('product_photos', 'public');
             $data['main_image'] = $mainImagePath;
+            $data['in_stock'] = true;
 
             $product = $this->productservice->create($data);
 
@@ -67,6 +68,8 @@ class ProductController extends Controller
             'images' => 'array|max:6',
             'images.*' => 'image|max:10240',
         ]);
+        
+        $data['in_stock'] = $request->in_stock;
 
         if ($request->hasFile('images')) {
 
@@ -91,6 +94,8 @@ class ProductController extends Controller
                 ]);
             }
         }
+
+        $this->productservice->update($data, $id);
 
         return back()->with('success', "You're product updated successfuly!");
     }
