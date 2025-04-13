@@ -18,6 +18,7 @@ class WorkerProfileController extends Controller
             'city' => 'required|string|max:255',
             'photos' => 'array|max:6',
             'photos.*' => 'image|max:10240',
+            'price' => 'required'
         ]);
 
         $worker = Auth::user();
@@ -26,6 +27,7 @@ class WorkerProfileController extends Controller
             'last_name' => $request->input('last_name'),
             'bio' => $request->input('bio'),
             'city' => $request->input('city'),
+            'price' => $request->input('price')
         ]);
 
         if ($request->hasFile('photos')) {
