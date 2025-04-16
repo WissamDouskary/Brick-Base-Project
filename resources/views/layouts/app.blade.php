@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>@yield('title', 'My App')</title>
     {{-- tailwindcss link --}}
     <script src="https://unpkg.com/@tailwindcss/browser@4"></script>
@@ -20,7 +21,7 @@
                         },
                     },
                     fontFamily: {
-                        sans: ['Inter', 'sans-serif'],
+                        sans: ['Poppins', 'sans-serif'],
                         serif: ['Georgia', 'serif'],
                     },
                 },
@@ -28,16 +29,23 @@
         }
     </script>
     <style>
+        html, body {
+            width: 100%;
+            overflow-x: hidden;
+            margin: 0;
+            padding: 0;
+        }
         body {
-    font-family: 'Poppins', sans-serif;
-}
+            font-family: 'Poppins', sans-serif;
+            -webkit-text-size-adjust: 100%;
+        }
     </style>
 </head>
 <body class="font-poppins">
 
 @include('partials.navbar')
 
-<div class="">
+<div class="w-full overflow-hidden">
     @yield('content')
 </div>
 
