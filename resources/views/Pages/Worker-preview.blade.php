@@ -4,13 +4,45 @@
 
 @section('content')
 
+    @if ($errors->any())
+        <div class="text-red-500 text-sm">
+            <ul>
+                @foreach ($errors->all() as $error)
+                    <li>• {{ $error }}</li>
+                @endforeach
+            </ul>
+        </div>
+    @endif
+
+    @if (session('success'))
+        <div id="successToast"
+            class="fixed z-50 top-4 left-1/2 transform -translate-x-1/2 bg-green-500 text-white px-6 py-3 rounded-md shadow-lg hidden opacity-0 transition-opacity duration-300">
+            <div class="flex items-center space-x-2">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                    <path fill-rule="evenodd"
+                        d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
+                        clip-rule="evenodd" />
+                </svg>
+                <span>{{ session('success') }}</span>
+            </div>
+        </div>
+    @endif
+
+    @if (session('error'))
+        <div id="successToast"
+            class="fixed z-50 top-4 left-1/2 transform -translate-x-1/2 bg-red-500 text-white px-6 py-3 rounded-md shadow-lg hidden opacity-0 transition-opacity duration-300">
+            <div class="flex items-center space-x-2">
+                <span>{{ session('error') }}</span>
+            </div>
+        </div>
+    @endif
+
     <section class="relative h-40 md:h-64 overflow-hidden">
         <!-- Background Image -->
         <div class="absolute inset-0">
             <img src="{{ asset('storage/photos/Section.png') }}" alt="Construction Background"
                 class="w-full h-full object-cover">
         </div>
-
 
         <!-- Hero Content -->
         <div class="container mx-auto px-4 h-full flex flex-col justify-center items-start ml-6 relative z-10">
@@ -28,11 +60,11 @@
                 <p class="text-yellow-500 text-sm">{{ $worker->job_title }}</p>
                 <h1 class="text-3xl font-bold text-gray-800 mt-1">{{ $worker->first_name . ' ' . $worker->last_name }}</h1>
             </div>
-            
+
             <div class="flex flex-col md:flex-row mt-6 gap-8">
                 <div class="md:w-1/2">
                     <p class="text-gray-700">
-                      {{ $worker->bio }}
+                        {{ $worker->bio }}
                     </p>
 
                     <div class="mt-8 space-y-4">
@@ -52,10 +84,15 @@
                             </div>
                         </div>
                     </div>
-
+                    <div class="mt-8 mb-4">
+                        <div class="flex items-center">
+                            <span class="text-3xl font-bold text-gray-900">${{ number_format($worker->price, 2) }}</span>
+                        </div>
+                    </div>
                     <div class="mt-8">
                         <button
-                            class="bg-yellow-400 hover:bg-yellow-500 text-white font-medium py-3 px-6 rounded-sm transition duration-300">
+                            class="bg-yellow-400 cursor-pointer hover:bg-yellow-500 text-white font-medium py-3 px-6 rounded-sm transition duration-300"
+                            onclick="openModel()">
                             Reserve Now
                         </button>
                     </div>
@@ -96,7 +133,8 @@
                         @foreach ($workers as $work)
                             <div class="w-full md:w-1/3">
                                 <div class="relative">
-                                    <img src="{{ asset('storage/' . $work->profile_photo) }}" alt="{{ $work->first_name }}"
+                                    <img src="{{ asset('storage/' . $work->profile_photo) }}"
+                                        alt="{{ $work->first_name }}"
                                         class="w-full h-60 object-cover rounded-md shadow-md" />
                                     <span
                                         class="absolute bottom-3 right-3 bg-yellow-400 text-white text-xs px-2 py-1 rounded-sm">
@@ -120,24 +158,21 @@
                             </div>
                         @endforeach
                     @else
-                        <div class="col-span-1 sm:col-span-2 lg:col-span-3">
-                            <div class="bg-white shadow-md rounded-lg p-8 text-center">
+                        <div class="w-full flex justify-center">
+                            <div class="bg-white shadow-md rounded-lg p-8 text-center max-w-xl">
                                 <div class="flex justify-center mb-4">
                                     <svg xmlns="http://www.w3.org/2000/svg" class="h-16 w-16 text-gray-400" fill="none"
                                         viewBox="0 0 24 24" stroke="currentColor">
-                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2"
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                             d="M20 13V6a2 2 0 00-2-2H6a2 2 0 00-2 2v7m16 0v5a2 2 0 01-2 2H6a2 2 0 01-2-2v-5m16 0h-2.586a1 1 0 00-.707.293l-2.414 2.414a1 1 0 01-.707.293h-3.172a1 1 0 01-.707-.293l-2.414-2.414A1 1 0 006.586 13H4" />
                                     </svg>
                                 </div>
                                 <h3 class="text-xl sm:text-2xl font-bold text-gray-700 mb-2">No Workers Available</h3>
                                 <p class="text-gray-500 mb-6 max-w-md mx-auto">We couldn't find any workers matching your
-                                    criteria.
-                                    Please try adjusting your search or check back later.</p>
+                                    criteria. Please try adjusting your search or check back later.</p>
                             </div>
                         </div>
                     @endif
-                </div>
-            </div>
         </section>
 
         {{-- comment section --}}
@@ -235,6 +270,79 @@
         </div>
     </div>
 
+    {{-- Reserve Model --}}
+    <div id="reservemodel" class="fixed inset-0 z-50 hidden items-center justify-center bg-black/70">
+        <div class="max-w-md mx-auto bg-white rounded-lg shadow-md overflow-hidden">
+            <div class="bg-yellow-500 px-6 py-4 flex justify-between">
+                <h2 class="text-xl font-bold text-white">Worker Service</h2>
+                <button onclick="closeModel()" class="text-xl font-bold cursor-pointer text-white">x</button>
+            </div>
+
+            <form class="p-6 space-y-6" method="POST" action="{{ route('reservation.store') }}">
+                @csrf
+                @method('POST')
+
+                <input type="hidden" name="worker_id" value="{{ $worker->id }}">
+
+                <!-- Date Range Selection -->
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div class="space-y-2">
+                        <label for="start-date" class="block text-sm font-medium text-gray-700">Start Date</label>
+                        <div class="relative">
+                            <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                                <svg class="h-5 w-5 text-gray-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"
+                                    fill="currentColor" aria-hidden="true">
+                                    <path fill-rule="evenodd"
+                                        d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z"
+                                        clip-rule="evenodd" />
+                                </svg>
+                            </div>
+                            <input type="datetime-local" id="start-date" name="start_date"
+                                class="pl-10 py-2 block w-full border-gray-300 rounded-md shadow-sm outline-yellow-500"
+                                required>
+                        </div>
+                    </div>
+
+                    <div class="space-y-2">
+                        <label for="end-date" class="block text-sm font-medium text-gray-700">End Date</label>
+                        <div class="relative">
+                            <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                                <svg class="h-5 w-5 text-gray-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"
+                                    fill="currentColor" aria-hidden="true">
+                                    <path fill-rule="evenodd"
+                                        d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z"
+                                        clip-rule="evenodd" />
+                                </svg>
+                            </div>
+                            <input type="datetime-local" id="end-date" name="end_date"
+                                class="pl-10 py-2 block w-full border-gray-300 rounded-md shadow-sm outline-yellow-500"
+                                required>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Pricing Information -->
+                <div class="bg-gray-50 rounded-lg p-4 border border-gray-200">
+                    <div class="flex justify-between items-center">
+                        <span class="text-sm font-medium text-gray-700">Worker Price:</span>
+                        <div class="text-lg font-bold text-blue-600">${{ number_format($worker->price, 2) }} / day</div>
+                        <input type="hidden" name="total_price" value="{{ $worker->price }}">
+                    </div>
+                    <p class="mt-1 text-xs text-gray-500">Final price may vary based on actual days worked</p>
+                </div>
+
+                <!-- Submit Button -->
+                <div class="pt-2">
+                    <button type="submit"
+                        class="w-full flex justify-center py-3 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-blue-600 cursor-pointer hover:bg-blue-900 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition duration-150">
+                        Send Demande
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+
     <script>
         function toggleSection(id) {
             const section = document.getElementById(id);
@@ -244,6 +352,37 @@
                 section.classList.add('hidden');
             }
         }
+
+        function openModel() {
+            let model = document.getElementById('reservemodel');
+            model.classList.remove('hidden');
+            model.classList.add('flex')
+        }
+
+        function closeModel() {
+            let model = document.getElementById('reservemodel');
+            model.classList.remove('flex');
+            model.classList.add('hidden')
+        }
+
+        document.addEventListener('DOMContentLoaded', function() {
+        const toast = document.getElementById('successToast');
+
+        if (toast) {
+            toast.classList.remove('hidden');
+            toast.classList.add('opacity-0');
+
+            toast.classList.add('opacity-100');
+            toast.classList.add('transition-opacity')
+            setTimeout(function() {
+                toast.classList.remove('opacity-100');
+
+                setTimeout(function() {
+                    toast.classList.add('hidden');
+                }, 300);
+            }, 5000);
+        }
+    });
     </script>
 
 @endsection
