@@ -5,6 +5,7 @@ use App\Http\Middleware\checkUserRole;
 use App\Http\Controllers\UserController;
 use App\Http\Middleware\CheckUserActive;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\ReservationController;
 use App\Http\Controllers\WorkerProfileController;
 use App\Http\Middleware\checkWorkerActivated;
 
@@ -40,6 +41,8 @@ Route::middleware(['auth', CheckUserActive::class])->group(function(){
     Route::get('/Workers/Preview/{id}', [UserController::class, 'find'])->name('Preview');
 
     Route::get('/Products/Preview/{id}', [ProductController::class, 'find'])->name('ProductPreview');
+
+    Route::post('/Worker/Reservation', [ReservationController::class, 'create'])->name('reservation.store');
 });
 
 Route::middleware(['auth', checkUserRole::class, CheckUserActive::class])->group(function(){
