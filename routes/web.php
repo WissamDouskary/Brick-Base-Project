@@ -50,6 +50,8 @@ Route::middleware(['auth', checkUserRole::class, CheckUserActive::class])->group
     Route::post('/Product/create', [ProductController::class, 'store'])->name('product.create');
     Route::put('/Product/update/{id}', [ProductController::class, 'update'])->name('product.update');
     Route::delete('/Product/destory/{id}', [ProductController::class, 'destroy'])->name('product.delete');
+
+    Route::get('/offers', [ReservationController::class, 'getWorkerOffers'])->name('offers');
 });
 
 Route::get('/CompleteRegistration', function () {
