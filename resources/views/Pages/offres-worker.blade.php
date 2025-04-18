@@ -61,8 +61,9 @@
                                         <div class="flex justify-between items-start mb-1">
                                             <h4 class="text-gray-900 font-medium">{{ $offer->first_name }}
                                                 {{ $offer->last_name }}</h4>
-                                            <span class="text-lg font-bold text-amber-500">${{ $offer->price * (\Carbon\Carbon::parse($offer->start_date)
-                                                        ->diffInDays(\Carbon\Carbon::parse($offer->end_date)) + 1) }}</span>
+                                            <span
+                                                class="text-lg font-bold text-amber-500">${{ $offer->price *
+                                                    (\Carbon\Carbon::parse($offer->start_date)->diffInDays(\Carbon\Carbon::parse($offer->end_date)) + 1) }}</span>
                                         </div>
 
                                         <div class="flex items-center mb-1">
@@ -94,14 +95,19 @@
                                         <p class="text-xs text-gray-600 mb-3 line-clamp-2">{{ $offer->content }}</p>
                                         @if ($offer->status == 'Pending')
                                             <div class="flex gap-2">
-                                                <form action="" method="POST" class="flex-1">
+                                                <form
+                                                    action="{{ route('offer.manage', ['id' => $offer->id, 'status' => 'Accepted']) }}"
+                                                    method="POST" class="flex-1">
                                                     @csrf
+
                                                     <button type="submit"
                                                         class="w-full cursor-pointer bg-green-500 text-white text-center py-1.5 rounded text-sm hover:bg-green-600 transition duration-200">
                                                         Accept
                                                     </button>
                                                 </form>
-                                                <form action="" method="POST" class="flex-1">
+                                                <form
+                                                    action="{{ route('offer.manage', ['id' => $offer->id, 'status' => 'Failed']) }}"
+                                                    method="POST" class="flex-1">
                                                     @csrf
                                                     <button type="submit"
                                                         class="w-full cursor-pointer bg-gray-200 text-gray-800 text-center py-1.5 rounded text-sm hover:bg-gray-300 transition duration-200">
@@ -111,11 +117,14 @@
                                             </div>
                                         @elseif ($offer->status == 'Accepted')
                                             <div class="flex gap-2">
-                                                <a href="#" onclick="openReservationModal({{ $offer->id }}); return false;"
+                                                <a href="#"
+                                                    onclick="openReservationModal({{ $offer->id }}); return false;"
                                                     class="flex-1 cursor-pointer bg-blue-500 text-white text-center py-1.5 rounded text-sm hover:bg-blue-600 transition duration-200">
                                                     View Details
                                                 </a>
-                                                <form action="" method="POST" class="flex-1">
+                                                <form
+                                                    action="{{ route('offer.manage', ['id' => $offer->id, 'status' => 'Completed']) }}"
+                                                    method="POST" class="flex-1">
                                                     @csrf
                                                     <button type="submit"
                                                         class="w-full cursor-pointer bg-amber-400 text-white text-center py-1.5 rounded text-sm hover:bg-amber-500 transition duration-200">
@@ -124,12 +133,14 @@
                                                 </form>
                                             </div>
                                         @elseif ($offer->status == 'Completed')
-                                            <a href="#" onclick="openReservationModal({{ $offer->id }}); return false;"
+                                            <a href="#"
+                                                onclick="openReservationModal({{ $offer->id }}); return false;"
                                                 class="block w-full cursor-pointer bg-gray-100 text-gray-800 text-center py-1.5 rounded text-sm hover:bg-gray-200 transition duration-200">
                                                 View Details
                                             </a>
                                         @elseif ($offer->status = 'Failed')
-                                            <a href="#" onclick="openReservationModal({{ $offer->id }}); return false;"
+                                            <a href="#"
+                                                onclick="openReservationModal({{ $offer->id }}); return false;"
                                                 class="block w-full cursor-pointer bg-gray-100 text-gray-800 text-center py-1.5 rounded text-sm hover:bg-gray-200 transition duration-200">
                                                 View Details
                                             </a>
@@ -173,10 +184,8 @@
                                         <div class="flex items-center justify-between">
                                             <h3 class="font-medium">Total Days</h3>
                                             <p>
-                                                {{
-                                                    \Carbon\Carbon::parse($offer->start_date)
-                                                        ->diffInDays(\Carbon\Carbon::parse($offer->end_date)) + 1
-                                                }} days
+                                                {{ \Carbon\Carbon::parse($offer->start_date)->diffInDays(\Carbon\Carbon::parse($offer->end_date)) + 1 }}
+                                                days
                                             </p>
                                         </div>
                                         <div class="flex items-center justify-between">
@@ -185,17 +194,20 @@
                                         </div>
                                         <div class="flex items-center justify-between">
                                             <h3 class="font-medium">Total Payment</h3>
-                                            <p class="font-bold text-amber-500">${{ $offer->price * (\Carbon\Carbon::parse($offer->start_date)
-                                                        ->diffInDays(\Carbon\Carbon::parse($offer->end_date)) + 1) }}</p>
+                                            <p class="font-bold text-amber-500">
+                                                ${{ $offer->price *
+                                                    (\Carbon\Carbon::parse($offer->start_date)->diffInDays(\Carbon\Carbon::parse($offer->end_date)) + 1) }}
+                                            </p>
                                         </div>
 
                                         <div class="pt-4 border-t">
                                             <h3 class="font-medium mb-2">Client Information</h3>
                                             <div class="flex items-center">
-                                                <img src="{{ asset('storage/'.$offer->profile_photo.'') }}" alt="Client"
-                                                    class="w-10 h-10 rounded-full object-cover mr-3">
+                                                <img src="{{ asset('storage/' . $offer->profile_photo . '') }}"
+                                                    alt="Client" class="w-10 h-10 rounded-full object-cover mr-3">
                                                 <div>
-                                                    <p class="font-medium">{{ $offer->first_name . " " . $offer->last_name }}</p>
+                                                    <p class="font-medium">
+                                                        {{ $offer->first_name . ' ' . $offer->last_name }}</p>
                                                     <p class="text-sm text-gray-500">{{ $offer->email }}</p>
                                                 </div>
                                             </div>
@@ -220,42 +232,92 @@
                         </div>
                     @endforeach
                 @else
-                    {{-- here i should do no offers now --}}
+                    <div class="bg-white rounded-lg shadow-sm border border-gray-100 p-6 text-center">
+                        <div class="flex flex-col items-center justify-center py-6">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-16 w-16 text-gray-300 mb-4" fill="none"
+                                viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M9.172 16.172a4 4 0 015.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                            </svg>
+                            <h3 class="text-lg font-medium text-gray-700 mb-1">No Offers Yet</h3>
+                            <p class="text-gray-500 mb-4">You don't have any offers at the moment.</p>
+                            <p class="text-sm text-gray-400">Check back later or update your profile to attract more
+                                clients.</p>
+                        </div>
+                    </div>
                 @endif
 
             </div>
 
             <!-- Pagination -->
-            <div class="flex justify-center mt-8 md:mt-10 px-2">
-                <nav class="inline-flex flex-wrap justify-center rounded-md shadow-sm">
-                    <span
-                        class="py-2 px-2 sm:px-4 border border-gray-300 bg-gray-200 rounded-l-md text-xs sm:text-sm font-medium text-gray-500 cursor-not-allowed flex items-center">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3 sm:h-4 sm:w-4 mr-0 sm:mr-1 inline-block"
-                            fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
-                        </svg>
-                        <span class="hidden sm:inline">Previous</span>
-                    </span>
+            @if ($offers->hasPages())
+                <div class="flex justify-center mt-8 md:mt-10 px-2">
+                    <nav class="inline-flex flex-wrap justify-center rounded-md shadow">
+                        {{-- Lien Précédent --}}
+                        @if ($offers->onFirstPage())
+                            <span
+                                class="py-2 px-2 sm:px-4 border border-gray-300 bg-gray-200 rounded-l-md text-xs sm:text-sm font-medium text-gray-500 cursor-not-allowed flex items-center">
+                                <svg xmlns="http://www.w3.org/2000/svg"
+                                    class="h-3 w-3 sm:h-4 sm:w-4 mr-0 sm:mr-1 inline-block" fill="none"
+                                    viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M15 19l-7-7 7-7" />
+                                </svg>
+                                <span class="hidden sm:inline">Previous</span>
+                            </span>
+                        @else
+                            <a href="{{ $offers->previousPageUrl() }}"
+                                class="py-2 px-2 sm:px-4 border border-gray-300 bg-white rounded-l-md text-xs sm:text-sm font-medium text-gray-700 hover:bg-gray-50 flex items-center">
+                                <svg xmlns="http://www.w3.org/2000/svg"
+                                    class="h-3 w-3 sm:h-4 sm:w-4 mr-0 sm:mr-1 inline-block" fill="none"
+                                    viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M15 19l-7-7 7-7" />
+                                </svg>
+                                <span class="hidden sm:inline">Previous</span>
+                            </a>
+                        @endif
 
-                    <span class="py-2 px-3 sm:px-4 border border-gray-300 text-yellow-400 text-xs sm:text-sm font-medium">
-                        1
-                    </span>
+                        @foreach ($offers->getUrlRange(1, $offers->lastPage()) as $page => $url)
+                            @if ($page == $offers->currentPage())
+                                <span
+                                    class="py-2 px-3 sm:px-4 border border-gray-300 text-yellow-400 text-xs sm:text-sm font-medium">
+                                    {{ $page }}
+                                </span>
+                            @else
+                                <a href="{{ $url }}"
+                                    class="py-2 px-3 sm:px-4 border border-gray-300 bg-white text-xs sm:text-sm font-medium text-gray-700 hover:bg-gray-50">
+                                    {{ $page }}
+                                </a>
+                            @endif
+                        @endforeach
 
-                    <a href="#"
-                        class="py-2 px-3 sm:px-4 border border-gray-300 bg-white text-xs sm:text-sm font-medium text-gray-700 hover:bg-gray-50">
-                        2
-                    </a>
-
-                    <a href="#"
-                        class="py-2 px-2 sm:px-4 border border-gray-300 bg-white rounded-r-md text-xs sm:text-sm font-medium text-gray-700 hover:bg-gray-50 flex items-center">
-                        <span class="hidden sm:inline">Next</span>
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3 sm:h-4 sm:w-4 ml-0 sm:ml-1 inline-block"
-                            fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
-                        </svg>
-                    </a>
-                </nav>
-            </div>
+                        @if ($offers->hasMorePages())
+                            <a href="{{ $offers->nextPageUrl() }}"
+                                class="py-2 px-2 sm:px-4 border border-gray-300 bg-white rounded-r-md text-xs sm:text-sm font-medium text-gray-700 hover:bg-gray-50 flex items-center">
+                                <span class="hidden sm:inline">Next</span>
+                                <svg xmlns="http://www.w3.org/2000/svg"
+                                    class="h-3 w-3 sm:h-4 sm:w-4 ml-0 sm:ml-1 inline-block" fill="none"
+                                    viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M9 5l7 7-7 7" />
+                                </svg>
+                            </a>
+                        @else
+                            <span
+                                class="py-2 px-2 sm:px-4 border border-gray-300 bg-gray-200 rounded-r-md text-xs sm:text-sm font-medium text-gray-500 cursor-not-allowed flex items-center">
+                                <span class="hidden sm:inline">Next</span>
+                                <svg xmlns="http://www.w3.org/2000/svg"
+                                    class="h-3 w-3 sm:h-4 sm:w-4 ml-0 sm:ml-1 inline-block" fill="none"
+                                    viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M9 5l7 7-7 7" />
+                                </svg>
+                            </span>
+                        @endif
+                    </nav>
+                </div>
+            @endif
         </div>
     </div>
 
