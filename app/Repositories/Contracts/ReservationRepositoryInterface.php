@@ -6,4 +6,7 @@ interface ReservationRepositoryInterface {
     public function create(array $data);
     public function modify(int $id, array $data);
     public function cancel(int $id);
+    public function getWorkerOffers();
+    public function getClientOffers();
+    
 }
