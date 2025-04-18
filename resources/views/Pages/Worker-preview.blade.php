@@ -321,6 +321,17 @@
                     </div>
                 </div>
 
+                <div class="relative">
+                    <label for="content" class="block text-sm font-medium text-gray-700">Content</label>
+
+                    <textarea type="text" id="content" name="content"
+                        class="pl-2 py-2 block w-full border-gray-300 rounded-md shadow-sm outline-yellow-500"
+                        required
+                        placeholder="Write what do you need from worker..."
+                        rows="4"
+                        ></textarea>
+                </div>
+
                 <!-- Pricing Information -->
                 <div class="bg-gray-50 rounded-lg p-4 border border-gray-200">
                     <div class="flex justify-between items-center">
