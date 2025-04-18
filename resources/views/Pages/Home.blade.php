@@ -6,8 +6,8 @@
     {{-- first section --}}
     <section class="relative h-screen">
         <div class="absolute inset-0 bg-teal-900 bg-opacity-50">
-            <img src="{{ asset('storage/photos/first-home.png') }}" alt="Construction Site"
-                class="w-full h-full object-cover" />
+            <img src="{{ asset('storage/photos/HomeBackground.png') }}" alt="Construction Site"
+                class="w-screen h-screen object-cover" />
         </div>
 
         <div class="relative h-full flex flex-col justify-center px-4 sm:px-8 max-w-6xl mx-auto">
