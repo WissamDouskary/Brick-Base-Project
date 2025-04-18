@@ -7,7 +7,7 @@
     <!-- Left side - Orange background with text -->
     <div class="bg-amber-400 p-8 md:w-1/2 flex flex-col justify-between">
         <div class="mt-12 md:mt-24 md:ml-8">
-            <h1 class="text-4xl md:text-5xl font-bold text-white mb-4">Enjoy us</h1>
+            <h1 class="text-4xl md:text-5xl font-bold text-white mb-4">Join us</h1>
             <p class="text-xl md:text-2xl text-white max-w-md">
                 Access to thousands of Jobs opportunities or Explore Your Favorite World
             </p>

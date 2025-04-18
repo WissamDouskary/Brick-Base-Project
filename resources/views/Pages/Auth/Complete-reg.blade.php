@@ -9,7 +9,7 @@
         <div class="md:ml-8">
             <h1 class="text-4xl md:text-5xl font-bold text-white mb-4">Complete Your registration</h1>
             <p class="text-xl md:text-2xl text-white">
-                enjoy us in our World!
+                Join us in our World!
             </p>
         </div>
     </div>
