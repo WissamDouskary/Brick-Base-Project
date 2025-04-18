@@ -76,4 +76,9 @@ class ReservationController extends Controller
         $offers = $this->reservationService->getWorkerOffers();
         return view('Pages.offres-worker', compact('offers'));
     }
+
+    public function manageOffers($id, $status){
+        $this->reservationService->manageOffers($id, $status);
+        return back()->with('success', 'status updated!');
+    }
 }
