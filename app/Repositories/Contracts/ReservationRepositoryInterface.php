@@ -8,5 +8,5 @@ interface ReservationRepositoryInterface {
     public function cancel(int $id);
     public function getWorkerOffers();
     public function getClientOffers();
-    
+    public function manageOffers($offer_id, $status);
 }
