@@ -52,6 +52,7 @@ Route::middleware(['auth', checkUserRole::class, CheckUserActive::class])->group
     Route::delete('/Product/destory/{id}', [ProductController::class, 'destroy'])->name('product.delete');
 
     Route::get('/offers', [ReservationController::class, 'getWorkerOffers'])->name('offers');
+    Route::post('/offer/{id}/{status}', [ReservationController::class, 'manageOffers'])->name('offer.manage');
 });
 
 Route::get('/CompleteRegistration', function () {
