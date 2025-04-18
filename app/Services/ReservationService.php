@@ -15,4 +15,12 @@ Class ReservationService {
     public function create($data){
         return $this->reservationRepository->create($data);
     }
+
+    public function getWorkerOffers(){
+        return $this->reservationRepository->getWorkerOffers();
+    }
+
+    public function manageOffers($offer_id, $status){
+        return $this->reservationRepository->manageOffers($offer_id, $status);
+    }
 }
