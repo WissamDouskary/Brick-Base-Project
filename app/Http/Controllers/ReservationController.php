@@ -71,4 +71,9 @@ class ReservationController extends Controller
 
         return back()->with('success', 'reservation passed successfuly');
     }
+
+    public function getWorkerOffers(){
+        $offers = $this->reservationService->getWorkerOffers();
+        return view('Pages.offres-worker', compact('offers'));
+    }
 }
