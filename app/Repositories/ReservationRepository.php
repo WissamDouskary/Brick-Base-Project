@@ -30,11 +30,16 @@ class ReservationRepository implements ReservationRepositoryInterface {
         ->join('users', 'users.id', '=', 'reservations.client_id')
         ->where('worker_id', '=', Auth::id())
         ->select('users.*', 'reservations.*')
-        ->get();
+        ->paginate(6);
     }
 
     public function getClientOffers(){
 
+    }
+
+    public function manageOffers($offer_id, $status){
+        $offer = Reservation::find($offer_id);
+        return $offer->update(['status' => $status]);
     }
 
 }
