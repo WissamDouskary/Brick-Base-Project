@@ -21,7 +21,8 @@ class ReservationController extends Controller
     {
         $fields = $request->validate([
             'start_date' => 'required|date|after_or_equal:today',
-            'end_date' => 'required|date|after:start-date'
+            'end_date' => 'required|date|after:start-date',
+            'content' => 'required|min:20'
         ]);
 
         $start = Carbon::parse($fields['start_date']);
@@ -64,7 +65,8 @@ class ReservationController extends Controller
             'price' => $total_price,
             'worker_id' => $request->worker_id,
             'client_id' => Auth::id(),
-            'status' => 'Pending'
+            'status' => 'Pending',
+            'content' => $request->content
         ]);
 
         return back()->with('success', 'reservation passed successfuly');
