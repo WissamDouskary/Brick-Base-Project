@@ -91,16 +91,14 @@ class ReservationController extends Controller
         return back()->with('success', 'status updated!');
     }
 
-    public function filter(Request $request)
-    {
-        $status = $request->query('status');
-    
-        if ($status == 'All') {
-            $offers = $this->reservationService->getWorkerOffers();
+    public function getClientOffers(Request $request){
+        $status = $request->input('status');
+
+        if($status && $status !== "All"){
+            $offers = $this->reservationService->filterOffersClient($status);
         } else {
-            $offers = $this->reservationService->filterOffers($status);
+            $offers = $this->reservationService->getClientOffers();
         }
-    
-        return response()->json($offers);
+        return view('Pages.offer-client', compact('offers'));
     }
 }
