@@ -9,4 +9,5 @@ interface ReservationRepositoryInterface {
     public function getWorkerOffers();
     public function getClientOffers();
     public function manageOffers($offer_id, $status);
+    public function filterOffers($status);
 }
