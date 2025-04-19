@@ -24,18 +24,22 @@
         <div>
             <div class="flex justify-between items-center mb-6">
                 <h3 class="text-lg font-medium text-gray-900">Available Offers</h3>
-                <div class="flex items-center space-x-2">
-                    <select id="filter-status"
-                        class="text-sm border border-gray-300 rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-amber-400">
-                        <option value="all">All Offers</option>
-                        <option value="pending">Pending</option>
-                        <option value="accepted">Accepted</option>
-                        <option value="completed">Completed</option>
+                <form method="GET" action="{{ route('offers') }}" class="mb-4 flex flex-wrap items-center gap-4">
+                    <select name="status" class="text-sm border border-gray-300 rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-amber-400">
+                        <option value="All">All Offers</option>
+                        <option value="Pending" {{ request('status') == 'Pending' ? 'selected' : '' }}>Pending</option>
+                        <option value="Accepted" {{ request('status') == 'Accepted' ? 'selected' : '' }}>Accepted</option>
+                        <option value="Completed" {{ request('status') == 'Completed' ? 'selected' : '' }}>Completed</option>
+                        <option value="Failed" {{ request('status') == 'Failed' ? 'selected' : '' }}>Failed</option>
                     </select>
-                </div>
+                
+                    <button type="submit" class="bg-yellow-500 hover:bg-yellow-600 text-white px-4 py-2 rounded text-sm">
+                        Filter
+                    </button>
+                </form>
             </div>
 
-            <div class="flex flex-col gap-4">
+            <div id="offers-container" class="flex flex-col gap-4">
                 <!-- Pending Offer Card -->
                 @if (count($offers) > 0)
 
@@ -338,7 +342,6 @@
 
     document.addEventListener('DOMContentLoaded', function() {
         const toast = document.getElementById('successToast');
-        const filterStatus = document.getElementById('filter-status');
 
         if (toast) {
             toast.classList.remove('hidden');
@@ -351,12 +354,6 @@
                     }, 300);
                 }, 5000);
             }, 100);
-        }
-
-        if (filterStatus) {
-            filterStatus.addEventListener('change', function() {
-                window.location.href = `?status=${this.value}`;
-            });
         }
     });
 </script>
