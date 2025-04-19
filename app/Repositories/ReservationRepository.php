@@ -34,7 +34,11 @@ class ReservationRepository implements ReservationRepositoryInterface {
     }
 
     public function getClientOffers(){
-
+        return DB::table('reservations')
+        ->join('users', 'users.id', '=', 'reservations.worker_id')
+        ->where('client_id', '=', Auth::id())
+        ->select('users.*', 'reservations.*')
+        ->paginate(6);
     }
 
     public function manageOffers($offer_id, $status){
@@ -46,6 +50,16 @@ class ReservationRepository implements ReservationRepositoryInterface {
         return DB::table('reservations')
         ->join('users', 'users.id', '=', 'reservations.client_id')
         ->where('worker_id', '=', Auth::id())
+        ->where('status', $status)
+        ->select('users.*', 'reservations.*')
+        ->paginate(6);
+    }
+
+    public function filterOffersClient($status)
+    {
+        return DB::table('reservations')
+        ->join('users', 'users.id', '=', 'reservations.worker_id')
+        ->where('client_id', '=', Auth::id())
         ->where('status', $status)
         ->select('users.*', 'reservations.*')
         ->paginate(6);
