@@ -42,4 +42,12 @@ class ReservationRepository implements ReservationRepositoryInterface {
         return $offer->update(['status' => $status]);
     }
 
+    public function filterOffers($status){
+        return DB::table('reservations')
+        ->join('users', 'users.id', '=', 'reservations.client_id')
+        ->where('worker_id', '=', Auth::id())
+        ->where('status', $status)
+        ->select('users.*', 'reservations.*')
+        ->paginate(6);
+    }
 }
