@@ -5,9 +5,10 @@ use App\Http\Middleware\checkUserRole;
 use App\Http\Controllers\UserController;
 use App\Http\Middleware\CheckUserActive;
 use App\Http\Controllers\ProductController;
-use App\Http\Controllers\ReservationController;
-use App\Http\Controllers\WorkerProfileController;
 use App\Http\Middleware\checkWorkerActivated;
+use App\Http\Controllers\ReservationController;
+use App\Http\Controllers\ClientProfileController;
+use App\Http\Controllers\WorkerProfileController;
 
 Route::get('/SignUp', function () {
     return view('Pages.Auth.Sign-up');
@@ -43,6 +44,14 @@ Route::middleware(['auth', CheckUserActive::class])->group(function(){
     Route::get('/Products/Preview/{id}', [ProductController::class, 'find'])->name('ProductPreview');
 
     Route::post('/Worker/Reservation', [ReservationController::class, 'create'])->name('reservation.store');
+
+    Route::get('/Client/offers', function(){
+        return view('Pages.offer-client');
+    })->name('client.offers');
+
+    Route::get('/Client/Profile', function(){
+        return view('Pages.Profiles.client-profile');
+    })->name('client.profile');
 });
 
 Route::middleware(['auth', checkUserRole::class, CheckUserActive::class])->group(function(){
@@ -62,6 +71,7 @@ Route::get('/CompleteRegistration', function () {
 Route::get('/Worker/Profile', [ProductController::class, 'getWorkerProducts'])->name('workerprofile');
 
 Route::put('/profile/update', [WorkerProfileController::class, 'update'])->name('worker.profile.edit')->middleware('auth');
+Route::put('/Client/Profile/Update', [ClientProfileController::class, 'update'])->name('client.profile.edit')->middleware('auth');
 
 Route::post('/register', [UserController::class, 'register'])->name('register');
 Route::post('/complete', [UserController::class, 'completeRegistration'])->name('completeRegistration');
