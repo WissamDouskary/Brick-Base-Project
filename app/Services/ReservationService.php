@@ -23,4 +23,8 @@ Class ReservationService {
     public function manageOffers($offer_id, $status){
         return $this->reservationRepository->manageOffers($offer_id, $status);
     }
+
+    public function filterOffers($status){
+        return $this->reservationRepository->filterOffers($status);
+    }
 }
