@@ -36,27 +36,27 @@ class ReservationController extends Controller
         $total_price = $days * $request->input('total_price');
 
         $alreadyReserved = Reservation::where('worker_id', $request->worker_id)
-        ->where(function($query) use ($startDB, $endDB) {
-            $query->where(function($q) use ($startDB, $endDB) {
-                $q->where('start_date', '<=', $startDB)
-                  ->where('end_date', '>', $startDB);
+            ->where(function ($query) use ($startDB, $endDB) {
+                $query->where(function ($q) use ($startDB, $endDB) {
+                    $q->where('start_date', '<=', $startDB)
+                        ->where('end_date', '>', $startDB);
+                })
+                    ->orWhere(function ($q) use ($startDB, $endDB) {
+                        $q->where('start_date', '<', $endDB)
+                            ->where('end_date', '>=', $endDB);
+                    })
+                    ->orWhere(function ($q) use ($startDB, $endDB) {
+                        $q->where('start_date', '>=', $startDB)
+                            ->where('end_date', '<=', $endDB);
+                    });
             })
-            ->orWhere(function($q) use ($startDB, $endDB) {
-                $q->where('start_date', '<', $endDB)
-                  ->where('end_date', '>=', $endDB);
-            })
-            ->orWhere(function($q) use ($startDB, $endDB) {
-                $q->where('start_date', '>=', $startDB)
-                  ->where('end_date', '<=', $endDB);
-            });
-        })
-        ->first();
+            ->first();
 
         if ($alreadyReserved) {
 
             $avDate = Carbon::parse($alreadyReserved->end_date);
 
-            return back()->with('error', 'this worker is reserved before please chose other date after '. $avDate);
+            return back()->with('error', 'this worker is reserved before please chose other date after ' . $avDate);
         }
 
         $this->reservationService->create([
@@ -72,13 +72,35 @@ class ReservationController extends Controller
         return back()->with('success', 'reservation passed successfuly');
     }
 
-    public function getWorkerOffers(){
-        $offers = $this->reservationService->getWorkerOffers();
+    public function getWorkerOffers(Request $request)
+    {
+        $status = $request->query('status');
+    
+        if ($status && $status !== 'All') {
+            $offers = $this->reservationService->filterOffers($status);
+        } else {
+            $offers = $this->reservationService->getWorkerOffers();
+        }
+    
         return view('Pages.offres-worker', compact('offers'));
     }
 
-    public function manageOffers($id, $status){
+    public function manageOffers($id, $status)
+    {
         $this->reservationService->manageOffers($id, $status);
         return back()->with('success', 'status updated!');
+    }
+
+    public function filter(Request $request)
+    {
+        $status = $request->query('status');
+    
+        if ($status == 'All') {
+            $offers = $this->reservationService->getWorkerOffers();
+        } else {
+            $offers = $this->reservationService->filterOffers($status);
+        }
+    
+        return response()->json($offers);
     }
 }
