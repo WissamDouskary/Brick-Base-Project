@@ -33,7 +33,7 @@
                         name="bio"
                         rows="4"
                         placeholder="Describe Your Self!"
-                        class="w-full p-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-amber-400 @error('bio') border-red-500 @enderror"
+                        class="w-full p-2 border rounded focus:outline-none focus:ring-2 focus:ring-amber-400 @error('bio') border-red-500 @enderror"
                         required
                     >{{ old('bio') }}</textarea>
                     @error('bio')
@@ -51,7 +51,7 @@
                         id="job_title"
                         name="job_title"
                         value="{{ old('job_title') }}"
-                        class="w-full p-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-amber-400 @error('job_title') border-red-500 @enderror"
+                        class="w-full p-2 border rounded focus:outline-none focus:ring-2 focus:ring-amber-400 @error('job_title') border-red-500 @enderror"
                         required
                     >
                     @error('job_title')
@@ -69,7 +69,7 @@
                         id="category"
                         name="category"
                         value="{{ old('category') }}"
-                        class="w-full p-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-amber-400 @error('category') border-red-500 @enderror"
+                        class="w-full p-2 border rounded focus:outline-none focus:ring-2 focus:ring-amber-400 @error('category') border-red-500 @enderror"
                     required
                     >
                         <option value="" disabled selected>Select Your Categorie</option>
