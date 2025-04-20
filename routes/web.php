@@ -8,6 +8,7 @@ use App\Http\Controllers\ProductController;
 use App\Http\Middleware\checkWorkerActivated;
 use App\Http\Controllers\ReservationController;
 use App\Http\Controllers\ClientProfileController;
+use App\Http\Controllers\OrderController;
 use App\Http\Controllers\WorkerProfileController;
 
 Route::get('/SignUp', function () {
@@ -50,6 +51,8 @@ Route::middleware(['auth', CheckUserActive::class])->group(function(){
     Route::get('/Client/Profile', function(){
         return view('Pages.Profiles.client-profile');
     })->name('client.profile');
+
+    Route::post('/product/buy', [OrderController::class, 'store'])->name('product.buy');
 });
 
 Route::middleware(['auth', checkUserRole::class, CheckUserActive::class])->group(function(){
