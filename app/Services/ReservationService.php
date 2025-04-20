@@ -20,6 +20,14 @@ Class ReservationService {
         return $this->reservationRepository->getWorkerOffers();
     }
 
+    public function getClientOffers(){
+        return $this->reservationRepository->getClientOffers();
+    }
+
+    public function filterOffersClient($status){
+        return $this->reservationRepository->filterOffersClient($status);
+    }
+
     public function manageOffers($offer_id, $status){
         return $this->reservationRepository->manageOffers($offer_id, $status);
     }
