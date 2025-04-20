@@ -4,6 +4,7 @@ namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 use App\Models\Role;
+use App\Models\Order;
 use App\Models\Product;
 use App\Models\WorkerImage;
 use Illuminate\Notifications\Notifiable;
@@ -78,5 +79,9 @@ class User extends Authenticatable
 
     public function madeReservations(){
         return $this->hasMany(Reservation::class, 'client_id');
+    }
+
+    public function order(){
+        return $this->hasMany(Order::class, 'client_id');
     }
 }
