@@ -45,9 +45,7 @@ Route::middleware(['auth', CheckUserActive::class])->group(function(){
 
     Route::post('/Worker/Reservation', [ReservationController::class, 'create'])->name('reservation.store');
 
-    Route::get('/Client/offers', function(){
-        return view('Pages.offer-client');
-    })->name('client.offers');
+    Route::get('/Client/offers', [ReservationController::class, 'getClientOffers'])->name('client.offers');
 
     Route::get('/Client/Profile', function(){
         return view('Pages.Profiles.client-profile');
@@ -61,7 +59,6 @@ Route::middleware(['auth', checkUserRole::class, CheckUserActive::class])->group
     Route::delete('/Product/destory/{id}', [ProductController::class, 'destroy'])->name('product.delete');
 
     Route::get('/offers', [ReservationController::class, 'getWorkerOffers'])->name('offers');
-    Route::post('/offer/{id}/{status}', [ReservationController::class, 'manageOffers'])->name('offer.manage');
 });
 
 Route::get('/CompleteRegistration', function () {
@@ -72,6 +69,8 @@ Route::get('/Worker/Profile', [ProductController::class, 'getWorkerProducts'])->
 
 Route::put('/profile/update', [WorkerProfileController::class, 'update'])->name('worker.profile.edit')->middleware('auth');
 Route::put('/Client/Profile/Update', [ClientProfileController::class, 'update'])->name('client.profile.edit')->middleware('auth');
+
+Route::post('/offer/{id}/{status}', [ReservationController::class, 'manageOffers'])->name('offer.manage')->middleware(['auth', CheckUserActive::class]);
 
 Route::post('/register', [UserController::class, 'register'])->name('register');
 Route::post('/complete', [UserController::class, 'completeRegistration'])->name('completeRegistration');
