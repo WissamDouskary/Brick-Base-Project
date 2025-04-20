@@ -123,7 +123,7 @@
                                 <button 
                                     type="submit"
                                     class="bg-yellow-400 cursor-pointer hover:bg-yellow-500 text-white font-medium py-3 px-6 rounded-sm transition duration-300">
-                                    Buy Now
+                                    Add To Cart
                                 </button>
                             </form>
                         </div>
