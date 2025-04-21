@@ -27,7 +27,7 @@ class PayPalController extends Controller
             'purchase_units' => [[
                 'amount' => [
                     'currency_code' => 'USD',
-                    'value' => number_format($order->price * $order->quantity + 5.99, 2),
+                    'value' => number_format($order->price * $order->quantity + 5.99, 2, '.', ''),
                 ]
             ]],
             'application_context' => [
