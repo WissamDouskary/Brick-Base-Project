@@ -5,15 +5,18 @@ namespace App\Http\Controllers;
 use App\Models\ProductImage;
 use Illuminate\Http\Request;
 use App\Services\ProductService;
+use App\Services\ReviewsService;
 use Illuminate\Support\Facades\Storage;
 
 class ProductController extends Controller
 {
     protected $productservice;
+    protected $reviewsservice;
 
-    public function __construct(ProductService $product_service)
+    public function __construct(ProductService $product_service, ReviewsService $reviews_service)
     {
         $this->productservice = $product_service;
+        $this->reviewsservice = $reviews_service;
     }
 
     public function index()
@@ -108,9 +111,9 @@ class ProductController extends Controller
     public function find($id)
     {
         $products = $this->productservice->get3($id);
-
+        $reviews =  $this->reviewsservice->getReviews($id);
         $product = $this->productservice->findById($id);
-        return view('Pages.Product-preview', compact('product', 'products'));
+        return view('Pages.Product-preview', compact('product', 'products', 'reviews'));
     }
 
     public function getWorkerProducts()

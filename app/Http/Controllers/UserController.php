@@ -5,15 +5,18 @@ namespace App\Http\Controllers;
 use App\Models\Role;
 use Illuminate\Http\Request;
 use App\Services\UserService;
+use App\Services\ReviewsService;
 use Illuminate\Support\Facades\Auth;
 
 class UserController extends Controller
 {
     protected $userService;
+    protected $reviewsservice;
 
-    public function __construct(UserService $userService)
+    public function __construct(UserService $userService, ReviewsService $reviews_service)
     {
         $this->userService = $userService;
+        $this->reviewsservice = $reviews_service;
     }
 
     public function register(Request $request)
@@ -71,8 +74,9 @@ class UserController extends Controller
     {
         $worker = $this->userService->findWorker($id);
         $workers = $this->userService->get3workers($id);
+        $reviews =  $this->reviewsservice->getReviews($id);
 
-        return view('Pages.Worker-preview', compact('worker', 'workers'));
+        return view('Pages.Worker-preview', compact('worker', 'workers', 'reviews'));
     }
 
     public function completeRegistration(Request $request)
