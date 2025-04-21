@@ -53,6 +53,8 @@ Route::middleware(['auth', CheckUserActive::class])->group(function(){
     })->name('client.profile');
 
     Route::post('/product/buy', [OrderController::class, 'store'])->name('product.buy');
+
+    Route::get('/orders', [OrderController::class, 'getClientOrders'])->name('orders.list');
 });
 
 Route::middleware(['auth', checkUserRole::class, CheckUserActive::class])->group(function(){
@@ -75,7 +77,7 @@ Route::put('/Client/Profile/Update', [ClientProfileController::class, 'update'])
 
 Route::post('/offer/{id}/{status}', [ReservationController::class, 'manageOffers'])->name('offer.manage')->middleware(['auth', CheckUserActive::class]);
 
-Route::post('/register', [UserController::class, 'register'])->name('register');
+Route::post('/register', [UserController::class, 'register'])->name('register')->middleware('guest');
 Route::post('/complete', [UserController::class, 'completeRegistration'])->name('completeRegistration');
-Route::post('/login', [UserController::class, 'login'])->name('sign_in');
+Route::post('/login', [UserController::class, 'login'])->name('sign_in')->middleware('guest');
 Route::post('/Logout', [UserController::class, 'Logout'])->name('logout');
