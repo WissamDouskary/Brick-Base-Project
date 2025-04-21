@@ -184,46 +184,34 @@
             <!-- Comment Input -->
             <div class="p-4 border-b border-gray-100">
                 <div class="flex items-start space-x-3">
-                    <img src="/api/placeholder/36/36" class="w-9 h-9 rounded-full" alt="Profile avatar" />
-                    <div class="flex-1 border border-gray-200 rounded-lg shadow-sm">
+                    <img src="{{ asset('storage/'.Auth::user()->profile_photo.'') }}" class="w-9 h-9 rounded-full" alt="{{ Auth::user()->first_name . ' ' . Auth::user()->last_name }}" />
+                    <form action="{{ route('review.store') }}" method="POST" class="flex-1 border border-gray-200 rounded-lg shadow-sm">
+                        @csrf
+                        <input type="hidden" name="worker_id" value="{{ $worker->id }}">
                         <div class="p-3 flex items-center space-x-2">
-                            <span class="font-medium text-gray-700">John Doe</span>
-                            <div class="flex text-yellow-400">
-                                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" viewBox="0 0 20 20"
-                                    fill="currentColor">
-                                    <path
-                                        d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118l-2.8-2.034c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
-                                </svg>
-                                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" viewBox="0 0 20 20"
-                                    fill="currentColor">
-                                    <path
-                                        d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118l-2.8-2.034c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
-                                </svg>
-                                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" viewBox="0 0 20 20"
-                                    fill="currentColor">
-                                    <path
-                                        d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118l-2.8-2.034c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
-                                </svg>
-                                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-gray-300" viewBox="0 0 20 20"
-                                    fill="currentColor">
-                                    <path
-                                        d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118l-2.8-2.034c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
-                                </svg>
-                                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-gray-300" viewBox="0 0 20 20"
-                                    fill="currentColor">
-                                    <path
-                                        d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118l-2.8-2.034c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
-                                </svg>
+                            <span
+                                class="font-medium text-gray-700">{{ Auth::user()->first_name . ' ' . Auth::user()->last_name }}</span>
+                            <div class="flex">
+                                <div class="flex flex-row-reverse justify-end space-x-reverse space-x-1" id="star-container">
+                                    @for ($i = 5; $i >= 1; $i--)
+                                        <input type="radio" name="rating" id="star{{ $i }}" value="{{ $i }}" class="hidden peer" />
+                                        <label for="star{{ $i }}"
+                                            class="text-gray-300 peer-checked:text-yellow-400 hover:text-yellow-400 cursor-pointer text-xl">
+                                            ★
+                                        </label>
+                                    @endfor
+                                </div>
                             </div>
                         </div>
                         <div class="px-3 pb-3">
-                            <textarea placeholder="type your comments..." rows="1" class="w-full outline-none text-gray-600 resize-none"></textarea>
+                            <textarea name="comment" placeholder="Type your comments..." rows="1"
+                                class="w-full outline-none text-gray-600 resize-none"></textarea>
                         </div>
                         <div class="px-3 py-2 bg-gray-50 border-t border-gray-100 flex justify-end items-center">
-                            <button
+                            <button type="submit"
                                 class="px-4 py-1 cursor-pointer bg-blue-500 text-white rounded-md text-sm font-medium">Comment</button>
                         </div>
-                    </div>
+                    </form>
                 </div>
             </div>
 
