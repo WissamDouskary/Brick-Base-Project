@@ -18,7 +18,7 @@
     @endif
 
     <div class="max-w-4xl mx-auto py-8 px-4 sm:px-6 lg:px-8">
-
+        {{-- filter orders --}}
         <div>
             <div class="flex justify-between items-center mb-10">
                 <h3 class="text-lg font-medium text-gray-900">My Orders</h3>
@@ -38,6 +38,7 @@
                 </form>
             </div>
 
+            {{-- orders container --}}
             <div id="orders-container" class="flex flex-col gap-4">
                 <?php $total = 0;
                 $count = 0; ?>
@@ -129,7 +130,7 @@
                                 </div>
                             </div>
                         </div>
-
+                        {{-- orders modal --}}
                         <div id="orderDetailsModal-{{ $order->id }}"
                             class="fixed inset-0 z-50 hidden items-center justify-center bg-black/70">
                             <div
