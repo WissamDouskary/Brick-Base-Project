@@ -23,14 +23,11 @@ class OrderController extends Controller
             'price' => 'required'
         ]);
 
-        $total_price = $request->quantity * $request->price;
-
         $existOrder = Order::where('client_id', Auth::id())->where('product_id', $request->product_id)->where('status', 'Pending')->first();
 
         if($existOrder){
             $existOrder->update([
-                'quantity' => $existOrder->quantity + $request->quantity,
-                'price' => $existOrder->price + $total_price
+                'quantity' => $existOrder->quantity + $request->quantity
             ]);
             return back()->with('success', 'Order Created, Go to Orders To Checkout!');
         }
@@ -39,9 +36,21 @@ class OrderController extends Controller
             'quantity' => $request->quantity,
             'status' => 'Pending',
             'product_id' => $request->product_id,
-            'price' => $total_price
+            'price' => $request->price
         ]);
 
         return back()->with('success', 'Order Created, Go to Orders To Checkout!');
+    }
+
+    public function getClientOrders(Request $request){
+        $status = $request->input('status');
+
+        if($status && $status !== "All"){
+            $orders = $this->orderservice->filterClientOrders($status);
+        } else {
+            $orders = $this->orderservice->getClientOrders();
+        }
+        
+        return view('Pages.orders', compact('orders'));
     }
 }
