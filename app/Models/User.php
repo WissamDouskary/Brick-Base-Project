@@ -84,4 +84,9 @@ class User extends Authenticatable
     public function order(){
         return $this->hasMany(Order::class, 'client_id');
     }
+
+    public function reviews()
+    {
+        return $this->morphMany(Review::class, 'reviewable');
+    }
 }
