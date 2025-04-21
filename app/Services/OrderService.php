@@ -27,4 +27,8 @@ Class OrderService {
     {
         return $this->orderrepository->filterClientOrders($status);
     }
+
+    public function cancelOrder($id){
+        return $this->orderrepository->cancelOrder($id);
+    }
 }

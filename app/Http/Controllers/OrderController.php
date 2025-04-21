@@ -53,4 +53,10 @@ class OrderController extends Controller
         
         return view('Pages.orders', compact('orders'));
     }
+
+    public function cancelOrder($id){
+        $this->orderservice->cancelOrder($id);
+
+        return back()->with('success', 'Order Cancelled :(');
+    }
 }
