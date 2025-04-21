@@ -26,7 +26,22 @@ class ReviewsRepository implements ReviewsRepositoryInterface {
     public function modify($id, $content){
 
     }
+
     public function delete($id){
 
+    }
+
+    public function getReviews($id){
+        if(Product::find($id)){
+
+            $product = Product::find($id);
+            return $product->reviews;
+
+        } else if(User::find($id)) {
+
+            $worker = User::find($id);
+            return $worker->reviews;
+
+        }
     }
 }
