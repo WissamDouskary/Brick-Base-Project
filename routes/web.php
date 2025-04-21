@@ -11,6 +11,8 @@ use App\Http\Controllers\ClientProfileController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\WorkerProfileController;
 
+use App\Http\Controllers\PayPalController;
+
 Route::get('/SignUp', function () {
     return view('Pages.Auth.Sign-up');
 })->name('SignUp');
@@ -23,19 +25,19 @@ Route::get('/Inactive', function () {
     return view('Pages.Auth.in-active');
 })->name('in-active')->middleware(checkWorkerActivated::class);
 
-Route::middleware(['auth', CheckUserActive::class])->group(function(){
+Route::middleware(['auth', CheckUserActive::class])->group(function () {
     Route::get('/Workers', [UserController::class, 'getWorkers'])->name('Workers');
 
     Route::get('/', function () {
         return view('Pages.Home');
     })->name('Home');
-    
+
     Route::get('/About', function () {
         return view('Pages.About');
     })->name('About');
-    
+
     Route::get('/products', [ProductController::class, 'getall'])->name('Products');
-    
+
     Route::get('/Contact', function () {
         return view('Pages.Contact');
     })->name('Contact');
@@ -48,7 +50,7 @@ Route::middleware(['auth', CheckUserActive::class])->group(function(){
 
     Route::get('/Client/offers', [ReservationController::class, 'getClientOffers'])->name('client.offers');
 
-    Route::get('/Client/Profile', function(){
+    Route::get('/Client/Profile', function () {
         return view('Pages.Profiles.client-profile');
     })->name('client.profile');
 
@@ -57,7 +59,7 @@ Route::middleware(['auth', CheckUserActive::class])->group(function(){
     Route::get('/orders', [OrderController::class, 'getClientOrders'])->name('orders.list');
 });
 
-Route::middleware(['auth', checkUserRole::class, CheckUserActive::class])->group(function(){
+Route::middleware(['auth', checkUserRole::class, CheckUserActive::class])->group(function () {
     Route::get('/Product/List', [ProductController::class, 'index'])->name('product_list');
     Route::post('/Product/create', [ProductController::class, 'store'])->name('product.create');
     Route::put('/Product/update/{id}', [ProductController::class, 'update'])->name('product.update');
@@ -81,3 +83,12 @@ Route::post('/register', [UserController::class, 'register'])->name('register')-
 Route::post('/complete', [UserController::class, 'completeRegistration'])->name('completeRegistration');
 Route::post('/login', [UserController::class, 'login'])->name('sign_in')->middleware('guest');
 Route::post('/Logout', [UserController::class, 'Logout'])->name('logout');
+
+//paypal 
+Route::get('/checkout', [PayPalController::class, 'checkout'])->name('checkout');
+Route::post('/create-order/{id}', [PayPalController::class, 'createOrder'])->name('create.order');
+Route::post('/capture-order/{orderId}', [PayPalController::class, 'captureOrder'])->name('capture.order');
+Route::post('/create-multi-order', [PayPalController::class, 'createMultiOrder'])->name('create.multi.order');
+
+Route::get('/checkout/success', [PayPalController::class, 'handleSuccess'])->name('checkout.success');
+Route::get('/checkout/cancel', [PayPalController::class, 'handleCancel'])->name('checkout.cancel');
