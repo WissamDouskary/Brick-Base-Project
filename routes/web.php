@@ -12,6 +12,8 @@ use App\Http\Controllers\OrderController;
 use App\Http\Controllers\WorkerProfileController;
 
 use App\Http\Controllers\PayPalController;
+use App\Http\Controllers\ReviewsController;
+use App\Models\Review;
 
 Route::get('/SignUp', function () {
     return view('Pages.Auth.Sign-up');
@@ -59,6 +61,8 @@ Route::middleware(['auth', CheckUserActive::class])->group(function () {
     Route::get('/orders', [OrderController::class, 'getClientOrders'])->name('orders.list');
 
     Route::delete('/order/cancel/{id}', [OrderController::class, 'cancelOrder'])->name('order.cancel');
+
+    Route::post('/review/create', [ReviewsController::class, 'store'])->name('review.store');
 });
 
 Route::middleware(['auth', checkUserRole::class, CheckUserActive::class])->group(function () {
