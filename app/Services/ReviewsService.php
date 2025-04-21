@@ -17,4 +17,8 @@ class ReviewsService {
     public function store($id, $data){
         return $this->reviewsrepository->store($id, $data);
     }
+
+    public function getReviews($id){
+        return $this->reviewsrepository->getReviews($id);
+    }
 }
