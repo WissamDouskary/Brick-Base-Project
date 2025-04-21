@@ -22,8 +22,13 @@ class ReviewsController extends Controller
         ]);
 
         $data['client_id'] = Auth::id();
-
-        $this->reviewsservice->store($request->product_id, $data);
+        
+        if(isset($request->product_id)){
+            $this->reviewsservice->store($request->product_id, $data);
+        }else{
+            $this->reviewsservice->store($request->worker_id, $data);
+        }
+        
 
         return back()->with('success', 'comment posted successfuly');
     } 
