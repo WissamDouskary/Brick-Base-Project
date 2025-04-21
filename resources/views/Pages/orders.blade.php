@@ -18,7 +18,7 @@
     @endif
 
     <div class="max-w-4xl mx-auto py-8 px-4 sm:px-6 lg:px-8">
-        <!-- Orders Section -->
+
         <div>
             <div class="flex justify-between items-center mb-10">
                 <h3 class="text-lg font-medium text-gray-900">My Orders</h3>
@@ -39,7 +39,8 @@
             </div>
 
             <div id="orders-container" class="flex flex-col gap-4">
-                <?php $total = 0; $count = 0;?>
+                <?php $total = 0;
+                $count = 0; ?>
                 @if (count($orders) > 0)
                     @foreach ($orders as $order)
                         @if ($order->status === 'Pending')
@@ -90,29 +91,38 @@
                                             <span>Ordered on {{ date('F j, Y', strtotime($order->created_at)) }}</span>
                                         </div>
 
-                                        <div class="flex gap-2">
+                                        <div class="">
                                             @if ($order->status === 'Pending')
-                                                <a href="#"
-                                                    onclick="openOrderModal({{ $order->id }}); return false;"
-                                                    class="flex-1 cursor-pointer bg-amber-500 text-white text-center py-1.5 rounded text-sm hover:bg-amber-600 transition duration-200">
-                                                    Checkout
-                                                </a>
-                                                <button type="button"
-                                                    class="flex-1 cursor-pointer bg-gray-200 text-gray-800 text-center py-1.5 rounded text-sm hover:bg-gray-300 transition duration-200">
-                                                    Cancel
-                                                </button>
-                                            @else
-                                                <a href="#"
-                                                    onclick="openOrderModal({{ $order->id }}); return false;"
-                                                    class="flex-1 cursor-pointer bg-blue-500 text-white text-center py-1.5 rounded text-sm hover:bg-blue-600 transition duration-200">
-                                                    View Details
-                                                </a>
-                                                @if ($order->status === 'Completed')
-                                                    <button type="button"
-                                                        class="flex-1 cursor-pointer bg-green-500 text-white text-center py-1.5 rounded text-sm hover:bg-green-600 transition duration-200">
-                                                        Leave Review
+                                                <form action="{{ route('order.cancel', ['id' => $order->id]) }}"
+                                                    method="POST" class="flex gap-2">
+                                                    @csrf
+                                                    @method('DELETE')
+
+                                                    <a href="#"
+                                                        onclick="openOrderModal({{ $order->id }}); return false;"
+                                                        class="flex-1 cursor-pointer bg-amber-500 text-white text-center py-1.5 rounded text-sm hover:bg-amber-600 transition duration-200">
+                                                        Checkout
+                                                    </a>
+
+                                                    <button type="submit"
+                                                        class="flex-1 cursor-pointer bg-gray-200 text-gray-800 text-center py-1.5 rounded text-sm hover:bg-gray-300 transition duration-200">
+                                                        Cancel
                                                     </button>
-                                                @endif
+                                                </form>
+                                            @else
+                                                <form action="" class="flex gap-2">
+                                                    <a href="#"
+                                                        onclick="openOrderModal({{ $order->id }}); return false;"
+                                                        class="flex-1 cursor-pointer bg-blue-500 text-white text-center py-1.5 rounded text-sm hover:bg-blue-600 transition duration-200">
+                                                        View Details
+                                                    </a>
+                                                    @if ($order->status === 'Completed')
+                                                        <button type="button"
+                                                            class="flex-1 cursor-pointer bg-green-500 text-white text-center py-1.5 rounded text-sm hover:bg-green-600 transition duration-200">
+                                                            Leave Review
+                                                        </button>
+                                                    @endif
+                                                </form>
                                             @endif
                                         </div>
                                     </div>
@@ -120,7 +130,6 @@
                             </div>
                         </div>
 
-                        <!-- Order Details Modal -->
                         <div id="orderDetailsModal-{{ $order->id }}"
                             class="fixed inset-0 z-50 hidden items-center justify-center bg-black/70">
                             <div
@@ -245,40 +254,77 @@
             </div>
 
             <!-- Pagination -->
-            <div class="flex justify-center mt-8 md:mt-10 px-2">
-                <nav class="inline-flex flex-wrap justify-center rounded-md shadow">
-                    <span
-                        class="py-2 px-2 sm:px-4 border border-gray-300 bg-gray-200 rounded-l-md text-xs sm:text-sm font-medium text-gray-500 cursor-not-allowed flex items-center">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3 sm:h-4 sm:w-4 mr-0 sm:mr-1 inline-block"
-                            fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
-                        </svg>
-                        <span class="hidden sm:inline">Previous</span>
-                    </span>
+            @if ($orders->hasPages())
+                <div class="flex justify-center mt-8 md:mt-10 px-2">
+                    <nav class="inline-flex flex-wrap justify-center rounded-md shadow">
+                        {{-- Lien Précédent --}}
+                        @if ($orders->onFirstPage())
+                            <span
+                                class="py-2 px-2 sm:px-4 border border-gray-300 bg-gray-200 rounded-l-md text-xs sm:text-sm font-medium text-gray-500 cursor-not-allowed flex items-center">
+                                <svg xmlns="http://www.w3.org/2000/svg"
+                                    class="h-3 w-3 sm:h-4 sm:w-4 mr-0 sm:mr-1 inline-block" fill="none"
+                                    viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M15 19l-7-7 7-7" />
+                                </svg>
+                                <span class="hidden sm:inline">Previous</span>
+                            </span>
+                        @else
+                            <a href="{{ $orders->previousPageUrl() }}"
+                                class="py-2 px-2 sm:px-4 border border-gray-300 bg-white rounded-l-md text-xs sm:text-sm font-medium text-gray-700 hover:bg-gray-50 flex items-center">
+                                <svg xmlns="http://www.w3.org/2000/svg"
+                                    class="h-3 w-3 sm:h-4 sm:w-4 mr-0 sm:mr-1 inline-block" fill="none"
+                                    viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M15 19l-7-7 7-7" />
+                                </svg>
+                                <span class="hidden sm:inline">Previous</span>
+                            </a>
+                        @endif
 
-                    <span class="py-2 px-3 sm:px-4 border border-gray-300 text-amber-500 text-xs sm:text-sm font-medium">
-                        1
-                    </span>
+                        @foreach ($orders->getUrlRange(1, $orders->lastPage()) as $page => $url)
+                            @if ($page == $orders->currentPage())
+                                <span
+                                    class="py-2 px-3 sm:px-4 border border-gray-300 text-yellow-400 text-xs sm:text-sm font-medium">
+                                    {{ $page }}
+                                </span>
+                            @else
+                                <a href="{{ $url }}"
+                                    class="py-2 px-3 sm:px-4 border border-gray-300 bg-white text-xs sm:text-sm font-medium text-gray-700 hover:bg-gray-50">
+                                    {{ $page }}
+                                </a>
+                            @endif
+                        @endforeach
 
-                    <a href="#"
-                        class="py-2 px-3 sm:px-4 border border-gray-300 bg-white text-xs sm:text-sm font-medium text-gray-700 hover:bg-gray-50">
-                        2
-                    </a>
-
-                    <a href="#"
-                        class="py-2 px-2 sm:px-4 border border-gray-300 bg-white rounded-r-md text-xs sm:text-sm font-medium text-gray-700 hover:bg-gray-50 flex items-center">
-                        <span class="hidden sm:inline">Next</span>
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3 sm:h-4 sm:w-4 ml-0 sm:ml-1 inline-block"
-                            fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
-                        </svg>
-                    </a>
-                </nav>
-            </div>
+                        @if ($orders->hasMorePages())
+                            <a href="{{ $orders->nextPageUrl() }}"
+                                class="py-2 px-2 sm:px-4 border border-gray-300 bg-white rounded-r-md text-xs sm:text-sm font-medium text-gray-700 hover:bg-gray-50 flex items-center">
+                                <span class="hidden sm:inline">Next</span>
+                                <svg xmlns="http://www.w3.org/2000/svg"
+                                    class="h-3 w-3 sm:h-4 sm:w-4 ml-0 sm:ml-1 inline-block" fill="none"
+                                    viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M9 5l7 7-7 7" />
+                                </svg>
+                            </a>
+                        @else
+                            <span
+                                class="py-2 px-2 sm:px-4 border border-gray-300 bg-gray-200 rounded-r-md text-xs sm:text-sm font-medium text-gray-500 cursor-not-allowed flex items-center">
+                                <span class="hidden sm:inline">Next</span>
+                                <svg xmlns="http://www.w3.org/2000/svg"
+                                    class="h-3 w-3 sm:h-4 sm:w-4 ml-0 sm:ml-1 inline-block" fill="none"
+                                    viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M9 5l7 7-7 7" />
+                                </svg>
+                            </span>
+                        @endif
+                    </nav>
+                </div>
+            @endif
         </div>
     </div>
 
-    <!-- Shopping Cart Summary (Fixed at bottom) -->
     <div class="fixed bottom-0 left-0 right-0 bg-white border-t border-gray-200 shadow-lg p-4">
         <div class="max-w-4xl mx-auto">
             <div class="flex items-center justify-between">
@@ -293,14 +339,14 @@
                         <span class="ml-2 font-bold text-lg">${{ $total }}</span>
                     </div>
                 </div>
-                @if($count > 0)
-                <form action="{{ route('create.multi.order') }}" method="POST">
-                    @csrf
-                    <button
-                        class="bg-amber-500 cursor-pointer hover:bg-amber-600 text-white px-6 py-2 rounded-md font-medium transition-colors">
-                        Checkout All
-                    </button>
-                </form>
+                @if ($count > 0)
+                    <form action="{{ route('create.multi.order') }}" method="POST">
+                        @csrf
+                        <button
+                            class="bg-amber-500 cursor-pointer hover:bg-amber-600 text-white px-6 py-2 rounded-md font-medium transition-colors">
+                            Checkout All
+                        </button>
+                    </form>
                 @endif
             </div>
         </div>
