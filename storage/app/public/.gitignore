@@ -1,2 +1,3 @@
-*
-!.gitignore
+/photos/product_photos/*
+/photos/profile_photos/*
+/photos/worker_photos/*
