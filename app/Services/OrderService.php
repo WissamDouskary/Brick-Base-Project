@@ -18,4 +18,13 @@ Class OrderService {
         return $this->orderrepository->store($data);
     }
 
+    public function getClientOrders()
+    {
+        return $this->orderrepository->getClientOrders();
+    }
+
+    public function filterClientOrders($status)
+    {
+        return $this->orderrepository->filterClientOrders($status);
+    }
 }
