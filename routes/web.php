@@ -57,6 +57,8 @@ Route::middleware(['auth', CheckUserActive::class])->group(function () {
     Route::post('/product/buy', [OrderController::class, 'store'])->name('product.buy');
 
     Route::get('/orders', [OrderController::class, 'getClientOrders'])->name('orders.list');
+
+    Route::delete('/order/cancel/{id}', [OrderController::class, 'cancelOrder'])->name('order.cancel');
 });
 
 Route::middleware(['auth', checkUserRole::class, CheckUserActive::class])->group(function () {
