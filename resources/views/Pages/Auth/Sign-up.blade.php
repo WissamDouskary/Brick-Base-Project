@@ -36,7 +36,7 @@
                             id="first_name"
                             name="first_name"
                             value="{{ old('first_name') }}"
-                            class="w-full p-2 border rounded focus:outline-none focus:ring-2 focus:ring-amber-400 @error('first_name') border-red-500 @enderror"
+                            class="w-full p-2 border rounded border-gray-300 focus:outline-none focus:ring-2 focus:ring-amber-400 @error('first_name') border-red-500 @enderror"
                             required
                         >
                         @error('first_name')
@@ -52,7 +52,7 @@
                             id="last_name"
                             name="last_name"
                             value="{{ old('last_name') }}"
-                            class="w-full p-2 border rounded focus:outline-none focus:ring-2 focus:ring-amber-400 @error('last_name') border-red-500 @enderror"
+                            class="w-full p-2 border rounded border-gray-300 focus:outline-none focus:ring-2 focus:ring-amber-400 @error('last_name') border-red-500 @enderror"
                             required
                         >
                         @error('last_name')
@@ -71,7 +71,7 @@
                         id="email"
                         name="email"
                         value="{{ old('email') }}"
-                        class="w-full p-2 border rounded focus:outline-none focus:ring-2 focus:ring-amber-400 @error('email') border-red-500 @enderror"
+                        class="w-full p-2 border rounded border-gray-300 focus:outline-none focus:ring-2 focus:ring-amber-400 @error('email') border-red-500 @enderror"
                         required
                     >
                     @error('email')
@@ -88,7 +88,7 @@
                         <select
                             id="role"
                             name="role"
-                            class="w-full p-2 border rounded focus:outline-none focus:ring-2 focus:ring-amber-400 appearance-none bg-white pr-8 @error('role') border-red-500 @enderror"
+                            class="w-full p-2 border rounded border-gray-300 focus:outline-none focus:ring-2 focus:ring-amber-400 appearance-none bg-white pr-8 @error('role') border-red-500 @enderror"
                             required
                         >
                             <option value="" disabled {{ old('role') ? '' : 'selected' }}>Select Your Role</option>
@@ -108,7 +108,7 @@
 
                 <!-- Profile photo -->
                 <div class="mb-4">
-                    <label for="profile_photo" class="block text-sm font-medium text-gray-700 mb-1">
+                    <label for="profile_photo" class="block border-gray-300 text-sm font-medium text-gray-700 mb-1">
                         Profile Photo
                     </label>
                     <div class="relative">
@@ -139,7 +139,7 @@
                         <select
                             id="city"
                             name="city"
-                            class="w-full p-2 border rounded focus:outline-none focus:ring-2 focus:ring-amber-400 appearance-none bg-white pr-8 @error('city') border-red-500 @enderror"
+                            class="w-full p-2 border rounded border-gray-300 focus:outline-none focus:ring-2 focus:ring-amber-400 appearance-none bg-white pr-8 @error('city') border-red-500 @enderror"
                             required
                         >
                             <option value="" disabled {{ old('city') ? '' : 'selected' }}>Select Your City</option>
@@ -178,7 +178,7 @@
                             type="password"
                             id="password"
                             name="password"
-                            class="w-full p-2 border rounded focus:outline-none focus:ring-2 focus:ring-amber-400 @error('password') border-red-500 @enderror"
+                            class="w-full p-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-amber-400 @error('password') border-red-500 @enderror"
                             required
                         >
                     </div>

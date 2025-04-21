@@ -118,6 +118,7 @@
                     <div class="py-1">
                         <a href="{{ route('client.profile') }}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-50">View profile</a>
                         <a href="{{ route('client.offers') }}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-50">View Offers</a>
+                        <a href="{{ route('orders.list') }}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-50">View Orders</a>
                         <a href="" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-50">Settings</a>
                     </div>
 
@@ -228,6 +229,8 @@
                         </div>
 
                         <a href="{{ route('client.profile') }}" class="block py-2 text-gray-600 hover:text-gray-900">View profile</a>
+                        <a href="{{ route('client.offers') }}" class="block py-2 text-gray-600 hover:text-gray-900">View Offers</a>
+                        <a href="{{ route('orders.list') }}" class="block py-2 text-gray-600 hover:text-gray-900">View Orders</a>
                         <a href="" class="block py-2 text-gray-600 hover:text-gray-900">Settings</a>
 
                         <form method="POST" action="">
