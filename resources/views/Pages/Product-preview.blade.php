@@ -213,17 +213,21 @@
             <!-- Comment Input -->
             <div class="p-4 border-b border-gray-100">
                 <div class="flex items-start space-x-3">
-                    <img src="{{ asset('storage/'.Auth::user()->profile_photo.'') }}" class="w-9 h-9 rounded-full" alt="{{ Auth::user()->first_name . ' ' . Auth::user()->last_name }}" />
-                    <form action="{{ route('review.store') }}" method="POST" class="flex-1 border border-gray-200 rounded-lg shadow-sm">
+                    <img src="{{ asset('storage/' . Auth::user()->profile_photo . '') }}" class="w-9 h-9 rounded-full"
+                        alt="{{ Auth::user()->first_name . ' ' . Auth::user()->last_name }}" />
+                    <form action="{{ route('review.store') }}" method="POST"
+                        class="flex-1 border border-gray-200 rounded-lg shadow-sm">
                         @csrf
                         <input type="hidden" name="product_id" value="{{ $product->id }}">
                         <div class="p-3 flex items-center space-x-2">
                             <span
                                 class="font-medium text-gray-700">{{ Auth::user()->first_name . ' ' . Auth::user()->last_name }}</span>
                             <div class="flex">
-                                <div class="flex flex-row-reverse justify-end space-x-reverse space-x-1" id="star-container">
+                                <div class="flex flex-row-reverse justify-end space-x-reverse space-x-1"
+                                    id="star-container">
                                     @for ($i = 5; $i >= 1; $i--)
-                                        <input type="radio" name="rating" id="star{{ $i }}" value="{{ $i }}" class="hidden peer" />
+                                        <input type="radio" name="rating" id="star{{ $i }}"
+                                            value="{{ $i }}" class="hidden peer" />
                                         <label for="star{{ $i }}"
                                             class="text-gray-300 peer-checked:text-yellow-400 hover:text-yellow-400 cursor-pointer text-xl">
                                             ★
@@ -243,24 +247,41 @@
                     </form>
                 </div>
             </div>
-
+            
             <!-- Existing Comment -->
-            <div class="p-4 border-b border-gray-100">
-                <div class="flex space-x-3">
-                    <img src="/api/placeholder/36/36" class="w-9 h-9 rounded-full" alt="Jane Doe avatar" />
-                    <div class="flex-1">
-                        <div class="flex items-center mb-1">
-                            <h3 class="font-medium text-gray-800 mr-2">Jane Doe</h3>
-                        </div>
-                        <p class="text-gray-600 mb-2">I really appreciate the insights and perspective shared in this
-                            article. It's definitely given me something to think about and has helped me see things from a
-                            different angle. Thank you for writing and sharing!</p>
-                        <div class="flex items-center space-x-4 text-xs text-gray-500">
-                            <span>5 min ago</span>
+            @if (count($reviews) > 0)
+
+                @foreach ($reviews as $review)
+                    <div class="p-4 border-b border-gray-100">
+                        <div class="flex space-x-3">
+                            <img src="{{ asset('storage/' . $review->client->profile_photo . '') }}"
+                                class="w-9 h-9 rounded-full"
+                                alt="{{ $review->client->first_name }} {{ $review->client->last_name }}" />
+                            <div class="flex-1">
+                                <div class="flex items-center mb-1">
+                                    <h3 class="font-medium text-gray-800 mr-2">{{ $review->client->first_name }}
+                                        {{ $review->client->last_name }}</h3>
+                                    @for ($i = 1; $i <= 5; $i++)
+                                        <span
+                                            class="{{ $i <= $review->rating ? 'text-yellow-400' : 'text-gray-300' }} text-xl">★</span>
+                                    @endfor
+                                </div>
+                                <p class="text-gray-600 mb-2">{{ $review->comment }}</p>
+                                <div class="flex items-center space-x-4 text-xs text-gray-500">
+                                    <span>{{ \Carbon\Carbon::parse($review->created_at)->diffForHumans() }}</span>
+                                </div>
+                            </div>
                         </div>
                     </div>
+                @endforeach
+            @else
+                <div class="w-full pt-12 flex flex-col items-center justify-center text-center">
+                    <h3 class="text-xl font-semibold mb-2">No Comments found!</h3>
+                    <p class="text-gray-500 max-w-md mb-6">
+                        We couldn't find any reviews for this product, create the first review.
+                    </p>
                 </div>
-            </div>
+            @endif
 
             <!-- Load More Button -->
             <div class="p-3">

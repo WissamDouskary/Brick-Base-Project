@@ -184,17 +184,21 @@
             <!-- Comment Input -->
             <div class="p-4 border-b border-gray-100">
                 <div class="flex items-start space-x-3">
-                    <img src="{{ asset('storage/'.Auth::user()->profile_photo.'') }}" class="w-9 h-9 rounded-full" alt="{{ Auth::user()->first_name . ' ' . Auth::user()->last_name }}" />
-                    <form action="{{ route('review.store') }}" method="POST" class="flex-1 border border-gray-200 rounded-lg shadow-sm">
+                    <img src="{{ asset('storage/' . Auth::user()->profile_photo . '') }}" class="w-9 h-9 rounded-full"
+                        alt="{{ Auth::user()->first_name . ' ' . Auth::user()->last_name }}" />
+                    <form action="{{ route('review.store') }}" method="POST"
+                        class="flex-1 border border-gray-200 rounded-lg shadow-sm">
                         @csrf
                         <input type="hidden" name="worker_id" value="{{ $worker->id }}">
                         <div class="p-3 flex items-center space-x-2">
                             <span
                                 class="font-medium text-gray-700">{{ Auth::user()->first_name . ' ' . Auth::user()->last_name }}</span>
                             <div class="flex">
-                                <div class="flex flex-row-reverse justify-end space-x-reverse space-x-1" id="star-container">
+                                <div class="flex flex-row-reverse justify-end space-x-reverse space-x-1"
+                                    id="star-container">
                                     @for ($i = 5; $i >= 1; $i--)
-                                        <input type="radio" name="rating" id="star{{ $i }}" value="{{ $i }}" class="hidden peer" />
+                                        <input type="radio" name="rating" id="star{{ $i }}"
+                                            value="{{ $i }}" class="hidden peer" />
                                         <label for="star{{ $i }}"
                                             class="text-gray-300 peer-checked:text-yellow-400 hover:text-yellow-400 cursor-pointer text-xl">
                                             ★
@@ -216,38 +220,39 @@
             </div>
 
             <!-- Existing Comment -->
-            <div class="p-4 border-b border-gray-100">
-                <div class="flex space-x-3">
-                    <img src="/api/placeholder/36/36" class="w-9 h-9 rounded-full" alt="Jane Doe avatar" />
-                    <div class="flex-1">
-                        <div class="flex items-center mb-1">
-                            <h3 class="font-medium text-gray-800 mr-2">Jane Doe</h3>
-                        </div>
-                        <p class="text-gray-600 mb-2">I really appreciate the insights and perspective shared in this
-                            article. It's definitely given me something to think about and has helped me see things from a
-                            different angle. Thank you for writing and sharing!</p>
-                        <div class="flex items-center space-x-4 text-xs text-gray-500">
-                            <div class="flex items-center space-x-1">
-                                <button class="hover:text-blue-500">
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none"
-                                        viewBox="0 0 24 24" stroke="currentColor">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                            d="M5 15l7-7 7 7" />
-                                    </svg>
-                                </button>
-                                <button class="hover:text-blue-500">
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none"
-                                        viewBox="0 0 24 24" stroke="currentColor">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                            d="M19 9l-7 7-7-7" />
-                                    </svg>
-                                </button>
+            @if (count($reviews) > 0)
+
+                @foreach ($reviews as $review)
+                    <div class="p-4 border-b border-gray-100">
+                        <div class="flex space-x-3">
+                            <img src="{{ asset('storage/' . $review->client->profile_photo . '') }}"
+                                class="w-9 h-9 rounded-full"
+                                alt="{{ $review->client->first_name }} {{ $review->client->last_name }}" />
+                            <div class="flex-1">
+                                <div class="flex items-center mb-1">
+                                    <h3 class="font-medium text-gray-800 mr-2">{{ $review->client->first_name }}
+                                        {{ $review->client->last_name }}</h3>
+                                    @for ($i = 1; $i <= 5; $i++)
+                                        <span
+                                            class="{{ $i <= $review->rating ? 'text-yellow-400' : 'text-gray-300' }} text-xl">★</span>
+                                    @endfor
+                                </div>
+                                <p class="text-gray-600 mb-2">{{ $review->comment }}</p>
+                                <div class="flex items-center space-x-4 text-xs text-gray-500">
+                                    <span>{{ \Carbon\Carbon::parse($review->created_at)->diffForHumans() }}</span>
+                                </div>
                             </div>
-                            <span>5 min ago</span>
                         </div>
                     </div>
+                @endforeach
+            @else
+                <div class="w-full pt-12 flex flex-col items-center justify-center text-center">
+                    <h3 class="text-xl font-semibold mb-2">No Comments found!</h3>
+                    <p class="text-gray-500 max-w-md mb-6">
+                        We couldn't find any reviews for this product, create the first review.
+                    </p>
                 </div>
-            </div>
+            @endif
 
             <!-- Load More Button -->
             <div class="p-3">
@@ -313,11 +318,8 @@
                     <label for="content" class="block text-sm font-medium text-gray-700">Content</label>
 
                     <textarea type="text" id="content" name="content"
-                        class="pl-2 py-2 block w-full border-gray-300 rounded-md shadow-sm outline-yellow-500"
-                        required
-                        placeholder="Write what do you need from worker..."
-                        rows="4"
-                        ></textarea>
+                        class="pl-2 py-2 block w-full border-gray-300 rounded-md shadow-sm outline-yellow-500" required
+                        placeholder="Write what do you need from worker..." rows="4"></textarea>
                 </div>
 
                 <!-- Pricing Information -->
@@ -365,23 +367,23 @@
         }
 
         document.addEventListener('DOMContentLoaded', function() {
-        const toast = document.getElementById('successToast');
+            const toast = document.getElementById('successToast');
 
-        if (toast) {
-            toast.classList.remove('hidden');
-            toast.classList.add('opacity-0');
+            if (toast) {
+                toast.classList.remove('hidden');
+                toast.classList.add('opacity-0');
 
-            toast.classList.add('opacity-100');
-            toast.classList.add('transition-opacity')
-            setTimeout(function() {
-                toast.classList.remove('opacity-100');
-
+                toast.classList.add('opacity-100');
+                toast.classList.add('transition-opacity')
                 setTimeout(function() {
-                    toast.classList.add('hidden');
-                }, 300);
-            }, 5000);
-        }
-    });
+                    toast.classList.remove('opacity-100');
+
+                    setTimeout(function() {
+                        toast.classList.add('hidden');
+                    }, 300);
+                }, 5000);
+            }
+        });
     </script>
 
 @endsection
