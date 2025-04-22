@@ -2,12 +2,13 @@
 
 namespace App\Services;
 
+use App\Repositories\Contracts\ReservationRepositoryInterface;
 use App\Repositories\ReservationRepository;
 
 Class ReservationService {
     protected $reservationRepository;
 
-    public function __construct(ReservationRepository $reservationRepository)
+    public function __construct(ReservationRepositoryInterface $reservationRepository)
     {
         $this->reservationRepository = $reservationRepository;
     }
