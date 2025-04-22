@@ -35,4 +35,35 @@ class UserRepository implements UserRepositoryInterface
             ->limit(3)
             ->get();
     }
+
+    public function filterByActive($is_active)
+    {
+        return User::where('is_active', $is_active)
+            ->where('id', '!=', Auth::id())
+            ->with('role')
+            ->paginate(9);
+    }
+
+    public function filterByRole($role_id)
+    {
+        return User::where('role_id', $role_id)
+            ->where('id', '!=', Auth::id())
+            ->with('role')
+            ->paginate(9);
+    }
+
+    public function filterByRoleAndStatus($role_id, $is_active)
+    {
+        return User::where('role_id', $role_id)
+            ->where('is_active', $is_active)
+            ->where('id', '!=', Auth::id())
+            ->with('role')
+            ->paginate(9);
+    }
+
+    public function getAllUsers()
+    {
+        return User::where('id', '!=', Auth::id())
+        ->paginate(9);
+    }
 }
