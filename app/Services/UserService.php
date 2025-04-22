@@ -57,4 +57,23 @@ class UserService
     public function get3workers($id){
         return $this->userRepository->get3workers($id);
     }
+
+    public function filterByActive($is_active)
+    {
+        return $this->userRepository->filterByActive($is_active);
+    }
+
+    public function filterByRole($role_id)
+    {
+        return $this->userRepository->filterByRole($role_id);
+    }
+
+    public function filterByRoleAndStatus($role_id, $is_active)
+    {
+        return $this->userRepository->filterByRoleAndStatus($role_id, $is_active);
+    }
+
+    public function getAllUsers(){
+        return $this->userRepository->getAllUsers();
+    }
 }
