@@ -8,9 +8,10 @@ use App\Http\Controllers\UserController;
 use App\Http\Middleware\CheckUserActive;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\PayPalController;
+use App\Http\Controllers\PeopleController;
 use App\Http\Controllers\ProductController;
-use App\Http\Controllers\ReportsController;
 
+use App\Http\Controllers\ReportsController;
 use App\Http\Controllers\ReviewsController;
 use App\Http\Middleware\RestrictAdminAccess;
 use App\Http\Middleware\checkWorkerActivated;
@@ -48,7 +49,7 @@ Route::get('/products', [ProductController::class, 'getall'])->name('Products');
 Route::get('/Contact', function () {
     return view('Pages.Contact');
 })->name('Contact');  
-  
+
 });
 
 Route::middleware(['auth', CheckUserActive::class, RestrictAdminAccess::class])->group(function () {
@@ -112,4 +113,5 @@ Route::get('/checkout/cancel', [PayPalController::class, 'handleCancel'])->name(
 //dashboard
 Route::middleware(['auth', CheckAdmin::class])->group(function () {
     Route::get('/dashboard/reports', [ReportsController::class, 'index'])->name('dashboard.reports');
+    Route::get('/dashboard/people', [PeopleController::class, 'index'])->name('dashboard.people');
 });
