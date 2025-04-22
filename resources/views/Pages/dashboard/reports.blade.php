@@ -1,20 +1,11 @@
 @extends('Pages.dashboard.layouts.app')
 
 @section('content')
-    <div class="space-y-6">
+    <div class="space-y-6 p-8">
         <h1 class="text-2xl font-bold">Reports</h1>
 
         <!-- Filters -->
         <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-            <div>
-                <label for="timeframe" class="block text-sm font-medium text-gray-700 mb-1">Timeframe:</label>
-                <select id="timeframe" class="w-full rounded-md border-gray-300 shadow-sm pl-2 py-2 focus:border-blue-500 focus:ring-blue-500">
-                    <option selected>All-time</option>
-                    <option>This month</option>
-                    <option>This week</option>
-                    <option>Today</option>
-                </select>
-            </div>
             <div>
                 <label for="people" class="block text-sm font-medium text-gray-700 mb-1">People:</label>
                 <select id="people" class="w-full rounded-md border-gray-300 shadow-sm pl-2 py-2 focus:border-blue-500 focus:ring-blue-500">
