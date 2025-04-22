@@ -1,19 +1,22 @@
 <?php
 
+use App\Models\Review;
+use App\Http\Middleware\checkadmin;
 use Illuminate\Support\Facades\Route;
 use App\Http\Middleware\checkUserRole;
 use App\Http\Controllers\UserController;
 use App\Http\Middleware\CheckUserActive;
+use App\Http\Controllers\OrderController;
+use App\Http\Controllers\PayPalController;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\ReportsController;
+
+use App\Http\Controllers\ReviewsController;
+use App\Http\Middleware\RestrictAdminAccess;
 use App\Http\Middleware\checkWorkerActivated;
 use App\Http\Controllers\ReservationController;
 use App\Http\Controllers\ClientProfileController;
-use App\Http\Controllers\OrderController;
 use App\Http\Controllers\WorkerProfileController;
-
-use App\Http\Controllers\PayPalController;
-use App\Http\Controllers\ReviewsController;
-use App\Models\Review;
 
 Route::get('/SignUp', function () {
     return view('Pages.Auth.Sign-up');
@@ -27,22 +30,23 @@ Route::get('/Inactive', function () {
     return view('Pages.Auth.in-active');
 })->name('in-active')->middleware(checkWorkerActivated::class);
 
-Route::middleware(['auth', CheckUserActive::class])->group(function () {
-    Route::get('/Workers', [UserController::class, 'getWorkers'])->name('Workers');
+Route::get('/Workers', [UserController::class, 'getWorkers'])->name('Workers');
 
-    Route::get('/', function () {
-        return view('Pages.Home');
-    })->name('Home');
+Route::get('/', function () {
+    return view('Pages.Home');
+})->name('Home');
 
-    Route::get('/About', function () {
-        return view('Pages.About');
-    })->name('About');
+Route::get('/About', function () {
+    return view('Pages.About');
+})->name('About');
 
-    Route::get('/products', [ProductController::class, 'getall'])->name('Products');
+Route::get('/products', [ProductController::class, 'getall'])->name('Products');
 
-    Route::get('/Contact', function () {
-        return view('Pages.Contact');
-    })->name('Contact');
+Route::get('/Contact', function () {
+    return view('Pages.Contact');
+})->name('Contact');
+
+Route::middleware(['auth', CheckUserActive::class, RestrictAdminAccess::class])->group(function () {
 
     Route::get('/Workers/Preview/{id}', [UserController::class, 'find'])->name('Preview');
 
@@ -78,7 +82,7 @@ Route::get('/CompleteRegistration', function () {
     return view('Pages.Auth.Complete-reg');
 })->name('CompleteRegistration')->middleware('auth');
 
-Route::get('/Worker/Profile', [ProductController::class, 'getWorkerProducts'])->name('workerprofile');
+Route::get('/Worker/Profile', [ProductController::class, 'getWorkerProducts'])->name('workerprofile')->middleware('auth', checkUserRole::class);
 
 Route::put('/profile/update', [WorkerProfileController::class, 'update'])->name('worker.profile.edit')->middleware('auth');
 Route::put('/Client/Profile/Update', [ClientProfileController::class, 'update'])->name('client.profile.edit')->middleware('auth');
@@ -91,10 +95,16 @@ Route::post('/login', [UserController::class, 'login'])->name('sign_in')->middle
 Route::post('/Logout', [UserController::class, 'Logout'])->name('logout');
 
 //paypal 
-Route::get('/checkout', [PayPalController::class, 'checkout'])->name('checkout');
-Route::post('/create-order/{id}', [PayPalController::class, 'createOrder'])->name('create.order');
-Route::post('/capture-order/{orderId}', [PayPalController::class, 'captureOrder'])->name('capture.order');
-Route::post('/create-multi-order', [PayPalController::class, 'createMultiOrder'])->name('create.multi.order');
+Route::get('/checkout', [PayPalController::class, 'checkout'])->name('checkout')->middleware('auth');
+Route::post('/create-order/{id}', [PayPalController::class, 'createOrder'])->name('create.order')->middleware('auth');
+Route::post('/capture-order/{orderId}', [PayPalController::class, 'captureOrder'])->name('capture.order')->middleware('auth');
+Route::post('/create-multi-order', [PayPalController::class, 'createMultiOrder'])->name('create.multi.order')->middleware('auth');
 
 Route::get('/checkout/success', [PayPalController::class, 'handleSuccess'])->name('checkout.success');
 Route::get('/checkout/cancel', [PayPalController::class, 'handleCancel'])->name('checkout.cancel');
+
+
+//dashboard
+Route::middleware(['auth', CheckAdmin::class])->group(function () {
+    Route::get('/dashboard/reports', [ReportsController::class, 'index'])->name('dashboard.reports');
+});
