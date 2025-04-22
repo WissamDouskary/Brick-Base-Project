@@ -18,6 +18,9 @@ use App\Http\Controllers\ReservationController;
 use App\Http\Controllers\ClientProfileController;
 use App\Http\Controllers\WorkerProfileController;
 
+//public routes
+route::middleware(RestrictAdminAccess::class)->group(function(){
+
 Route::get('/SignUp', function () {
     return view('Pages.Auth.Sign-up');
 })->name('SignUp');
@@ -44,7 +47,9 @@ Route::get('/products', [ProductController::class, 'getall'])->name('Products');
 
 Route::get('/Contact', function () {
     return view('Pages.Contact');
-})->name('Contact');
+})->name('Contact');  
+  
+});
 
 Route::middleware(['auth', CheckUserActive::class, RestrictAdminAccess::class])->group(function () {
 
