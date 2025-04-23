@@ -4,28 +4,6 @@
     <div class="space-y-6 p-8">
         <h1 class="text-2xl font-bold">Reports</h1>
 
-        <!-- Filters -->
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-            <div>
-                <label for="people" class="block text-sm font-medium text-gray-700 mb-1">People:</label>
-                <select id="people"
-                    class="w-full rounded-md border-gray-300 shadow-sm pl-2 py-2 focus:border-blue-500 focus:ring-blue-500">
-                    <option selected>All</option>
-                    <option>Admins</option>
-                    <option>Users</option>
-                </select>
-            </div>
-            <div>
-                <label for="topic" class="block text-sm font-medium text-gray-700 mb-1">Topic:</label>
-                <select id="topic"
-                    class="w-full rounded-md border-gray-300 shadow-sm pl-2 py-2 focus:border-blue-500 focus:ring-blue-500">
-                    <option selected>All</option>
-                    <option>Sales</option>
-                    <option>Marketing</option>
-                    <option>Support</option>
-                </select>
-            </div>
-        </div>
 
         <!-- Stats Grid -->
         <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
@@ -34,6 +12,7 @@
                 <h3 class="text-sm font-medium text-gray-500 mb-2">Active Users</h3>
                 <div class="flex items-baseline">
                     <span class="text-3xl font-bold">{{ $countUsers }}</span>
+                    <input type="hidden" id="countUsers" value="{{ $countUsers }}">
                 </div>
             </div>
 
@@ -42,6 +21,7 @@
                 <h3 class="text-sm font-medium text-gray-500 mb-2">Banned Users</h3>
                 <div class="flex items-baseline">
                     <span class="text-3xl font-bold">{{ $countinactiveUsers }}</span>
+                    <input type="hidden" id="countinactiveUsers" value="{{ $countinactiveUsers }}">
                 </div>
             </div>
 
@@ -66,6 +46,7 @@
                 <h3 class="text-sm font-medium text-gray-500 mb-2">Available Workers</h3>
                 <div class="flex items-baseline">
                     <span class="text-3xl font-bold">{{ $countWorkers }}</span>
+                    <input type="hidden" id="countWorkers" value="{{ $countWorkers }}">
                 </div>
             </div>
         </div>
@@ -75,7 +56,7 @@
             <!-- Chart -->
             <div class="bg-white p-6 rounded-lg shadow-sm">
                 <div class="flex justify-center">
-                    <div class="w-64 h-64">
+                    <div class="w-88 h-72">
                         <canvas id="pieChart"></canvas>
                     </div>
                 </div>
@@ -105,24 +86,27 @@
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             const ctx = document.getElementById('pieChart').getContext('2d');
+            let countUsers = document.getElementById('countUsers').value
+            let countinactiveUsers = document.getElementById('countinactiveUsers').value
+            let countWorkers = document.getElementById('countWorkers').value
 
+            let data = [countUsers, countinactiveUsers, countWorkers]
+            
             new Chart(ctx, {
                 type: 'doughnut',
                 data: {
-                    labels: ['Red', 'Green', 'Yellow', 'Blue'],
+                    labels: ['Active Users', 'Banned Users', 'Workers'],
                     datasets: [{
-                        data: [39, 28, 22, 11],
+                        data: data,
                         backgroundColor: [
-                            'rgba(255, 99, 132, 0.7)',
                             'rgba(75, 192, 192, 0.7)',
-                            'rgba(255, 206, 86, 0.7)',
-                            'rgba(54, 162, 235, 0.7)'
+                            'rgba(255, 99, 132, 0.7)',
+                            'rgba(255, 206, 86, 0.7)'
                         ],
                         borderColor: [
-                            'rgba(255, 99, 132, 1)',
                             'rgba(75, 192, 192, 1)',
-                            'rgba(255, 206, 86, 1)',
-                            'rgba(54, 162, 235, 1)'
+                            'rgba(255, 99, 132, 1)',
+                            'rgba(255, 206, 86, 1)'
                         ],
                         borderWidth: 1
                     }]
@@ -133,7 +117,7 @@
                     cutout: '70%',
                     plugins: {
                         legend: {
-                            display: false
+                            display: true
                         }
                     }
                 }
