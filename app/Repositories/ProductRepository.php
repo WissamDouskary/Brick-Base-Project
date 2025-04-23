@@ -32,15 +32,17 @@ class ProductRepository implements ProductRepositoryInterface
         return Product::find($id);
     }
 
-    public function getall()
+    public function getall($status)
     {
-        return Product::where('worker_id', '!=', Auth::id())->paginate(9);
+        return Product::where('worker_id', '!=', Auth::id())->where('status', $status)->latest()->with('user')->paginate(9);
     }
 
     public function get3($id)
     {
         return Product::where('worker_id', '!=', Auth::id())
+            ->where('status', 'Accepted')
             ->where('id', '!=', $id)
+            ->latest()
             ->limit(3)
             ->get();
     }
