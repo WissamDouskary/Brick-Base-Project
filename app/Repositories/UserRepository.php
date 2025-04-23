@@ -66,4 +66,12 @@ class UserRepository implements UserRepositoryInterface
         return User::where('id', '!=', Auth::id())
         ->paginate(9);
     }
+
+    public function manageStatus($id, $status)
+    {
+        $user = User::find($id);
+        return $user->update([
+            'is_active' => $status
+        ]);
+    }
 }

@@ -33,4 +33,9 @@ class PeopleController extends Controller
 
         return view('Pages.dashboard.people', compact('users'));
     }
+
+    public function manageStatus($id, $status){
+        $this->userservice->manageStatus($id, $status);
+        return back()->with('success', 'Status updated successfuly!');
+    }
 }

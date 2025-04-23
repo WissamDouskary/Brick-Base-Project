@@ -76,4 +76,8 @@ class UserService
     public function getAllUsers(){
         return $this->userRepository->getAllUsers();
     }
+
+    public function manageStatus($id, $status){
+        return $this->userRepository->manageStatus($id, $status);
+    }
 }

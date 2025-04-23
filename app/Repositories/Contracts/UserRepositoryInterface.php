@@ -14,4 +14,5 @@ interface UserRepositoryInterface
     public function getAllUsers();
     public function filterByActive($is_active);
     public function filterByRole($role_id);
+    public function manageStatus($id, $status);
 }
