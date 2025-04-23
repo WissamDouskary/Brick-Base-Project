@@ -1,11 +1,13 @@
 <?php
+
 namespace App\Services;
 
 use App\Repositories\Contracts\ProductRepositoryInterface;
 use Illuminate\Support\Facades\Auth;
 
 
-Class ProductService {
+class ProductService
+{
 
     protected $productrepository;
 
@@ -14,31 +16,45 @@ Class ProductService {
         $this->productrepository = $product_repository;
     }
 
-    public function create($data){
+    public function create($data)
+    {
+        $data['in_stock'] = true;
+        $data['status'] = 'Pending';
         return $this->productrepository->create($data);
     }
 
-    public function update(array $data, int $id){
+    public function update(array $data, int $id)
+    {
         return $this->productrepository->update($data, $id);
     }
 
-    public function delete(int $id){
+    public function delete(int $id)
+    {
         return $this->productrepository->destroy($id);
     }
 
-    public function getall($status){
-       return $this->productrepository->getall($status);
+    public function getall($status)
+    {
+        return $this->productrepository->getall($status);
     }
 
-    public function findById($id){
+    public function findById($id)
+    {
         return $this->productrepository->findById($id);
     }
 
-    public function get3($id){
+    public function get3($id)
+    {
         return $this->productrepository->get3($id);
     }
 
-    public function getWorkerProducts(){
+    public function getWorkerProducts()
+    {
         return $this->productrepository->getWorkerProducts();
+    }
+
+    public function manageStatus($id, $status)
+    {
+        return $this->productrepository->manageProduct($id, $status);
     }
 }

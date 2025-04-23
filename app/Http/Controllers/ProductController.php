@@ -46,10 +46,9 @@ class ProductController extends Controller
             $photos = $request->file('photos');
 
             $mainImagePath = $photos[0]->store('product_photos', 'public');
-            $data['main_image'] = $mainImagePath;
-            $data['in_stock'] = true;
-            $data['status'] = 'Pending';
 
+            $data['main_image'] = $mainImagePath;
+            
             $product = $this->productservice->create($data);
 
             foreach ($photos as $photo) {
