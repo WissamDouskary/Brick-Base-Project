@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ActivitiesController;
 use App\Models\Review;
 use App\Http\Middleware\checkadmin;
 use Illuminate\Support\Facades\Route;
@@ -114,5 +115,6 @@ Route::get('/checkout/cancel', [PayPalController::class, 'handleCancel'])->name(
 Route::middleware(['auth', CheckAdmin::class])->group(function () {
     Route::get('/dashboard/reports', [ReportsController::class, 'index'])->name('dashboard.reports');
     Route::get('/dashboard/people', [PeopleController::class, 'index'])->name('dashboard.people');
+    Route::get('/dashboard/Activities', [ActivitiesController::class, 'index'])->name('dashboard.activities');
     Route::post('/dashboard/people/{id}/{status}', [PeopleController::class, 'manageStatus'])->name('dashboard.people.status');
 });
