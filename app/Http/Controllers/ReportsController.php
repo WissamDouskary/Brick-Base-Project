@@ -25,7 +25,7 @@ class ReportsController extends Controller
         $countUsers = count($this->userservice->filterByActive(1));
         $countinactiveUsers = count($this->userservice->filterByActive(0));
         $countReviews = count($this->reviewservice->getallReviews());
-        $countproducts = count($this->productservice->getall());
+        $countproducts = count($this->productservice->getall('Accepted'));
         $countWorkers = count($this->userservice->filterByRole(1));
 
         $latestUsers = $this->userservice->getAllUsers()->take(3);
