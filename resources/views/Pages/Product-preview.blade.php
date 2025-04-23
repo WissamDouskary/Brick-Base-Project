@@ -320,35 +320,6 @@
                 }, 5000);
             }
         });
-
-        document.addEventListener('DOMContentLoaded', function() {
-            let currentRating = 3;
-            const stars = document.querySelectorAll('.star');
-            const ratingInput = document.getElementById('rating-value');
-
-            stars.forEach(star => {
-                star.addEventListener('click', function() {
-                    const value = parseInt(this.getAttribute('data-value'));
-                    setRating(value);
-                });
-            });
-
-            function setRating(value) {
-                currentRating = value;
-                ratingInput.value = value;
-
-                stars.forEach(star => {
-                    const starValue = parseInt(star.getAttribute('data-value'));
-                    if (starValue <= currentRating) {
-                        star.classList.add('text-yellow-400');
-                        star.classList.remove('text-gray-300');
-                    } else {
-                        star.classList.remove('text-yellow-400');
-                        star.classList.add('text-gray-300');
-                    }
-                });
-            }
-        });
     </script>
 
 @endsection
