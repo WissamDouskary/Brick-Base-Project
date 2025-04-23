@@ -117,4 +117,7 @@ Route::middleware(['auth', CheckAdmin::class])->group(function () {
     Route::get('/dashboard/people', [PeopleController::class, 'index'])->name('dashboard.people');
     Route::get('/dashboard/Activities', [ActivitiesController::class, 'index'])->name('dashboard.activities');
     Route::post('/dashboard/people/{id}/{status}', [PeopleController::class, 'manageStatus'])->name('dashboard.people.status');
+
+    //manage products
+    Route::post('/dashboard/Product/{id}/{status}', [ActivitiesController::class, 'manageProduct'])->name('dashboard.manageProduct');
 });
