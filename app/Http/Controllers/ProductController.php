@@ -26,7 +26,7 @@ class ProductController extends Controller
 
     public function getall()
     {
-        $products = $this->productservice->getall();
+        $products = $this->productservice->getall('Accepted');
         return view('Pages.Products', compact('products'));
     }
 
@@ -48,6 +48,7 @@ class ProductController extends Controller
             $mainImagePath = $photos[0]->store('product_photos', 'public');
             $data['main_image'] = $mainImagePath;
             $data['in_stock'] = true;
+            $data['status'] = 'Pending';
 
             $product = $this->productservice->create($data);
 
