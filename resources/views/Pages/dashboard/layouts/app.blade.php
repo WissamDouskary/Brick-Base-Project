@@ -10,8 +10,10 @@
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    {{-- google fonts link  --}}
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
     <script src="https://unpkg.com/@tailwindcss/browser@4"></script>
 
     <!-- Scripts -->
@@ -30,7 +32,7 @@
         }
     </style>
 </head>
-<body class="font-sans antialiased bg-gray-50">
+<body class="antialiased bg-gray-50 font-poppins">
     <div class="flex h-screen overflow-hidden">
         <!-- Sidebar -->
         @include('Pages.dashboard.components.sidebar')
