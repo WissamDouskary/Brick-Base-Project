@@ -1,6 +1,21 @@
 @extends('Pages.dashboard.layouts.app')
 
 @section('content')
+
+    @if (session('success'))
+        <div id="successToast"
+            class="fixed z-50 top-4 left-1/2 transform -translate-x-1/2 bg-green-500 text-white px-6 py-3 rounded-md shadow-lg hidden opacity-0 transition-opacity duration-300">
+            <div class="flex items-center space-x-2">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                    <path fill-rule="evenodd"
+                        d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
+                        clip-rule="evenodd" />
+                </svg>
+                <span>{{ session('success') }}</span>
+            </div>
+        </div>
+    @endif
+
     <div class="min-h-screen">
         <div class="ml-8 mt-8">
             <h1 class="text-2xl font-bold">People</h1>
@@ -92,7 +107,8 @@
                                             </span>
                                         </td>
                                         <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
-                                            <button class="text-gray-400 hover:text-gray-500" onclick="toggleSidebar({{ $user->id }})">
+                                            <button class="text-gray-400 hover:text-gray-500"
+                                                onclick="toggleSidebar({{ $user->id }})">
                                                 <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20"
                                                     fill="currentColor">
                                                     <path
@@ -108,8 +124,8 @@
                         <div class="w-full flex justify-center">
                             <div class="bg-white rounded-lg p-8 text-center max-w-xl">
                                 <div class="flex justify-center mb-4">
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-16 w-16 text-gray-400"
-                                        fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-16 w-16 text-gray-400" fill="none"
+                                        viewBox="0 0 24 24" stroke="currentColor">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                             d="M20 13V6a2 2 0 00-2-2H6a2 2 0 00-2 2v7m16 0v5a2 2 0 01-2 2H6a2 2 0 01-2-2v-5m16 0h-2.586a1 1 0 00-.707.293l-2.414 2.414a1 1 0 01-.707.293h-3.172a1 1 0 01-.707-.293l-2.414-2.414A1 1 0 006.586 13H4" />
                                     </svg>
@@ -150,8 +166,8 @@
                     <h3 class="text-lg font-medium text-gray-900">Person Details</h3>
                     <button type="button" onclick="toggleSidebar({{ $user->id }})"
                         class="text-gray-400 hover:text-gray-500">
-                        <svg class="h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none"
-                            viewBox="0 0 24 24" stroke="currentColor">
+                        <svg class="h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                            stroke="currentColor">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                 d="M6 18L18 6M6 6l12 12" />
                         </svg>
@@ -159,10 +175,9 @@
                 </div>
                 <div class="flex-1 overflow-y-auto p-6">
                     <div class="flex items-center mb-6">
-                        <img
-                            src="{{ asset('storage/'.$user->profile_photo.'') }}"
+                        <img src="{{ asset('storage/' . $user->profile_photo . '') }}"
                             class="h-16 w-16 rounded-full bg-blue-100 flex items-center justify-center text-blue-600 text-xl font-bold">
-                        
+
                         <div class="ml-4">
                             <h4 class="text-lg font-medium text-gray-900">
                                 {{ $user->first_name . ' ' . $user->last_name }}</h4>
@@ -215,11 +230,26 @@
                     </div>
                 </div>
                 <div class="px-6 py-4 border-t border-gray-200">
-                    <div class="flex space-x-3">
-                        <button
-                            class="flex-1 px-4 py-2 text-sm font-medium text-red-700 bg-red-100 border border-transparent rounded-md shadow-sm hover:bg-red-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500">
-                            Deactivate
-                        </button>
+                    <div class="flex space-x-3 w-full">
+                        @if ($user->is_active)
+                            <form action="{{ route('dashboard.people.status', ['id' => $user->id, 'status' => 0]) }}"
+                                method="POST" class="w-full">
+                                @csrf
+                                <button type="submit"
+                                    class="cursor-pointer px-4 py-2 text-sm font-medium text-red-700 bg-red-100 border border-transparent rounded-md shadow-sm hover:bg-red-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500">
+                                    Deactivate
+                                </button>
+                            </form>
+                        @else
+                            <form action="{{ route('dashboard.people.status', ['id' => $user->id, 'status' => 1]) }}"
+                                method="POST" class="w-full">
+                                @csrf
+                                <button type="submit"
+                                    class="cursor-pointer px-4 py-2 text-sm font-medium text-blue-700 bg-blue-100 border border-transparent rounded-md shadow-sm hover:bg-blue-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
+                                    Activate
+                                </button>
+                            </form>
+                        @endif
                     </div>
                 </div>
             </div>
@@ -235,5 +265,24 @@
                 sidebar.classList.add('translate-x-full');
             }
         }
+
+        document.addEventListener('DOMContentLoaded', function() {
+            const toast = document.getElementById('successToast');
+
+            if (toast) {
+                toast.classList.remove('hidden');
+                toast.classList.add('opacity-0');
+
+                toast.classList.add('opacity-100');
+                toast.classList.add('transition-opacity')
+                setTimeout(function() {
+                    toast.classList.remove('opacity-100');
+
+                    setTimeout(function() {
+                        toast.classList.add('hidden');
+                    }, 300);
+                }, 5000);
+            }
+        });
     </script>
 @endsection
