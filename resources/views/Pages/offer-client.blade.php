@@ -25,14 +25,16 @@
             <div class="flex justify-between items-center mb-10">
                 <h3 class="text-lg font-medium text-gray-900">Available Offers</h3>
                 <form method="GET" action="{{ route('client.offers') }}" class=" flex flex-wrap items-center gap-4">
-                    <select name="status" class="text-sm border border-gray-300 rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-amber-400">
+                    <select name="status"
+                        class="text-sm border border-gray-300 rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-amber-400">
                         <option value="All">All Offers</option>
                         <option value="Pending" {{ request('status') == 'Pending' ? 'selected' : '' }}>Pending</option>
                         <option value="Accepted" {{ request('status') == 'Accepted' ? 'selected' : '' }}>Accepted</option>
-                        <option value="Completed" {{ request('status') == 'Completed' ? 'selected' : '' }}>Completed</option>
+                        <option value="Completed" {{ request('status') == 'Completed' ? 'selected' : '' }}>Completed
+                        </option>
                         <option value="Failed" {{ request('status') == 'Failed' ? 'selected' : '' }}>Failed</option>
                     </select>
-                
+
                     <button type="submit" class="bg-yellow-500 hover:bg-yellow-600 text-white px-4 py-2 rounded text-sm">
                         Filter
                     </button>
@@ -65,9 +67,9 @@
                                         <div class="flex justify-between items-start mb-1">
                                             <h4 class="text-gray-900 font-medium">{{ $offer->first_name }}
                                                 {{ $offer->last_name }}</h4>
-                                            <span
-                                                class="text-lg font-bold text-amber-500">${{ $offer->price *
-                                                    (\Carbon\Carbon::parse($offer->start_date)->diffInDays(\Carbon\Carbon::parse($offer->end_date)) + 1) }}</span>
+                                            <span class="text-lg font-bold text-amber-500">
+                                                ${{ number_format($offer->price * (\Carbon\Carbon::parse($offer->start_date)->diffInDays(\Carbon\Carbon::parse($offer->end_date)) + 1), 2) }}
+                                            </span>
                                         </div>
 
                                         <div class="flex items-center mb-1">
@@ -128,7 +130,7 @@
                             class="fixed inset-0 z-50 hidden items-center justify-center bg-black/70">
                             <div
                                 class="bg-white rounded-xl p-6 w-full max-w-lg shadow-2xl relative mx-4 animate-fade-in-up max-h-[90vh] overflow-y-auto">
-                                
+
                                 <button onclick="closeReservationModal({{ $offer->id }})"
                                     class="absolute top-3 right-3 h-8 w-8 flex items-center justify-center rounded-full bg-gray-100 hover:bg-gray-200 transition-colors cursor-pointer">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18"
@@ -161,7 +163,7 @@
                                         </div>
                                         <div class="flex items-center justify-between">
                                             <h3 class="font-medium">Daily Rate</h3>
-                                            <p>${{ Auth::user()->price }}</p>
+                                            <p>${{ $offer->price }}</p>
                                         </div>
                                         <div class="flex items-center justify-between">
                                             <h3 class="font-medium">Total Payment</h3>
@@ -224,7 +226,7 @@
             @if ($offers->hasPages())
                 <div class="flex justify-center mt-8 md:mt-10 px-2">
                     <nav class="inline-flex flex-wrap justify-center rounded-md shadow">
-                        
+
                         @if ($offers->onFirstPage())
                             <span
                                 class="py-2 px-2 sm:px-4 border border-gray-300 bg-gray-200 rounded-l-md text-xs sm:text-sm font-medium text-gray-500 cursor-not-allowed flex items-center">
