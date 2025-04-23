@@ -1,6 +1,21 @@
 @extends('Pages.dashboard.layouts.app')
 
 @section('content')
+
+    @if (session('success'))
+        <div id="successToast"
+            class="fixed z-50 top-4 left-1/2 transform -translate-x-1/2 bg-green-500 text-white px-6 py-3 rounded-md shadow-lg hidden opacity-0 transition-opacity duration-300">
+            <div class="flex items-center space-x-2">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                    <path fill-rule="evenodd"
+                        d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
+                        clip-rule="evenodd" />
+                </svg>
+                <span>{{ session('success') }}</span>
+            </div>
+        </div>
+    @endif
+
     <div class="min-h-screen">
         <div class="ml-8 mt-8">
             <h1 class="text-2xl font-bold">Products</h1>
@@ -54,15 +69,21 @@
                                         {{ $product->description }}
                                     </p>
                                     <div class="mt-4 flex space-x-2">
-                                        <form action="">
-                                            <button
-                                                class="px-4 py-2 bg-green-600 text-white text-sm font-medium rounded hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500">
+                                        <form
+                                            action="{{ route('dashboard.manageProduct', ['id' => $product->id, 'status' => 'Accepted']) }}"
+                                            method="post">
+                                            @csrf
+                                            <button type="submit"
+                                                class="cursor-pointer px-4 py-2 bg-green-600 text-white text-sm font-medium rounded hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500">
                                                 Accept
                                             </button>
                                         </form>
-                                        <form action="">
-                                            <button
-                                                class="px-4 py-2 bg-red-600 text-white text-sm font-medium rounded hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500">
+                                        <form
+                                            action="{{ route('dashboard.manageProduct', ['id' => $product->id, 'status' => 'Declined']) }}"
+                                            method="post">
+                                            @csrf
+                                            <button type="submit"
+                                                class="cursor-pointer px-4 py-2 bg-red-600 text-white text-sm font-medium rounded hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500">
                                                 Decline
                                             </button>
                                         </form>
@@ -184,21 +205,23 @@
     </div>
 
     <script>
-        function toggleModal() {
-            const modal = document.getElementById('addProductModal');
-            if (modal.classList.contains('hidden')) {
-                modal.classList.remove('hidden');
-            } else {
-                modal.classList.add('hidden');
-            }
-        }
-
         document.addEventListener('DOMContentLoaded', function() {
-            const addProductButton = document.querySelector('header a.bg-blue-600');
-            addProductButton.addEventListener('click', function(e) {
-                e.preventDefault();
-                toggleModal();
-            });
+            const toast = document.getElementById('successToast');
+
+            if (toast) {
+                toast.classList.remove('hidden');
+                toast.classList.add('opacity-0');
+
+                toast.classList.add('opacity-100');
+                toast.classList.add('transition-opacity')
+                setTimeout(function() {
+                    toast.classList.remove('opacity-100');
+
+                    setTimeout(function() {
+                        toast.classList.add('hidden');
+                    }, 300);
+                }, 5000);
+            }
         });
     </script>
 @endsection
