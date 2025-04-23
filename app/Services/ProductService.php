@@ -26,8 +26,8 @@ Class ProductService {
         return $this->productrepository->destroy($id);
     }
 
-    public function getall(){
-       return $this->productrepository->getall();
+    public function getall($status){
+       return $this->productrepository->getall($status);
     }
 
     public function findById($id){
