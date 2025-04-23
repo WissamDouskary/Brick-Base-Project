@@ -64,6 +64,7 @@ class UserRepository implements UserRepositoryInterface
     public function getAllUsers()
     {
         return User::where('id', '!=', Auth::id())
+        ->latest()
         ->paginate(9);
     }
 
