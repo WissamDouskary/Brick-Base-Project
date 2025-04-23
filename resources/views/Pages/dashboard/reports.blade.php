@@ -8,7 +8,8 @@
         <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
             <div>
                 <label for="people" class="block text-sm font-medium text-gray-700 mb-1">People:</label>
-                <select id="people" class="w-full rounded-md border-gray-300 shadow-sm pl-2 py-2 focus:border-blue-500 focus:ring-blue-500">
+                <select id="people"
+                    class="w-full rounded-md border-gray-300 shadow-sm pl-2 py-2 focus:border-blue-500 focus:ring-blue-500">
                     <option selected>All</option>
                     <option>Admins</option>
                     <option>Users</option>
@@ -16,7 +17,8 @@
             </div>
             <div>
                 <label for="topic" class="block text-sm font-medium text-gray-700 mb-1">Topic:</label>
-                <select id="topic" class="w-full rounded-md border-gray-300 shadow-sm pl-2 py-2 focus:border-blue-500 focus:ring-blue-500">
+                <select id="topic"
+                    class="w-full rounded-md border-gray-300 shadow-sm pl-2 py-2 focus:border-blue-500 focus:ring-blue-500">
                     <option selected>All</option>
                     <option>Sales</option>
                     <option>Marketing</option>
@@ -31,8 +33,7 @@
             <div class="bg-white p-6 rounded-lg shadow-sm">
                 <h3 class="text-sm font-medium text-gray-500 mb-2">Active Users</h3>
                 <div class="flex items-baseline">
-                    <span class="text-3xl font-bold">27</span>
-                    <span class="text-gray-400 text-sm ml-2">/80</span>
+                    <span class="text-3xl font-bold">{{ $countUsers }}</span>
                 </div>
             </div>
 
@@ -40,15 +41,15 @@
             <div class="bg-white p-6 rounded-lg shadow-sm">
                 <h3 class="text-sm font-medium text-gray-500 mb-2">Banned Users</h3>
                 <div class="flex items-baseline">
-                    <span class="text-3xl font-bold">5</span>
+                    <span class="text-3xl font-bold">{{ $countinactiveUsers }}</span>
                 </div>
             </div>
 
             <!-- Reviews -->
             <div class="bg-white p-6 rounded-lg shadow-sm">
-                <h3 class="text-sm font-medium text-gray-500 mb-2">Reviews</h3>
+                <h3 class="text-sm font-medium text-gray-500 mb-2">Reviews and Comments</h3>
                 <div class="flex items-baseline">
-                    <span class="text-3xl font-bold">15</span>
+                    <span class="text-3xl font-bold">{{ $countReviews }}</span>
                 </div>
             </div>
 
@@ -56,15 +57,7 @@
             <div class="bg-white p-6 rounded-lg shadow-sm">
                 <h3 class="text-sm font-medium text-gray-500 mb-2">Active Products</h3>
                 <div class="flex items-baseline">
-                    <span class="text-3xl font-bold">27</span>
-                </div>
-            </div>
-
-            <!-- Comments -->
-            <div class="bg-white p-6 rounded-lg shadow-sm">
-                <h3 class="text-sm font-medium text-gray-500 mb-2">Comments</h3>
-                <div class="flex items-baseline">
-                    <span class="text-3xl font-bold">120</span>
+                    <span class="text-3xl font-bold">{{ $countproducts }}</span>
                 </div>
             </div>
 
@@ -72,7 +65,7 @@
             <div class="bg-white p-6 rounded-lg shadow-sm">
                 <h3 class="text-sm font-medium text-gray-500 mb-2">Available Workers</h3>
                 <div class="flex items-baseline">
-                    <span class="text-3xl font-bold">2</span>
+                    <span class="text-3xl font-bold">{{ $countWorkers }}</span>
                 </div>
             </div>
         </div>
@@ -92,18 +85,16 @@
             <div class="bg-white p-6 rounded-lg shadow-sm">
                 <h3 class="text-sm font-medium text-gray-900 mb-4">Latest Users</h3>
                 <div class="space-y-4">
-                    <div>
-                        <h4 class="font-medium">Houston Facility</h4>
-                        <p class="text-sm text-gray-500">User</p>
-                    </div>
-                    <div>
-                        <h4 class="font-medium">Test Group</h4>
-                        <p class="text-sm text-gray-500">Admin</p>
-                    </div>
-                    <div>
-                        <h4 class="font-medium">Sales Leadership</h4>
-                        <p class="text-sm text-gray-500">User</p>
-                    </div>
+                    @foreach ($latestUsers as $user)
+                        <div class="flex gap-4 justify-start items-center">
+                            <img class="w-8 h-8 rounded-full border-gray-300 ring-slate-500" src="{{ asset('storage/' . $user->profile_photo . '') }}"
+                                alt="photo for {{ $user->first_name . ' ' . $user->last_name }}">
+                            <div>
+                                <h4 class="font-medium">{{ $user->first_name . ' ' . $user->last_name }}</h4>
+                                <p class="text-sm text-gray-500">{{ $user->role == '1' ? 'Worker' : 'User' }}</p>
+                            </div>
+                        </div>
+                    @endforeach
                 </div>
             </div>
         </div>
@@ -114,7 +105,7 @@
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             const ctx = document.getElementById('pieChart').getContext('2d');
-            
+
             new Chart(ctx, {
                 type: 'doughnut',
                 data: {
