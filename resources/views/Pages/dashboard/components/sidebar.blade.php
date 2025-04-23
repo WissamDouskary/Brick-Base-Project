@@ -32,7 +32,9 @@
                 <line x1="3" x2="21" y1="9" y2="9"></line>
                 <line x1="9" x2="9" y1="21" y2="9"></line>
             </svg>
+            
             <span class="font-medium">Products</span>
+
         </a>
 
         <a href="" class="flex items-center px-4 py-3 text-gray-700 rounded-lg hover:bg-gray-100 group">
