@@ -30,4 +30,9 @@ class ActivitiesController extends Controller
 
         return view('Pages.dashboard.activities', compact('countacceptedProducts', 'countpendingProducts', 'countdeclinedProducts', 'countallProducts', 'pendingProducts', 'amount', 'amountAccepted', 'acceptedProducts'));
     }
+
+    public function manageProduct($id, $status){
+        $this->productservice->manageProduct($id, $status);
+        return back()->with('success','The Product ' . $status . ' successfuly!');
+    }
 }
