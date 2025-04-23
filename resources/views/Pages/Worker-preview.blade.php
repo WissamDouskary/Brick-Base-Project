@@ -159,7 +159,7 @@
                         @endforeach
                     @else
                         <div class="w-full flex justify-center">
-                            <div class="bg-white shadow-md rounded-lg p-8 text-center max-w-xl">
+                            <div class=" p-8 text-center max-w-xl">
                                 <div class="flex justify-center mb-4">
                                     <svg xmlns="http://www.w3.org/2000/svg" class="h-16 w-16 text-gray-400" fill="none"
                                         viewBox="0 0 24 24" stroke="currentColor">
