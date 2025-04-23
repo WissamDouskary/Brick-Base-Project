@@ -114,4 +114,5 @@ Route::get('/checkout/cancel', [PayPalController::class, 'handleCancel'])->name(
 Route::middleware(['auth', CheckAdmin::class])->group(function () {
     Route::get('/dashboard/reports', [ReportsController::class, 'index'])->name('dashboard.reports');
     Route::get('/dashboard/people', [PeopleController::class, 'index'])->name('dashboard.people');
+    Route::post('/dashboard/people/{id}/{status}', [PeopleController::class, 'manageStatus'])->name('dashboard.people.status');
 });
