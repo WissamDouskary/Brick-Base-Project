@@ -44,4 +44,8 @@ class ReviewsRepository implements ReviewsRepositoryInterface {
 
         }
     }
+
+    public function getallReviews(){
+        return Review::all();
+    }
 }

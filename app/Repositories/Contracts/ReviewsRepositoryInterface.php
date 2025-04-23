@@ -7,4 +7,5 @@ interface ReviewsRepositoryInterface {
     public function modify($id, $content);
     public function delete($id);
     public function getReviews($id);
+    public function getallReviews();
 }

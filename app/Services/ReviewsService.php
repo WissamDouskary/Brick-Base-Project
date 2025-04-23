@@ -21,4 +21,8 @@ class ReviewsService {
     public function getReviews($id){
         return $this->reviewsrepository->getReviews($id);
     }
+
+    public function getallReviews(){
+        return $this->reviewsrepository->getallReviews();
+    }
 }
