@@ -72,7 +72,7 @@
                                 alt="photo for {{ $user->first_name . ' ' . $user->last_name }}">
                             <div>
                                 <h4 class="font-medium">{{ $user->first_name . ' ' . $user->last_name }}</h4>
-                                <p class="text-sm text-gray-500">{{ $user->role == '1' ? 'Worker' : 'User' }}</p>
+                                <p class="text-sm text-gray-500">{{ $user->role_id == 1 ? 'Worker' : 'User' }}</p>
                             </div>
                         </div>
                     @endforeach

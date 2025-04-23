@@ -93,7 +93,7 @@
                         >
                             <option value="" disabled {{ old('role') ? '' : 'selected' }}>Select Your Role</option>
                             <option value="1" {{ old('role') == 'Worker' ? 'selected' : '' }}>Worker</option>
-                            <option value="2" {{ old('role') == 'Client' ? 'selected' : '' }}>Client</option>
+                            <option value="3" {{ old('role') == 'Client' ? 'selected' : '' }}>Client</option>
                         </select>
                         <div class="absolute inset-y-0 right-0 flex items-center px-2 pointer-events-none">
                             <svg class="w-4 h-4 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
