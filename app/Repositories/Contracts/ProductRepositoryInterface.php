@@ -10,7 +10,7 @@ interface ProductRepositoryInterface
     public function update(array $data, $id);
     public function destroy($id);
     public function findById($id);
-    public function getall();
+    public function getall($status);
     public function get3($id);
     public function getWorkerProducts();
 }
