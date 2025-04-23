@@ -13,4 +13,5 @@ interface ProductRepositoryInterface
     public function getall($status);
     public function get3($id);
     public function getWorkerProducts();
+    public function manageProduct($id, $status);
 }
