@@ -51,4 +51,12 @@ class ProductRepository implements ProductRepositoryInterface
     {
         return Product::where('worker_id', Auth::id())->paginate(3);
     }
+
+    public function manageProduct($id, $status)
+    {
+        $product = Product::find($id);
+        return $product->update([
+            'status' => $status,
+        ]);
+    }
 }
