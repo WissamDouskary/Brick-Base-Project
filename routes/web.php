@@ -1,6 +1,5 @@
 <?php
 
-use App\Http\Controllers\ActivitiesController;
 use App\Models\Review;
 use App\Http\Middleware\checkadmin;
 use Illuminate\Support\Facades\Route;
@@ -11,11 +10,13 @@ use App\Http\Controllers\OrderController;
 use App\Http\Controllers\PayPalController;
 use App\Http\Controllers\PeopleController;
 use App\Http\Controllers\ProductController;
-
 use App\Http\Controllers\ReportsController;
+
 use App\Http\Controllers\ReviewsController;
+use App\Http\Controllers\CommentsController;
 use App\Http\Middleware\RestrictAdminAccess;
 use App\Http\Middleware\checkWorkerActivated;
+use App\Http\Controllers\ActivitiesController;
 use App\Http\Controllers\ReservationController;
 use App\Http\Controllers\ClientProfileController;
 use App\Http\Controllers\WorkerProfileController;
@@ -115,8 +116,9 @@ Route::get('/checkout/cancel', [PayPalController::class, 'handleCancel'])->name(
 Route::middleware(['auth', CheckAdmin::class])->group(function () {
     Route::get('/dashboard/reports', [ReportsController::class, 'index'])->name('dashboard.reports');
     Route::get('/dashboard/people', [PeopleController::class, 'index'])->name('dashboard.people');
-    Route::get('/dashboard/Activities', [ActivitiesController::class, 'index'])->name('dashboard.activities');
+    Route::get('/dashboard/activities', [ActivitiesController::class, 'index'])->name('dashboard.activities');
     Route::post('/dashboard/people/{id}/{status}', [PeopleController::class, 'manageStatus'])->name('dashboard.people.status');
+    Route::get('/dashboard/comments', [CommentsController::class, 'index'])->name('dashboard.comments');
 
     //manage products
     Route::post('/dashboard/Product/{id}/{status}', [ActivitiesController::class, 'manageProduct'])->name('dashboard.manageProduct');
