@@ -2,6 +2,7 @@
 
 @section('content')
     <div class="min-h-screen p-8">
+        
         <h1 class="text-2xl font-bold">Comments</h1>
 
         <!-- Main Content -->
@@ -9,9 +10,92 @@
 
             <!-- Top Products Comment -->
             <div class="mb-10">
-                <h2 class="text-xl font-bold mb-4">Top Products Comment</h2>
-                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <h2 class="text-xl font-bold mb-4">Top Products / Workers Comment</h2>
+                <div class="flex justify-center items-center gap-3 mb-7">
+                    <button id="workerCom" onclick="toggleTopComments('worker')" class="bg-white border focus:border-gray-500 border-gray-300 shadow-md rounded-full py-3 px-6 select-none cursor-pointer">Workers</button>
+                    <button id="productCom" onclick="toggleTopComments('products')" class="bg-white border focus:border-gray-500 border-gray-300 shadow-md rounded-full py-3 px-6 select-none cursor-pointer">Products</button>
+                </div>
+                @if (count($products) > 0)
+
+                <div id="productComSection" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                     <!-- Product 1 -->
+                    @foreach ($products as $product)
+                        
+                    <div class="bg-white rounded-lg shadow-sm overflow-hidden">
+                        <div class="relative">
+                            <img src="{{ asset('storage/'.$product->main_image.'') }}"
+                                alt="{{ $product->title }}" class="w-full h-48 object-cover">
+                            <div
+                                class="absolute top-2 left-2 bg-yellow-100 text-yellow-800 text-xs font-medium px-2 py-1 rounded">
+                                {{ $product->category }}
+                            </div>
+                        </div>
+                        <div class="p-4">
+                            <div class="flex justify-between items-start">
+                                <div>
+                                    <h3 class="font-bold text-gray-900">{{ $product->title }}</h3>
+                                </div>
+                                <div class="flex items-center">
+                                    <span class="text-sm font-medium text-gray-700">4.5/5</span>
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-yellow-400"
+                                        viewBox="0 0 20 20" fill="currentColor">
+                                        <path
+                                            d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                                    </svg>
+                                </div>
+                            </div>
+                            <p class="mt-2 text-sm text-gray-600 truncate">
+                                {{ $product->description }}
+                            </p>
+                            <div class="mt-4 flex justify-between items-center">
+                                <div class="flex items-center text-gray-500 text-sm">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-1" viewBox="0 0 20 20"
+                                        fill="currentColor">
+                                        <path fill-rule="evenodd"
+                                            d="M18 10c0 3.866-3.582 7-8 7a8.841 8.841 0 01-4.083-.98L2 17l1.338-3.123C2.493 12.767 2 11.434 2 10c0-3.866 3.582-7 8-7s8 3.134 8 7zM7 9H5v2h2V9zm8 0h-2v2h2V9zM9 9h2v2H9V9z"
+                                            clip-rule="evenodd" />
+                                    </svg>
+                                    {{ $product->reviews_count }}
+                                </div>
+                                <div class="flex items-center text-gray-500 text-sm">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-1" viewBox="0 0 20 20"
+                                        fill="currentColor">
+                                        <path d="M10 12a2 2 0 100-4 2 2 0 000 4z" />
+                                        <path fill-rule="evenodd"
+                                            d="M.458 10C1.732 5.943 5.522 3 10 3s8.268 2.943 9.542 7c-1.274 4.057-5.064 7-9.542 7S1.732 14.057.458 10zM14 10a4 4 0 11-8 0 4 4 0 018 0z"
+                                            clip-rule="evenodd" />
+                                    </svg>
+                                    240
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    @endforeach
+                </div>
+
+                @else
+                <div class="flex justify-center">
+                    <div class="w-full py-12 flex flex-col items-center justify-center text-center">
+                        <div class="bg-gray-100 p-6 rounded-full mb-6">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-12 w-12 text-gray-400" fill="none"
+                                viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z" />
+                            </svg>
+                        </div>
+                        <h3 class="text-xl font-semibold mb-2">No products found!</h3>
+                        <p class="text-gray-500 max-w-md mb-6">
+                            We couldn't find any products matching your criteria. Try adjusting your filters or search
+                            terms, or wait for workers adding new products
+                        </p>
+                    </div>
+                </div>
+                @endif
+
+                
+                <div id="workerComSection" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 hidden">
+                    <!-- worker -->
                     <div class="bg-white rounded-lg shadow-sm overflow-hidden">
                         <div class="relative">
                             <img src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/image-EoS95PDbmLl5vlsjwZeZWaSgyJEELp.png"
@@ -24,7 +108,7 @@
                         <div class="p-4">
                             <div class="flex justify-between items-start">
                                 <div>
-                                    <h3 class="font-bold text-gray-900">KERASET</h3>
+                                    <h3 class="font-bold text-gray-900">WORKER</h3>
                                 </div>
                                 <div class="flex items-center">
                                     <span class="text-sm font-medium text-gray-700">4.5/5</span>
@@ -62,110 +146,6 @@
                             </div>
                         </div>
                     </div>
-
-                    <!-- Product 2 -->
-                    <div class="bg-white rounded-lg shadow-sm overflow-hidden">
-                        <div class="relative">
-                            <img src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/image-EoS95PDbmLl5vlsjwZeZWaSgyJEELp.png"
-                                alt="KERASET product" class="w-full h-48 object-cover">
-                            <div
-                                class="absolute top-2 left-2 bg-yellow-100 text-yellow-800 text-xs font-medium px-2 py-1 rounded">
-                                Ceramics and Stone Material
-                            </div>
-                        </div>
-                        <div class="p-4">
-                            <div class="flex justify-between items-start">
-                                <div>
-                                    <h3 class="font-bold text-gray-900">KERASET</h3>
-                                </div>
-                                <div class="flex items-center">
-                                    <span class="text-sm font-medium text-gray-700">4.5/5</span>
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-yellow-400"
-                                        viewBox="0 0 20 20" fill="currentColor">
-                                        <path
-                                            d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
-                                    </svg>
-                                </div>
-                            </div>
-                            <p class="mt-2 text-sm text-gray-600">
-                                Keraset is a gray or white powder composed of cement, sands of selected granulometry,
-                                synthetic resins and special additives.
-                            </p>
-                            <div class="mt-4 flex justify-between items-center">
-                                <div class="flex items-center text-gray-500 text-sm">
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-1" viewBox="0 0 20 20"
-                                        fill="currentColor">
-                                        <path fill-rule="evenodd"
-                                            d="M18 10c0 3.866-3.582 7-8 7a8.841 8.841 0 01-4.083-.98L2 17l1.338-3.123C2.493 12.767 2 11.434 2 10c0-3.866 3.582-7 8-7s8 3.134 8 7zM7 9H5v2h2V9zm8 0h-2v2h2V9zM9 9h2v2H9V9z"
-                                            clip-rule="evenodd" />
-                                    </svg>
-                                    110
-                                </div>
-                                <div class="flex items-center text-gray-500 text-sm">
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-1" viewBox="0 0 20 20"
-                                        fill="currentColor">
-                                        <path d="M10 12a2 2 0 100-4 2 2 0 000 4z" />
-                                        <path fill-rule="evenodd"
-                                            d="M.458 10C1.732 5.943 5.522 3 10 3s8.268 2.943 9.542 7c-1.274 4.057-5.064 7-9.542 7S1.732 14.057.458 10zM14 10a4 4 0 11-8 0 4 4 0 018 0z"
-                                            clip-rule="evenodd" />
-                                    </svg>
-                                    180
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Product 3 -->
-                    <div class="bg-white rounded-lg shadow-sm overflow-hidden">
-                        <div class="relative">
-                            <img src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/image-EoS95PDbmLl5vlsjwZeZWaSgyJEELp.png"
-                                alt="KERASET product" class="w-full h-48 object-cover">
-                            <div
-                                class="absolute top-2 left-2 bg-yellow-100 text-yellow-800 text-xs font-medium px-2 py-1 rounded">
-                                Ceramics and Stone Material
-                            </div>
-                        </div>
-                        <div class="p-4">
-                            <div class="flex justify-between items-start">
-                                <div>
-                                    <h3 class="font-bold text-gray-900">KERASET</h3>
-                                </div>
-                                <div class="flex items-center">
-                                    <span class="text-sm font-medium text-gray-700">4.5/5</span>
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-yellow-400"
-                                        viewBox="0 0 20 20" fill="currentColor">
-                                        <path
-                                            d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
-                                    </svg>
-                                </div>
-                            </div>
-                            <p class="mt-2 text-sm text-gray-600">
-                                Keraset is a gray or white powder composed of cement, sands of selected granulometry,
-                                synthetic resins and special additives.
-                            </p>
-                            <div class="mt-4 flex justify-between items-center">
-                                <div class="flex items-center text-gray-500 text-sm">
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-1" viewBox="0 0 20 20"
-                                        fill="currentColor">
-                                        <path fill-rule="evenodd"
-                                            d="M18 10c0 3.866-3.582 7-8 7a8.841 8.841 0 01-4.083-.98L2 17l1.338-3.123C2.493 12.767 2 11.434 2 10c0-3.866 3.582-7 8-7s8 3.134 8 7zM7 9H5v2h2V9zm8 0h-2v2h2V9zM9 9h2v2H9V9z"
-                                            clip-rule="evenodd" />
-                                    </svg>
-                                    98
-                                </div>
-                                <div class="flex items-center text-gray-500 text-sm">
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-1" viewBox="0 0 20 20"
-                                        fill="currentColor">
-                                        <path d="M10 12a2 2 0 100-4 2 2 0 000 4z" />
-                                        <path fill-rule="evenodd"
-                                            d="M.458 10C1.732 5.943 5.522 3 10 3s8.268 2.943 9.542 7c-1.274 4.057-5.064 7-9.542 7S1.732 14.057.458 10zM14 10a4 4 0 11-8 0 4 4 0 018 0z"
-                                            clip-rule="evenodd" />
-                                    </svg>
-                                    165
-                                </div>
-                            </div>
-                        </div>
-                    </div>
                 </div>
             </div>
 
@@ -176,16 +156,17 @@
 
                 </div>
 
-                <div id="product-toggle" onclick="toggleWorkerSection('products')"
+                <button id="product-toggle" onclick="toggleSection('products')"
                     class="py-2 cursor-pointer border border-gray-300 border-b-gray-50 inline-block px-8 select-none rounded-t-xl">
                     <h2>Product</h2>
-                </div>
-                <div id="worker-toggle" onclick="toggleWorkerSection('workers')"
+                </button>
+                <button id="worker-toggle" onclick="toggleSection('workers')"
                     class="py-2 border cursor-pointer border-gray-300 border-b-gray-50 inline-block px-8 select-none rounded-t-xl">
                     <h2>Workers</h2>
-                </div>
+                </button>
 
                 {{-- Porducts commands section --}}
+                 
                 <div id="product-section" class="bg-white shadow overflow-hidden sm:rounded-lg">
                     <table class="min-w-full divide-y divide-gray-200">
                         <thead class="bg-gray-50">
@@ -713,7 +694,7 @@
         let workerbutton = document.getElementById('worker-toggle');
         let productbutton = document.getElementById('product-toggle');
 
-        function toggleWorkerSection(section) {
+        function toggleSection(section) {
             if (section == 'products' ? !workersSection.classList.contains('hidden') : !productsSection.classList.contains('hidden')) {
                 section == 'products' ? workersSection.classList.add('hidden') : productsSection.classList.add('hidden')
             }
@@ -728,6 +709,17 @@
                 productbutton.classList.remove('border-gray-500');
                 workerbutton.classList.add('border-gray-500');
             }
+        }
+
+        let workerComSection = document.getElementById('workerComSection');
+        let productComSection = document.getElementById('productComSection');
+
+        function toggleTopComments(section){
+            if (section == 'products' ? !workerComSection.classList.contains('hidden') : !productComSection.classList.contains('hidden')) {
+                section == 'products' ? workerComSection.classList.add('hidden') : productComSection.classList.add('hidden')
+            }
+
+            section == 'products' ? productComSection.classList.remove('hidden') : workerComSection.classList.remove('hidden');
         }
 
         document.addEventListener('DOMContentLoaded', function() {
