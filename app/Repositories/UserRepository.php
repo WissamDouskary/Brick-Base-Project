@@ -22,6 +22,7 @@ class UserRepository implements UserRepositoryInterface
     {
         return User::where('role_id', 1)
             ->where('is_active', true)
+            ->withCount('reviews')
             ->where('id', '!=', Auth::id())
             ->paginate(9);
     }
