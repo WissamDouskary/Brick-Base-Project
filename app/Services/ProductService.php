@@ -57,4 +57,8 @@ class ProductService
     {
         return $this->productrepository->manageProduct($id, $status);
     }
+
+    public function getProductsWithComments(){
+        return $this->productrepository->getProductsWithComments();
+    }
 }
