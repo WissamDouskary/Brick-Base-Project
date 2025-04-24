@@ -93,22 +93,25 @@
                 </div>
                 @endif
 
-                
+                @if (count($workers) > 0)
+
                 <div id="workerComSection" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 hidden">
                     <!-- worker -->
+                    @foreach ($workers as $worker)
+                        
                     <div class="bg-white rounded-lg shadow-sm overflow-hidden">
                         <div class="relative">
-                            <img src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/image-EoS95PDbmLl5vlsjwZeZWaSgyJEELp.png"
-                                alt="KERASET product" class="w-full h-48 object-cover">
+                            <img src="{{ asset('storage/' . $worker->profile_photo . '') }}"
+                                alt="{{ $worker->first_name . " " . $worker->last_name }}" class="w-full h-48 object-cover">
                             <div
                                 class="absolute top-2 left-2 bg-yellow-100 text-yellow-800 text-xs font-medium px-2 py-1 rounded">
-                                Ceramics and Stone Material
+                                {{ $worker->category }}
                             </div>
                         </div>
                         <div class="p-4">
                             <div class="flex justify-between items-start">
                                 <div>
-                                    <h3 class="font-bold text-gray-900">WORKER</h3>
+                                    <h3 class="font-bold text-gray-900">{{ $worker->first_name . " " . $worker->last_name }}</h3>
                                 </div>
                                 <div class="flex items-center">
                                     <span class="text-sm font-medium text-gray-700">4.5/5</span>
@@ -119,9 +122,8 @@
                                     </svg>
                                 </div>
                             </div>
-                            <p class="mt-2 text-sm text-gray-600">
-                                Keraset is a gray or white powder composed of cement, sands of selected granulometry,
-                                synthetic resins and special additives.
+                            <p class="mt-2 text-sm text-gray-600 truncate">
+                                {{ $worker->bio }}
                             </p>
                             <div class="mt-4 flex justify-between items-center">
                                 <div class="flex items-center text-gray-500 text-sm">
@@ -131,7 +133,7 @@
                                             d="M18 10c0 3.866-3.582 7-8 7a8.841 8.841 0 01-4.083-.98L2 17l1.338-3.123C2.493 12.767 2 11.434 2 10c0-3.866 3.582-7 8-7s8 3.134 8 7zM7 9H5v2h2V9zm8 0h-2v2h2V9zM9 9h2v2H9V9z"
                                             clip-rule="evenodd" />
                                     </svg>
-                                    107
+                                    {{ $worker->reviews_count }}
                                 </div>
                                 <div class="flex items-center text-gray-500 text-sm">
                                     <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-1" viewBox="0 0 20 20"
@@ -146,7 +148,27 @@
                             </div>
                         </div>
                     </div>
+
+                    @endforeach
                 </div>
+                @else
+                <div class="flex justify-center">
+                    <div class="w-full py-12 flex flex-col items-center justify-center text-center">
+                        <div class="bg-gray-100 p-6 rounded-full mb-6">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-12 w-12 text-gray-400" fill="none"
+                                viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z" />
+                            </svg>
+                        </div>
+                        <h3 class="text-xl font-semibold mb-2">No Workers found!</h3>
+                        <p class="text-gray-500 max-w-md mb-6">
+                            We couldn't find any Worker matching your criteria. Try adjusting your filters or search
+                            terms, or wait for workers adding new Worker
+                        </p>
+                    </div>
+                </div>
+                @endif
             </div>
 
             <!-- Recent Comments -->
