@@ -59,4 +59,9 @@ class ProductRepository implements ProductRepositoryInterface
             'status' => $status,
         ]);
     }
+
+    public function getProductsWithComments()
+    {
+        return Product::withCount('reviews')->where('status', 'Accepted')->paginate(3);
+    }
 }
