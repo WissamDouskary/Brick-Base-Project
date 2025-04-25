@@ -37,7 +37,7 @@ class ProductController extends Controller
             'photos' => 'array|max:6',
             'photos.*' => 'image|max:10240',
             'description' => 'required|max:255|min:40',
-            'price' => 'required',
+            'price' => 'required|max:5000|min:10',
             'category' => 'required'
         ]);
 
