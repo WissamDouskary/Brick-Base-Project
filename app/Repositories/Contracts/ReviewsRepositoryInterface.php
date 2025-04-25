@@ -8,4 +8,6 @@ interface ReviewsRepositoryInterface {
     public function delete($id);
     public function getReviews($id);
     public function getallReviews();
+    public function getProductsReviews();
+    public function getWorkersReviews();
 }
