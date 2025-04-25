@@ -92,7 +92,7 @@ class UserController extends Controller
             'bio' => 'required|min:40|max:255',
             'job_title' => 'required',
             'category' => 'required',
-            'price' => 'required'
+            'price' => 'required|min:20|max:1000'
         ]);
 
         $user->update([
