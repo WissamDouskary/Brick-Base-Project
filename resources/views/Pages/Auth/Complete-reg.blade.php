@@ -100,7 +100,7 @@
                             <span class="text-gray-500 sm:text-sm">USD</span>
                         </div>
                     </div>
-                    @error('job_title')
+                    @error('price')
                         <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
                     @enderror
                 </div>

@@ -87,14 +87,14 @@ class UserController extends Controller
         if ($role == 2) {
             return redirect()->route('Home');
         }
-    
+        
         $request->validate([
             'bio' => 'required|min:40|max:255',
             'job_title' => 'required',
             'category' => 'required',
-            'price' => 'required|min:20|max:1000'
+            'price' => 'required|min:20|max:1000|numeric'
         ]);
-
+        
         $user->update([
             'bio' => $request->bio,
             'job_title' => $request->job_title,
