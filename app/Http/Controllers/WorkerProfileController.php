@@ -12,9 +12,9 @@ class WorkerProfileController extends Controller
     public function update(Request $request)
     {
         $request->validate([
-            'first_name' => 'required|string|max:255',
-            'last_name' => 'required|string|max:255',
-            'bio' => 'required|string|max:255',
+            'first_name' => 'required|string|min:3|max:20',
+            'last_name' => 'required|string|min:3|max:20',
+            'bio' => 'required|string|min:40|max:255',
             'city' => 'required|string|max:255',
             'photos' => 'array|max:6',
             'photos.*' => 'image|max:10240',
