@@ -25,4 +25,14 @@ class ReviewsService {
     public function getallReviews(){
         return $this->reviewsrepository->getallReviews();
     }
+
+    public function getProductsReviews()
+    {
+        return $this->reviewsrepository->getProductsReviews();
+    }
+
+    public function getWorkersReviews()
+    {
+        return $this->reviewsrepository->getWorkersReviews();
+    }
 }
