@@ -18,7 +18,7 @@ class ReviewsController extends Controller
     public function store(Request $request){
         $data = $request->validate([
             'rating' => 'required',
-            'comment' => 'required'
+            'comment' => 'required|max:200|min:3'
         ]);
 
         $data['client_id'] = Auth::id();
