@@ -59,6 +59,9 @@
                         </label>
                         <input type="text" name="first_name" id="first_name" value="{{ auth()->user()->first_name }}"
                             class="w-full p-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-amber-400">
+                        @error('first_name')
+                            <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
+                        @enderror
                     </div>
 
                     <div>
@@ -67,6 +70,9 @@
                         </label>
                         <input type="text" name="last_name" id="last_name" value="{{ auth()->user()->last_name }}"
                             class="w-full p-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-amber-400">
+                        @error('last_name')
+                            <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
+                        @enderror
                     </div>
 
                     <div>
@@ -75,6 +81,9 @@
                         </label>
                         <input type="text" name="bio" id="bio" value="{{ auth()->user()->bio }}"
                             class="w-full p-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-amber-400">
+                        @error('bio')
+                            <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
+                        @enderror
                     </div>
 
                     <div>
@@ -91,10 +100,13 @@
                             <option value="Agadir" {{ Auth::user()->city == 'Agadir' ? 'selected' : '' }}>Agadir</option>
                             <option value="Oujda" {{ Auth::user()->city == 'Oujda' ? 'selected' : '' }}>Oujda</option>
                         </select>
+                        @error('city')
+                            <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
+                        @enderror
                     </div>
 
                     <div class="mb-6">
-                        <label for="job_title" class="block text-sm font-medium text-gray-700 mb-1">
+                        <label for="price" class="block text-sm font-medium text-gray-700 mb-1">
                             Price per Day
                         </label>
                         <div class="mt-1 relative rounded-md shadow-sm">
@@ -109,7 +121,7 @@
                                 <span class="text-gray-500 sm:text-sm">USD</span>
                             </div>
                         </div>
-                        @error('job_title')
+                        @error('price')
                             <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
                         @enderror
                     </div>

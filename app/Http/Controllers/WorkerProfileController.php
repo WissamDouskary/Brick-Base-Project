@@ -18,7 +18,7 @@ class WorkerProfileController extends Controller
             'city' => 'required|string|max:255',
             'photos' => 'array|max:6',
             'photos.*' => 'image|max:10240',
-            'price' => 'required|min:20|max:1000'
+            'price' => 'required|min:20|max:1000|numeric'
         ]);
 
         $worker = Auth::user();
