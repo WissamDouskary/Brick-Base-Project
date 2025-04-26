@@ -61,32 +61,38 @@
                                     <div class="flex justify-between items-start">
                                         <div>
                                             <h3 class="font-bold text-gray-900">{{ $product->title }}</h3>
-                                            <p class="text-sm text-gray-500">from
-                                                {{ $product->user->first_name . ' ' . $product->user->last_name }}</p>
+                                            <p class="text-sm text-gray-500">
+                                                from {{ $product->user->first_name . ' ' . $product->user->last_name }}
+                                            </p>
                                         </div>
                                     </div>
                                     <p class="mt-2 text-sm text-gray-600 line-clamp-3">
                                         {{ $product->description }}
                                     </p>
-                                    <div class="mt-4 flex space-x-2">
-                                        <form
-                                            action="{{ route('dashboard.manageProduct', ['id' => $product->id, 'status' => 'Accepted']) }}"
-                                            method="post">
-                                            @csrf
-                                            <button type="submit"
-                                                class="cursor-pointer px-4 py-2 bg-green-600 text-white text-sm font-medium rounded hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500">
-                                                Accept
-                                            </button>
-                                        </form>
-                                        <form
-                                            action="{{ route('dashboard.manageProduct', ['id' => $product->id, 'status' => 'Declined']) }}"
-                                            method="post">
-                                            @csrf
-                                            <button type="submit"
-                                                class="cursor-pointer px-4 py-2 bg-red-600 text-white text-sm font-medium rounded hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500">
-                                                Decline
-                                            </button>
-                                        </form>
+                                    <div class="mt-4 flex space-x-2 items-center justify-between">
+                                        <div class="flex gap-2">
+                                            <form
+                                                action="{{ route('dashboard.manageProduct', ['id' => $product->id, 'status' => 'Accepted']) }}"
+                                                method="post">
+                                                @csrf
+                                                <button type="submit"
+                                                    class="cursor-pointer px-4 py-2 bg-green-600 text-white text-sm font-medium rounded hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500">
+                                                    Accept
+                                                </button>
+                                            </form>
+                                            <form
+                                                action="{{ route('dashboard.manageProduct', ['id' => $product->id, 'status' => 'Declined']) }}"
+                                                method="post">
+                                                @csrf
+                                                <button type="submit"
+                                                    class="cursor-pointer px-4 py-2 bg-red-600 text-white text-sm font-medium rounded hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500">
+                                                    Decline
+                                                </button>
+                                            </form>
+                                        </div>
+                                        <div>
+                                            <h3 class="font-bold text-yellow-500">${{ $product->price }}</h3>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -147,7 +153,7 @@
                                                 {{ $product->user->first_name . ' ' . $product->user->last_name }}</p>
                                         </div>
                                         <div class="flex items-center">
-                                            <span class="text-sm font-medium text-gray-700">4.5/5</span>
+                                            <span class="text-sm font-medium text-gray-700">{{ number_format($product->reviews_avg_rating, 1) }}/5</span>
                                             <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-yellow-400"
                                                 viewBox="0 0 20 20" fill="currentColor">
                                                 <path
@@ -158,15 +164,18 @@
                                     <p class="mt-2 text-sm text-gray-600 line-clamp-3">
                                         {{ $product->description }}
                                     </p>
-                                    <div class="mt-4 flex items-center text-gray-500 text-sm">
-                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-1" viewBox="0 0 20 20"
-                                            fill="currentColor">
-                                            <path d="M10 12a2 2 0 100-4 2 2 0 000 4z" />
-                                            <path fill-rule="evenodd"
-                                                d="M.458 10C1.732 5.943 5.522 3 10 3s8.268 2.943 9.542 7c-1.274 4.057-5.064 7-9.542 7S1.732 14.057.458 10zM14 10a4 4 0 11-8 0 4 4 0 018 0z"
-                                                clip-rule="evenodd" />
-                                        </svg>
-                                        109
+                                    <div class="flex items-center justify-between mt-4">
+                                        <div class="flex items-center text-gray-500 text-sm">
+                                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-1"
+                                                fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                    d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z" />
+                                            </svg>
+                                            {{ $product->orders_count }}
+                                        </div>
+                                        <div>
+                                            <h3 class="font-bold text-yellow-500">${{ $product->price }}</h3>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
