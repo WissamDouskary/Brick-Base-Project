@@ -29,7 +29,7 @@ class ProductRepository implements ProductRepositoryInterface
 
     public function findById($id)
     {
-        return Product::find($id);
+        return Product::where('id', $id)->WithCount('orders')->withAvg('reviews','rating')->withCount('reviews')->first();
     }
 
     public function getall($status)
@@ -62,6 +62,12 @@ class ProductRepository implements ProductRepositoryInterface
 
     public function getProductsWithComments()
     {
-        return Product::withCount('reviews')->where('status', 'Accepted')->WithCount('orders')->withAvg('reviews','rating')->paginate(3);
+        return Product::withCount('reviews')
+        ->where('status', 'Accepted')
+        ->WithCount(['orders as completed_orders_count' => function($query){
+            $query->where('status', 'Completed');
+        }])
+        ->withAvg('reviews','rating')
+        ->paginate(3);
     }
 }
