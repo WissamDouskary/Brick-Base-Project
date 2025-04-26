@@ -15,7 +15,7 @@ class UserRepository implements UserRepositoryInterface
 
     public function findById($id)
     {
-        return User::where('id', '!=', Auth::id())->find($id);
+        return User::where('id', '!=', Auth::id())->where('id', $id)->withCount('reviews')->withAvg('reviews', 'rating')->first();
     }
 
     public function getWorkers()
@@ -24,7 +24,9 @@ class UserRepository implements UserRepositoryInterface
             ->where('is_active', true)
             ->withCount('reviews')
             ->where('id', '!=', Auth::id())
-            ->withCount('recievedReservations')
+            ->withCount(['recievedReservations as accepted_reservations_count' => function($query){
+                $query->where('status', 'Accepted');
+            }])
             ->withAvg('reviews', 'rating')
             ->paginate(9);
     }
