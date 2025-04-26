@@ -34,7 +34,7 @@ class ProductRepository implements ProductRepositoryInterface
 
     public function getall($status)
     {
-        return Product::where('worker_id', '!=', Auth::id())->where('status', $status)->latest()->with('user')->paginate(9);
+        return Product::where('worker_id', '!=', Auth::id())->where('status', $status)->latest()->with('user')->WithCount('orders')->withAvg('reviews','rating')->paginate(9);
     }
 
     public function get3($id)
@@ -62,6 +62,6 @@ class ProductRepository implements ProductRepositoryInterface
 
     public function getProductsWithComments()
     {
-        return Product::withCount('reviews')->where('status', 'Accepted')->paginate(3);
+        return Product::withCount('reviews')->where('status', 'Accepted')->WithCount('orders')->withAvg('reviews','rating')->paginate(3);
     }
 }
