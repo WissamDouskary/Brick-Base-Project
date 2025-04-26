@@ -257,7 +257,6 @@
             @if ($offers->hasPages())
                 <div class="flex justify-center mt-8 md:mt-10 px-2">
                     <nav class="inline-flex flex-wrap justify-center rounded-md shadow">
-                        {{-- Lien Précédent --}}
                         @if ($offers->onFirstPage())
                             <span
                                 class="py-2 px-2 sm:px-4 border border-gray-300 bg-gray-200 rounded-l-md text-xs sm:text-sm font-medium text-gray-500 cursor-not-allowed flex items-center">

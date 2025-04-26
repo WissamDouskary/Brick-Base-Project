@@ -7,7 +7,7 @@
 
         <!-- Main Content -->
         <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
-
+            
             <!-- Top Products Comment -->
             <div class="mb-10">
                 <h2 class="text-xl font-bold mb-4">Top Products / Workers Comment</h2>
@@ -64,7 +64,7 @@
                                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                                     d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z" />
                                             </svg>
-                                            {{ $product->orders_count }}
+                                            {{ $product->completed_orders_count }}
                                         </div>
                                     </div>
                                 </div>
@@ -139,7 +139,7 @@
                                                 <path
                                                     d="M7 2a1 1 0 00-1 1v1H5a3 3 0 00-3 3v12a3 3 0 003 3h14a3 3 0 003-3V7a3 3 0 00-3-3h-1V3a1 1 0 10-2 0v1H8V3a1 1 0 00-1-1zM4 8h16v11a1 1 0 01-1 1H5a1 1 0 01-1-1V8zm10.707 4.707a1 1 0 00-1.414-1.414L11 13.586l-1.293-1.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l3-3z" />
                                             </svg>
-                                            {{ $worker->recieved_reservations_count }}
+                                            {{ $worker->accepted_reservations_count }}
                                         </div>
                                     </div>
                                 </div>

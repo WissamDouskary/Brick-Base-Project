@@ -59,6 +59,20 @@
             <div class="text-start mb-2">
                 <p class="text-yellow-500 text-sm">{{ $worker->job_title }}</p>
                 <h1 class="text-3xl font-bold text-gray-800 mt-1">{{ $worker->first_name . ' ' . $worker->last_name }}</h1>
+                <div class="flex items-center gap-2">
+                    <div>
+                    @for ($i = 0; $i < 5; $i++)
+                        @if ($i < floor($worker->reviews_avg_rating))
+                            <span class="text-yellow-500 text-md">★</span>
+                        @elseif ($i - $worker->reviews_avg_rating < 1)
+                            <span class="text-yellow-500 text-md">⯨</span>
+                        @else
+                            <span class="text-gray-400 text-md">★</span>
+                        @endif
+                    @endfor
+                </div>
+                    <p class="text-yellow-500 text-sm">({{ $worker->reviews_count }}reviews)</p>
+                </div>
             </div>
 
             <div class="flex flex-col md:flex-row mt-6 gap-8">

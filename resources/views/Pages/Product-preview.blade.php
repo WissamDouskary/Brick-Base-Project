@@ -36,120 +36,107 @@
     </section>
 
     <div class="container mx-auto px-4 py-8 max-w-6xl">
-        @if (!$product || $product->title == null)
-            <div class="container mx-auto px-4 py-8 max-w-6xl">
-                <div class="bg-red-50 border-l-4 border-red-500 p-4 rounded-md shadow-sm">
-                    <div class="flex items-start">
-                        <div class="flex-shrink-0">
-                            <!-- Alert Circle Icon -->
-                            <svg class="h-5 w-5 text-red-500" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
-                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                                stroke-linejoin="round">
-                                <circle cx="12" cy="12" r="10"></circle>
-                                <line x1="12" y1="8" x2="12" y2="12"></line>
-                                <line x1="12" y1="16" x2="12.01" y2="16"></line>
-                            </svg>
-                        </div>
-                        <div class="ml-3">
-                            <h3 class="text-sm font-medium text-red-800">Error</h3>
-                            <div class="mt-1 text-sm text-red-700">
-                                There is no product with this ID! Please check the product ID and try again.
+        <!-- Product Information Section -->
+        <section class="mb-12">
+            <div class="text-start mb-2">
+                <p class="text-yellow-500 text-sm">{{ $product->category }}</p>
+                <h1 class="text-3xl font-bold text-gray-800 mt-1">{{ $product->title }}</h1>
+                <div class="flex gap-2 items-center">
+                    <div>
+                        @for ($i = 1; $i <= 5; $i++)
+                            @if ($i <= floor($product->reviews_avg_rating))
+                                <span class="text-yellow-400 text-md">★</span>
+                            @elseif ($i - $product->reviews_avg_rating < 1)
+                                <span class="text-yellow-400 text-md">⯨</span>
+                            @else
+                                <span class="text-gray-300 text-md">★</span>
+                            @endif
+                        @endfor
+                    </div>
+                    <p class="text-yellow-500 text-sm">({{ $product->reviews_count }} reviews)</p>
+                </div>
+            </div>
+
+            <div class="flex flex-col md:flex-row mt-6 gap-8">
+                <div class="md:w-1/2">
+                    <p class="text-gray-700">
+                        {{ $product->description }}
+                    </p>
+
+                    <div class="mt-8 space-y-4">
+                        <div class="border-b border-gray-200 pb-4">
+                            <button onclick="toggleSection('productDescription')"
+                                class="w-full text-left font-medium py-2 focus:outline-none flex justify-between items-center">
+                                Product Description
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20"
+                                    fill="currentColor">
+                                    <path fill-rule="evenodd"
+                                        d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
+                                        clip-rule="evenodd" />
+                                </svg>
+                            </button>
+                            <div id="productDescription" class="hidden">
+                                <p>{{ $product->description }}</p>
                             </div>
                         </div>
+                    </div>
+
+                    <!-- Price Section Added Here -->
+                    <div class="mt-8 mb-4">
+                        <div class="flex items-center">
+                            <span class="text-3xl font-bold text-gray-900">${{ number_format($product->price, 2) }}</span>
+                        </div>
+
+                        @if (isset($product->in_stock) && $product->in_stock)
+                            <p class="mt-1 text-sm text-green-600">In Stock</p>
+                        @else
+                            <p class="mt-1 text-sm text-red-600">Out of Stock</p>
+                        @endif
+                    </div>
+
+                    <div class="mt-8">
+                        <form action="{{ route('product.buy') }}" method="POST" class="flex flex-col items-start gap-6">
+                            @csrf
+                            <input type="hidden" name="product_id" value="{{ $product->id }}">
+                            <input type="hidden" name="price" value="{{ $product->price }}">
+
+                            <div>
+                                <input name="quantity" type="number" placeholder="Quantity" value="1"
+                                    class="border border-yellow-500 rounded-full px-3 py-2 outline-none">
+                                @error('quantity')
+                                    <p class="text-red-500 ml-2 text-sm mt-1">{{ $message }}</p>
+                                @enderror
+                            </div>
+
+                            <button type="submit"
+                                class="bg-yellow-400 cursor-pointer hover:bg-yellow-500 text-white font-medium py-3 px-6 rounded-sm transition duration-300">
+                                Add To Cart
+                            </button>
+                        </form>
+                    </div>
+                </div>
+
+                <div class="md:w-1/2 mt-6 md:mt-0">
+                    <div class="relative">
+                        <img src="{{ asset('storage/' . $product->main_image) }}" alt="Workers applying Keraset"
+                            class="w-full h-2/4 rounded-md shadow-md" />
+                        <span class="absolute bottom-3 right-3 bg-yellow-400 text-white text-xs px-2 py-1 rounded-sm">
+                            {{ $product->category }}
+                        </span>
                     </div>
                 </div>
             </div>
-        @else
-            <!-- Product Information Section -->
-            <section class="mb-12">
-                <div class="text-start mb-2">
-                    <p class="text-yellow-500 text-sm">{{ $product->category }}</p>
-                    <h1 class="text-3xl font-bold text-gray-800 mt-1">{{ $product->title }}</h1>
+
+            <div class="mt-5">
+
+                <div class="flex justify-end gap-4">
+                    @foreach ($product->images as $image)
+                        <img src="{{ asset('storage/' . $image->image_path) }}" alt="image for {{ $product->title }}"
+                            class="w-24 h-20 object-cover rounded border border-gray-300 cursor-pointer hover:border-yellow-400" />
+                    @endforeach
                 </div>
-
-                <div class="flex flex-col md:flex-row mt-6 gap-8">
-                    <div class="md:w-1/2">
-                        <p class="text-gray-700">
-                            {{ $product->description }}
-                        </p>
-
-                        <div class="mt-8 space-y-4">
-                            <div class="border-b border-gray-200 pb-4">
-                                <button onclick="toggleSection('productDescription')"
-                                    class="w-full text-left font-medium py-2 focus:outline-none flex justify-between items-center">
-                                    Product Description
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20"
-                                        fill="currentColor">
-                                        <path fill-rule="evenodd"
-                                            d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
-                                            clip-rule="evenodd" />
-                                    </svg>
-                                </button>
-                                <div id="productDescription" class="hidden">
-                                    <p>{{ $product->description }}</p>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Price Section Added Here -->
-                        <div class="mt-8 mb-4">
-                            <div class="flex items-center">
-                                <span
-                                    class="text-3xl font-bold text-gray-900">${{ number_format($product->price, 2) }}</span>
-                            </div>
-
-                            @if (isset($product->in_stock) && $product->in_stock)
-                                <p class="mt-1 text-sm text-green-600">In Stock</p>
-                            @else
-                                <p class="mt-1 text-sm text-red-600">Out of Stock</p>
-                            @endif
-                        </div>
-
-                        <div class="mt-8">
-                            <form action="{{ route('product.buy') }}" method="POST"
-                                class="flex flex-col items-start gap-6">
-                                @csrf
-                                <input type="hidden" name="product_id" value="{{ $product->id }}">
-                                <input type="hidden" name="price" value="{{ $product->price }}">
-
-                                <div>
-                                    <input name="quantity" type="number" placeholder="Quantity" value="1"
-                                        class="border border-yellow-500 rounded-full px-3 py-2 outline-none">
-                                    @error('quantity')
-                                        <p class="text-red-500 ml-2 text-sm mt-1">{{ $message }}</p>
-                                    @enderror
-                                </div>
-
-                                <button type="submit"
-                                    class="bg-yellow-400 cursor-pointer hover:bg-yellow-500 text-white font-medium py-3 px-6 rounded-sm transition duration-300">
-                                    Add To Cart
-                                </button>
-                            </form>
-                        </div>
-                    </div>
-
-                    <div class="md:w-1/2 mt-6 md:mt-0">
-                        <div class="relative">
-                            <img src="{{ asset('storage/' . $product->main_image) }}" alt="Workers applying Keraset"
-                                class="w-full h-2/4 rounded-md shadow-md" />
-                            <span class="absolute bottom-3 right-3 bg-yellow-400 text-white text-xs px-2 py-1 rounded-sm">
-                                {{ $product->category }}
-                            </span>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="mt-5">
-
-                    <div class="flex justify-end gap-4">
-                        @foreach ($product->images as $image)
-                            <img src="{{ asset('storage/' . $image->image_path) }}" alt="Thumbnail 1"
-                                class="w-24 h-20 object-cover rounded border border-gray-300 cursor-pointer hover:border-yellow-400" />
-                        @endforeach
-                    </div>
-                </div>
-            </section>
-        @endif
+            </div>
+        </section>
 
         <!-- Similar Products Section -->
         <section class="mb-12 mt-24">
@@ -247,7 +234,7 @@
                     </form>
                 </div>
             </div>
-            
+
             <!-- Existing Comment -->
             @if (count($reviews) > 0)
 

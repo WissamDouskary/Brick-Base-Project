@@ -113,8 +113,12 @@
                             <h3 class="text-base sm:text-lg font-bold">{{ $worker->first_name . ' ' . $worker->last_name }}
                             </h3>
                             <div class="flex items-center mb-2">
-                                <div class="text-yellow-500 text-sm sm:text-base">★★★★½</div>
-                                <span class="ml-2 text-gray-600 text-xs sm:text-sm">4.5/5</span>
+                                <div class="flex items-center">
+                                    <span class="mr-1 text-sm">{{ number_format($worker->reviews_avg_rating, 1) }}/5</span>
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-yellow-400" viewBox="0 0 20 20" fill="currentColor">
+                                        <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/>
+                                    </svg>
+                                </div>
                             </div>
                             <p class="text-gray-600 mb-4 text-xs sm:text-sm truncate">{{ $worker->bio }}</p>
                             <div class="flex justify-between items-center">
@@ -165,7 +169,6 @@
         @if ($workers->hasPages())
             <div class="flex justify-center mt-8 md:mt-10 px-2">
                 <nav class="inline-flex flex-wrap justify-center rounded-md shadow">
-                    {{-- Lien Précédent --}}
                     @if ($workers->onFirstPage())
                         <span
                             class="py-2 px-2 sm:px-4 border border-gray-300 bg-gray-200 rounded-l-md text-xs sm:text-sm font-medium text-gray-500 cursor-not-allowed flex items-center">
