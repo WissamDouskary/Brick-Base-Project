@@ -19,7 +19,7 @@ class OrderController extends Controller
 
     public function store(Request $request){
         $request->validate([
-            'quantity' => 'gt:0|required|numeric|max:20',
+            'quantity' => 'gt:0|required|numeric|min:1|max:20',
             'price' => 'required'
         ]);
 

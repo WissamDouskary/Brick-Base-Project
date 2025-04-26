@@ -9,8 +9,8 @@ class ClientProfileController extends Controller
 {
     public function update(Request $request){
         $request->validate([
-            'first_name' => 'required|min:3',
-            'last_name' => 'required|min:3',
+            'first_name' => 'required|min:3|max:15',
+            'last_name' => 'required|min:3|max:15',
             'city' => 'required',
         ]);
 

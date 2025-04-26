@@ -22,7 +22,7 @@ class ReservationController extends Controller
         $fields = $request->validate([
             'start_date' => 'required|date|after_or_equal:today',
             'end_date' => 'required|date|after:start-date',
-            'content' => 'required|min:20'
+            'content' => 'required|min:10|max:40'
         ]);
 
         $start = Carbon::parse($fields['start_date']);
