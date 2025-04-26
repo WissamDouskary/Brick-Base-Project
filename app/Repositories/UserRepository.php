@@ -24,6 +24,8 @@ class UserRepository implements UserRepositoryInterface
             ->where('is_active', true)
             ->withCount('reviews')
             ->where('id', '!=', Auth::id())
+            ->withCount('recievedReservations')
+            ->withAvg('reviews', 'rating')
             ->paginate(9);
     }
 
