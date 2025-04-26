@@ -36,7 +36,8 @@
                                             <h3 class="font-bold text-gray-900">{{ $product->title }}</h3>
                                         </div>
                                         <div class="flex items-center">
-                                            <span class="text-sm font-medium text-gray-700">4.5/5</span>
+                                            <span
+                                                class="text-sm font-medium text-gray-700">{{ number_format($product->reviews_avg_rating, 1) }}/5</span>
                                             <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-yellow-400"
                                                 viewBox="0 0 20 20" fill="currentColor">
                                                 <path
@@ -58,14 +59,12 @@
                                             {{ $product->reviews_count }}
                                         </div>
                                         <div class="flex items-center text-gray-500 text-sm">
-                                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-1" viewBox="0 0 20 20"
-                                                fill="currentColor">
-                                                <path d="M10 12a2 2 0 100-4 2 2 0 000 4z" />
-                                                <path fill-rule="evenodd"
-                                                    d="M.458 10C1.732 5.943 5.522 3 10 3s8.268 2.943 9.542 7c-1.274 4.057-5.064 7-9.542 7S1.732 14.057.458 10zM14 10a4 4 0 11-8 0 4 4 0 018 0z"
-                                                    clip-rule="evenodd" />
+                                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-1" fill="none"
+                                                viewBox="0 0 24 24" stroke="currentColor">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                    d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z" />
                                             </svg>
-                                            240
+                                            {{ $product->orders_count }}
                                         </div>
                                     </div>
                                 </div>
@@ -112,7 +111,8 @@
                                                 {{ $worker->first_name . ' ' . $worker->last_name }}</h3>
                                         </div>
                                         <div class="flex items-center">
-                                            <span class="text-sm font-medium text-gray-700">4.5/5</span>
+                                            <span
+                                                class="text-sm font-medium text-gray-700">{{ number_format($worker->reviews_avg_rating, 1) }}/5</span>
                                             <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-yellow-400"
                                                 viewBox="0 0 20 20" fill="currentColor">
                                                 <path
@@ -134,14 +134,12 @@
                                             {{ $worker->reviews_count }}
                                         </div>
                                         <div class="flex items-center text-gray-500 text-sm">
-                                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-1" viewBox="0 0 20 20"
+                                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-1" viewBox="0 0 24 24"
                                                 fill="currentColor">
-                                                <path d="M10 12a2 2 0 100-4 2 2 0 000 4z" />
-                                                <path fill-rule="evenodd"
-                                                    d="M.458 10C1.732 5.943 5.522 3 10 3s8.268 2.943 9.542 7c-1.274 4.057-5.064 7-9.542 7S1.732 14.057.458 10zM14 10a4 4 0 11-8 0 4 4 0 018 0z"
-                                                    clip-rule="evenodd" />
+                                                <path
+                                                    d="M7 2a1 1 0 00-1 1v1H5a3 3 0 00-3 3v12a3 3 0 003 3h14a3 3 0 003-3V7a3 3 0 00-3-3h-1V3a1 1 0 10-2 0v1H8V3a1 1 0 00-1-1zM4 8h16v11a1 1 0 01-1 1H5a1 1 0 01-1-1V8zm10.707 4.707a1 1 0 00-1.414-1.414L11 13.586l-1.293-1.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l3-3z" />
                                             </svg>
-                                            240
+                                            {{ $worker->recieved_reservations_count }}
                                         </div>
                                     </div>
                                 </div>
@@ -455,7 +453,7 @@
 
     @foreach ($workerComments as $comments)
         @foreach ($comments->reviews as $review)
-            <div id="commentWorkerModal-{{$comments->id}}-{{$review->id}}"
+            <div id="commentWorkerModal-{{ $comments->id }}-{{ $review->id }}"
                 class="fixed inset-0 bg-black/60 flex items-center justify-center hidden z-50">
                 <div class="bg-white rounded-lg shadow-xl max-w-lg w-full">
                     <div class="px-6 py-4 border-b border-gray-200">
