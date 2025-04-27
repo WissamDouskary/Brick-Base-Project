@@ -51,7 +51,7 @@ class ReviewsRepository implements ReviewsRepositoryInterface {
 
     public function getProductsReviews()
     {
-        return Product::has('reviews')->with('reviews')->with('user')->with(['reviews.client'])->paginate(7);
+        return Product::has('reviews')->with(['reviews.client', 'user'])->with('reviews')->with('user')->with(['reviews.client'])->paginate(7);
     }
 
     public function getWorkersReviews()
