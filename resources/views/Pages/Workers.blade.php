@@ -21,14 +21,21 @@
     </section>
 
     <div class="container mx-auto px-4 py-6">
-        <div class="flex flex-col md:flex-row items-start md:items-center justify-between gap-4 mb-8 w-full mt-6 md:mt-10">
+        <form action="{{ route('Workers') }}" method="GET" class="flex flex-col md:flex-row items-start md:items-center justify-between gap-4 mb-8 w-full mt-6 md:mt-10">
             <div class="flex flex-wrap gap-2 sm:gap-3 w-full md:w-auto">
+
                 <div class="relative w-full sm:w-auto">
-                    <select
+                    <select name="sort"
                         class="w-full sm:w-auto bg-white border border-gray-200 text-gray-700 rounded-lg px-3 sm:px-4 py-2 sm:py-2.5 pr-10 appearance-none cursor-pointer focus:outline-none focus:ring-2 focus:ring-yellow-500 focus:border-transparent shadow-sm hover:border-gray-300 transition-colors">
-                        <option>Reviews</option>
-                        <option>Highest</option>
-                        <option>Lowest</option>
+                        <option value="" selected disabled>Select option</option>
+                        <option value="popular" {{ request('sort') == 'popular' ? 'selected' : '' }}>Most
+                            Popular</option>
+                        <option value="newest" {{ request('sort') == 'newest' ? 'selected' : '' }}>Newest
+                        </option>
+                        <option value="price_low" {{ request('sort') == 'price_low' ? 'selected' : '' }}>Price:
+                            Low to High</option>
+                        <option value="price_high" {{ request('sort') == 'price_high' ? 'selected' : '' }}>
+                            Price: High to Low</option>
                     </select>
                     <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-500">
                         <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"
@@ -39,11 +46,24 @@
                 </div>
 
                 <div class="relative w-full sm:w-auto">
-                    <select
+                    <select name="category"
                         class="w-full sm:w-auto bg-white border border-gray-200 text-gray-700 rounded-lg px-3 sm:px-4 py-2 sm:py-2.5 pr-10 appearance-none cursor-pointer focus:outline-none focus:ring-2 focus:ring-yellow-500 focus:border-transparent shadow-sm hover:border-gray-300 transition-colors">
-                        <option>Popularity</option>
-                        <option>Most Popular</option>
-                        <option>Least Popular</option>
+                        <option value="" selected disabled>Select Category</option>
+                        <option value="Residential construction"
+                            {{ request('category') == 'Residential construction' ? 'selected' : '' }}>
+                            Residential construction</option>
+                        <option value="Commercial construction"
+                            {{ request('category') == 'Commercial construction' ? 'selected' : '' }}>Commercial
+                            construction
+                        </option>
+                        <option value="Industrial construction"
+                            {{ request('category') == 'Industrial construction' ? 'selected' : '' }}>
+                            Industrial construction</option>
+                        <option value="Infrastructure construction"
+                            {{ request('category') == 'Infrastructure construction' ? 'selected' : '' }}>
+                            Infrastructure construction</option>
+                        <option value="Non-combustible" {{ request('category') == 'Non-combustible' ? 'selected' : '' }}>
+                            Non-combustible</option>
                     </select>
                     <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-500">
                         <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"
@@ -54,29 +74,13 @@
                 </div>
 
                 <div class="relative w-full sm:w-auto">
-                    <select
-                        class="w-full sm:w-auto bg-white border border-gray-200 text-gray-700 rounded-lg px-3 sm:px-4 py-2 sm:py-2.5 pr-10 appearance-none cursor-pointer focus:outline-none focus:ring-2 focus:ring-yellow-500 focus:border-transparent shadow-sm hover:border-gray-300 transition-colors">
-                        <option>Category</option>
-                        <option>Restaurants</option>
-                        <option>Hotels</option>
-                        <option>Entertainment</option>
-                    </select>
-                    <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-500">
-                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"
-                            xmlns="http://www.w3.org/2000/svg">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
-                        </svg>
-                    </div>
-                </div>
-
-                <div class="relative w-full sm:w-auto">
-                    <select
-                        class="w-full sm:w-auto bg-white border border-gray-200 text-gray-700 rounded-lg px-3 sm:px-4 py-2 sm:py-2.5 pr-10 appearance-none cursor-pointer focus:outline-none focus:ring-2 focus:ring-yellow-500 focus:border-transparent shadow-sm hover:border-gray-300 transition-colors">
-                        <option>City</option>
-                        <option>All</option>
-                        <option>New York</option>
-                        <option>Los Angeles</option>
-                        <option>Chicago</option>
+                    <select name="city"
+                    class="w-full sm:w-auto bg-white border border-gray-200 text-gray-700 rounded-lg px-3 sm:px-4 py-2 sm:py-2.5 pr-10 appearance-none cursor-pointer focus:outline-none focus:ring-2 focus:ring-yellow-500 focus:border-transparent shadow-sm hover:border-gray-300 transition-colors">
+                    <option value="" disabled {{ request('city') ? '' : 'selected' }}>Select City</option>
+                        <option value="Casablanca" {{ request('city') == 'Casablanca' ? 'selected' : '' }}>Casablanca</option>
+                        <option value="Safi" {{ request('city') == 'Safi' ? 'selected' : '' }}>Safi</option>
+                        <option value="Agadir" {{ request('city') == 'Agadir' ? 'selected' : '' }}>Agadir</option>
+                        <option value="Oujda" {{ request('city') == 'Oujda' ? 'selected' : '' }}>Oujda</option>
                     </select>
                     <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-500">
                         <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"
@@ -88,14 +92,14 @@
             </div>
 
             <div class="flex w-full md:w-auto mt-4 md:mt-0">
-                <input type="text" placeholder="Search"
+                <input type="text" placeholder="Search" name="search" value="{{ request('search') }}"
                     class="w-full md:w-64 border border-gray-200 rounded-l-lg px-4 py-2.5 focus:outline-none focus:ring-2 focus:ring-yellow-400 focus:border-transparent">
-                <button
+                <button type="submit"
                     class="bg-yellow-500 cursor-pointer hover:bg-yellow-600 text-white font-medium px-4 sm:px-6 py-2.5 rounded-r-lg transition-colors focus:outline-none">
-                    Search
+                    Apply Filters
                 </button>
             </div>
-        </div>
+        </form>
 
         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-10 lg:gap-20 mt-8 sm:mt-12 lg:mt-20">
             @if (count($workers) > 0)
@@ -115,8 +119,10 @@
                             <div class="flex items-center mb-2">
                                 <div class="flex items-center">
                                     <span class="mr-1 text-sm">{{ number_format($worker->reviews_avg_rating, 1) }}/5</span>
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-yellow-400" viewBox="0 0 20 20" fill="currentColor">
-                                        <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/>
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-yellow-400"
+                                        viewBox="0 0 20 20" fill="currentColor">
+                                        <path
+                                            d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
                                     </svg>
                                 </div>
                             </div>
@@ -132,7 +138,8 @@
                                     </svg>
                                 </a>
                                 <div class="flex items-center text-gray-600 text-xs sm:text-sm">
-                                    <svg class="w-3 h-3 sm:w-4 sm:h-4 mr-1 sm:mr-2" fill="currentColor" viewBox="0 0 20 20">
+                                    <svg class="w-3 h-3 sm:w-4 sm:h-4 mr-1 sm:mr-2" fill="currentColor"
+                                        viewBox="0 0 20 20">
                                         <path fillRule="evenodd"
                                             d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z"
                                             clipRule="evenodd" />
@@ -165,72 +172,66 @@
             @endif
         </div>
     </div>
-        <!-- Pagination -->
-        @if ($workers->hasPages())
-            <div class="flex justify-center mt-8 md:mt-10 px-2">
-                <nav class="inline-flex flex-wrap justify-center rounded-md shadow">
-                    @if ($workers->onFirstPage())
+    <!-- Pagination -->
+    @if ($workers->hasPages())
+        <div class="flex justify-center mt-8 md:mt-10 px-2">
+            <nav class="inline-flex flex-wrap justify-center rounded-md shadow">
+                @if ($workers->onFirstPage())
+                    <span
+                        class="py-2 px-2 sm:px-4 border border-gray-300 bg-gray-200 rounded-l-md text-xs sm:text-sm font-medium text-gray-500 cursor-not-allowed flex items-center">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3 sm:h-4 sm:w-4 mr-0 sm:mr-1 inline-block"
+                            fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+                        </svg>
+                        <span class="hidden sm:inline">Previous</span>
+                    </span>
+                @else
+                    <a href="{{ $workers->previousPageUrl() }}"
+                        class="py-2 px-2 sm:px-4 border border-gray-300 bg-white rounded-l-md text-xs sm:text-sm font-medium text-gray-700 hover:bg-gray-50 flex items-center">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3 sm:h-4 sm:w-4 mr-0 sm:mr-1 inline-block"
+                            fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+                        </svg>
+                        <span class="hidden sm:inline">Previous</span>
+                    </a>
+                @endif
+
+                @foreach ($workers->getUrlRange(1, $workers->lastPage()) as $page => $url)
+                    @if ($page == $workers->currentPage())
                         <span
-                            class="py-2 px-2 sm:px-4 border border-gray-300 bg-gray-200 rounded-l-md text-xs sm:text-sm font-medium text-gray-500 cursor-not-allowed flex items-center">
-                            <svg xmlns="http://www.w3.org/2000/svg"
-                                class="h-3 w-3 sm:h-4 sm:w-4 mr-0 sm:mr-1 inline-block" fill="none"
-                                viewBox="0 0 24 24" stroke="currentColor">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                    d="M15 19l-7-7 7-7" />
-                            </svg>
-                            <span class="hidden sm:inline">Previous</span>
+                            class="py-2 px-3 sm:px-4 border border-gray-300 text-yellow-400 text-xs sm:text-sm font-medium">
+                            {{ $page }}
                         </span>
                     @else
-                        <a href="{{ $workers->previousPageUrl() }}"
-                            class="py-2 px-2 sm:px-4 border border-gray-300 bg-white rounded-l-md text-xs sm:text-sm font-medium text-gray-700 hover:bg-gray-50 flex items-center">
-                            <svg xmlns="http://www.w3.org/2000/svg"
-                                class="h-3 w-3 sm:h-4 sm:w-4 mr-0 sm:mr-1 inline-block" fill="none"
-                                viewBox="0 0 24 24" stroke="currentColor">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                    d="M15 19l-7-7 7-7" />
-                            </svg>
-                            <span class="hidden sm:inline">Previous</span>
+                        <a href="{{ $url }}"
+                            class="py-2 px-3 sm:px-4 border border-gray-300 bg-white text-xs sm:text-sm font-medium text-gray-700 hover:bg-gray-50">
+                            {{ $page }}
                         </a>
                     @endif
+                @endforeach
 
-                    @foreach ($workers->getUrlRange(1, $workers->lastPage()) as $page => $url)
-                        @if ($page == $workers->currentPage())
-                            <span
-                                class="py-2 px-3 sm:px-4 border border-gray-300 text-yellow-400 text-xs sm:text-sm font-medium">
-                                {{ $page }}
-                            </span>
-                        @else
-                            <a href="{{ $url }}"
-                                class="py-2 px-3 sm:px-4 border border-gray-300 bg-white text-xs sm:text-sm font-medium text-gray-700 hover:bg-gray-50">
-                                {{ $page }}
-                            </a>
-                        @endif
-                    @endforeach
-
-                    @if ($workers->hasMorePages())
-                        <a href="{{ $workers->nextPageUrl() }}"
-                            class="py-2 px-2 sm:px-4 border border-gray-300 bg-white rounded-r-md text-xs sm:text-sm font-medium text-gray-700 hover:bg-gray-50 flex items-center">
-                            <span class="hidden sm:inline">Next</span>
-                            <svg xmlns="http://www.w3.org/2000/svg"
-                                class="h-3 w-3 sm:h-4 sm:w-4 ml-0 sm:ml-1 inline-block" fill="none"
-                                viewBox="0 0 24 24" stroke="currentColor">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
-                            </svg>
-                        </a>
-                    @else
-                        <span
-                            class="py-2 px-2 sm:px-4 border border-gray-300 bg-gray-200 rounded-r-md text-xs sm:text-sm font-medium text-gray-500 cursor-not-allowed flex items-center">
-                            <span class="hidden sm:inline">Next</span>
-                            <svg xmlns="http://www.w3.org/2000/svg"
-                                class="h-3 w-3 sm:h-4 sm:w-4 ml-0 sm:ml-1 inline-block" fill="none"
-                                viewBox="0 0 24 24" stroke="currentColor">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
-                            </svg>
-                        </span>
-                    @endif
-                </nav>
-            </div>
-        @endif
+                @if ($workers->hasMorePages())
+                    <a href="{{ $workers->nextPageUrl() }}"
+                        class="py-2 px-2 sm:px-4 border border-gray-300 bg-white rounded-r-md text-xs sm:text-sm font-medium text-gray-700 hover:bg-gray-50 flex items-center">
+                        <span class="hidden sm:inline">Next</span>
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3 sm:h-4 sm:w-4 ml-0 sm:ml-1 inline-block"
+                            fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                        </svg>
+                    </a>
+                @else
+                    <span
+                        class="py-2 px-2 sm:px-4 border border-gray-300 bg-gray-200 rounded-r-md text-xs sm:text-sm font-medium text-gray-500 cursor-not-allowed flex items-center">
+                        <span class="hidden sm:inline">Next</span>
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3 sm:h-4 sm:w-4 ml-0 sm:ml-1 inline-block"
+                            fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                        </svg>
+                    </span>
+                @endif
+            </nav>
+        </div>
+    @endif
 
     {{-- why choose us section --}}
     <section class="grid grid-cols-1 lg:grid-cols-2 mb-10 md:mb-16 mt-10 md:mt-16" data-aos="fade-up"

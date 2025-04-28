@@ -22,56 +22,77 @@
             <!-- Search and Filter Sidebar -->
             <div class="lg:w-1/4 w-full space-y-6">
                 <!-- Search -->
-                <div class="bg-[#D9D9D9] rounded-lg shadow p-4">
-                    <h3 class="font-medium text-lg mb-4">Search</h3>
-                    <div class="relative">
-                        <input type="text" placeholder="Type To Search"
-                            class="w-full border bg-[#FFFFFF] border-gray-300 rounded-lg py-2 px-4 pr-10 outline-none">
-                        <button class="absolute right-3 top-2.5">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-gray-500" fill="none"
-                                viewBox="0 0 24 24" stroke="currentColor">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                    d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
-                            </svg>
+                <form method="GET" action="{{ route('Products') }}" class="space-y-6">
+                    <!-- Search -->
+                    <div class="bg-[#D9D9D9] rounded-lg shadow p-4">
+                        <h3 class="font-medium text-lg mb-4">Search</h3>
+                        <div class="relative">
+                            <input type="text" name="search" value="{{ request('search') }}"
+                                placeholder="Type To Search"
+                                class="w-full border bg-[#FFFFFF] border-gray-300 rounded-lg py-2 px-4 pr-10 outline-none">
+                            <button type="submit" class="absolute right-3 top-2.5">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-gray-500" fill="none"
+                                    viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                                </svg>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Filters -->
+                    <div class="bg-[#D9D9D9] rounded-lg shadow p-4">
+                        <h3 class="font-medium text-lg mb-4 font-poppins text-[#121C45]">Filter</h3>
+                        <div class="space-y-4">
+                            <div>
+                                <label class="block mb-2 text-sm font-medium text-gray-700">Popularity</label>
+                                <select name="sort"
+                                    class="w-full border border-gray-300 rounded py-2 px-3 bg-[#FFFFFF] outline-none">
+                                    <option value="" selected disabled>Select option</option>
+                                    <option value="popular" {{ request('sort') == 'popular' ? 'selected' : '' }}>Most
+                                        Popular</option>
+                                    <option value="newest" {{ request('sort') == 'newest' ? 'selected' : '' }}>Newest
+                                    </option>
+                                    <option value="price_low" {{ request('sort') == 'price_low' ? 'selected' : '' }}>Price:
+                                        Low to High</option>
+                                    <option value="price_high" {{ request('sort') == 'price_high' ? 'selected' : '' }}>
+                                        Price: High to Low</option>
+                                </select>
+                            </div>
+
+                            <div> 
+                                <label class="block mb-2 text-sm font-medium text-gray-700">Categories</label>
+                                <select name="category"
+                                    class="w-full border border-gray-300 rounded py-2 px-3 bg-[#FFFFFF] outline-none">
+                                    <option value="" selected disabled>Select option</option>
+                                    <option value="Residential construction"
+                                        {{ request('category') == 'Residential construction' ? 'selected' : '' }}>
+                                        Residential construction</option>
+                                    <option value="Commercial construction"
+                                        {{ request('category') == 'Commercial construction' ? 'selected' : '' }}>Commercial
+                                        construction
+                                    </option>
+                                    <option value="Industrial construction"
+                                        {{ request('category') == 'Industrial construction' ? 'selected' : '' }}>
+                                        Industrial construction</option>
+                                    <option value="Infrastructure construction"
+                                        {{ request('category') == 'Infrastructure construction' ? 'selected' : '' }}>
+                                        Infrastructure construction</option>
+                                    <option value="Non-combustible"
+                                        {{ request('category') == 'Non-combustible' ? 'selected' : '' }}>
+                                        Non-combustible</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div>
+                        <button type="submit"
+                            class="w-full bg-yellow-400 hover:bg-yellow-500 text-white font-bold py-2 px-4 rounded cursor-pointer">
+                            Apply Filters
                         </button>
                     </div>
-                </div>
-
-                <!-- Filter -->
-                <div class="bg-[#D9D9D9] rounded-lg shadow p-4">
-                    <h3 class="font-medium text-lg mb-4 font-poppins text-[#121C45]">Filter</h3>
-                    <div class="space-y-4">
-                        <div>
-                            <label class="block mb-2 text-sm font-medium text-gray-700">Popularity</label>
-                            <select class="w-full border border-gray-300 rounded py-2 px-3 bg-[#FFFFFF] outline-none">
-                                <option selected>Select option</option>
-                                <option>Most Popular</option>
-                                <option>Newest</option>
-                                <option>Price: Low to High</option>
-                                <option>Price: High to Low</option>
-                            </select>
-                        </div>
-                        <div>
-                            <label class="block mb-2 text-sm font-medium text-gray-700">Reviews</label>
-                            <select class="w-full border border-gray-300 rounded py-2 px-3 bg-[#FFFFFF] outline-none">
-                                <option selected>Select option</option>
-                                <option>5 Stars</option>
-                                <option>4 Stars & Up</option>
-                                <option>3 Stars & Up</option>
-                            </select>
-                        </div>
-                        <div>
-                            <label class="block mb-2 text-sm font-medium text-gray-700">Categories</label>
-                            <select class="w-full border border-gray-300 rounded py-2 px-3 bg-[#FFFFFF] outline-none">
-                                <option selected>Select option</option>
-                                <option>Adhesives</option>
-                                <option>Grouts</option>
-                                <option>Sealants</option>
-                                <option>Mortars</option>
-                            </select>
-                        </div>
-                    </div>
-                </div>
+                </form>
             </div>
 
             <!-- Products Grid -->
@@ -82,50 +103,55 @@
                         <!-- Product  -->
 
                         @foreach ($products as $product)
-                        <div class="bg-white rounded-lg shadow overflow-hidden h-full flex flex-col">
-                            <div class="h-48 w-full">
-                                <img src="{{ asset('storage/' . $product->main_image) }}"
-                                    class="w-full h-full object-cover" alt="{{ $product->title }}">
-                            </div>
-                            <div class="p-4 flex-1 flex flex-col">
-                                <div class="flex items-center justify-between mb-2">
-                                    <h3 class="font-bold text-lg">{{ $product->title }}</h3>
-                                    <div class="flex items-center">
-                                        <span class="mr-1 text-sm">{{ number_format($product->reviews_avg_rating, 1) }}/5</span>
-                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-yellow-400" viewBox="0 0 20 20" fill="currentColor">
-                                            <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/>
-                                        </svg>
-                                    </div>
+                            <div class="bg-white rounded-lg shadow overflow-hidden h-full flex flex-col">
+                                <div class="h-48 w-full">
+                                    <img src="{{ asset('storage/' . $product->main_image) }}"
+                                        class="w-full h-full object-cover" alt="{{ $product->title }}">
                                 </div>
-                                <p class="text-gray-600 text-sm mb-4 truncate flex-1">{{ $product->description }}</p>
-                                <a href="{{ route('ProductPreview', ['id' => $product->id]) }}"
-                                    class="inline-flex items-center text-blue-600 hover:text-blue-800">
-                                    View Details
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 ml-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
-                                    </svg>
-                                </a>
+                                <div class="p-4 flex-1 flex flex-col">
+                                    <div class="flex items-center justify-between mb-2">
+                                        <h3 class="font-bold text-lg">{{ $product->title }}</h3>
+                                        <div class="flex items-center">
+                                            <span
+                                                class="mr-1 text-sm">{{ number_format($product->reviews_avg_rating, 1) }}/5</span>
+                                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-yellow-400"
+                                                viewBox="0 0 20 20" fill="currentColor">
+                                                <path
+                                                    d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                                            </svg>
+                                        </div>
+                                    </div>
+                                    <p class="text-gray-600 text-sm mb-4 truncate flex-1">{{ $product->description }}</p>
+                                    <a href="{{ route('ProductPreview', ['id' => $product->id]) }}"
+                                        class="inline-flex items-center text-blue-600 hover:text-blue-800">
+                                        View Details
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 ml-1" fill="none"
+                                            viewBox="0 0 24 24" stroke="currentColor">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                d="M9 5l7 7-7 7" />
+                                        </svg>
+                                    </a>
+                                </div>
                             </div>
-                        </div>
-                        
-                @endforeach
+                        @endforeach
 
                     </div>
-            @else
-                <div class="w-full py-12 flex flex-col items-center justify-center text-center">
-                    <div class="bg-gray-100 p-6 rounded-full mb-6">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-12 w-12 text-gray-400" fill="none"
-                            viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z" />
-                        </svg>
+                @else
+                    <div class="w-full py-12 flex flex-col items-center justify-center text-center">
+                        <div class="bg-gray-100 p-6 rounded-full mb-6">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-12 w-12 text-gray-400" fill="none"
+                                viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z" />
+                            </svg>
+                        </div>
+                        <h3 class="text-xl font-semibold mb-2">No products found!</h3>
+                        <p class="text-gray-500 max-w-md mb-6">
+                            We couldn't find any products matching your criteria. Try adjusting your filters or search
+                            terms, or
+                            wait for workers adding new products
+                        </p>
                     </div>
-                    <h3 class="text-xl font-semibold mb-2">No products found!</h3>
-                    <p class="text-gray-500 max-w-md mb-6">
-                        We couldn't find any products matching your criteria. Try adjusting your filters or search terms, or
-                        wait for workers adding new products
-                    </p>
-                </div>
                 @endif
 
                 <!-- Pagination -->
