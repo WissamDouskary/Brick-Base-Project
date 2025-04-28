@@ -24,9 +24,9 @@ class ProductController extends Controller
         return view('Pages.Product.list-product');
     }
 
-    public function getall()
+    public function getall(Request $request)
     {
-        $products = $this->productservice->getall('Accepted');
+        $products = $this->productservice->filterProducts($request);
         return view('Pages.Products', compact('products'));
     }
 
