@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Product;
+use App\Models\Review;
 use App\Repositories\Contracts\ProductRepositoryInterface;
 use App\Repositories\Contracts\ReviewsRepositoryInterface;
 use App\Repositories\Contracts\UserRepositoryInterface;
@@ -20,12 +22,20 @@ class CommentsController extends Controller
         $this->reviewsservice = $reviews_repository;
     }
 
-    public function index(){
+    public function index()
+    {
         $products = $this->productservice->getProductsWithComments();
         $workers = $this->userservice->getWorkers();
-        $productComments = $this->reviewsservice->getProductsReviews(); 
+        $productComments = $this->reviewsservice->getProductsReviews();
         $workerComments = $this->reviewsservice->getWorkersReviews();
 
         return view('Pages.dashboard.comments', compact('products', 'workers', 'productComments', 'workerComments'));
+    }
+
+    public function destroy($id)
+    {
+        $review = Review::find($id);
+        $review->delete();
+        return back()->with('success', 'comment deleted succesfuly');
     }
 }

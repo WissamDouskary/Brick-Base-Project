@@ -3,6 +3,20 @@
 @section('content')
     <div class="min-h-screen p-8">
 
+        @if (session('success'))
+            <div id="successToast"
+                class="fixed z-50 top-4 left-1/2 transform -translate-x-1/2 bg-green-500 text-white px-6 py-3 rounded-md shadow-lg hidden opacity-0 transition-opacity duration-300">
+                <div class="flex items-center space-x-2">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                        <path fill-rule="evenodd"
+                            d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
+                            clip-rule="evenodd" />
+                    </svg>
+                    <span>{{ session('success') }}</span>
+                </div>
+            </div>
+        @endif
+
         <h1 class="text-2xl font-bold">Comments</h1>
 
         <!-- Main Content -->
@@ -410,13 +424,19 @@
                             </div>
                         </div>
                     </div>
-                    <div class="px-6 py-4 bg-gray-50 text-right rounded-b-lg">
-                        <button type="button"
-                            class="px-4 py-2 text-sm font-medium text-red-700 bg-red-100 border border-transparent rounded-md shadow-sm hover:bg-red-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500 mr-2">
-                            Delete Comment
-                        </button>
+                    <div class="px-6 py-4 bg-gray-50 text-right rounded-b-lg flex justify-end">
+                        <form action="{{ route('comments.delete', ['id' => $reviews->id]) }}" method="post">
+                            @csrf
+                            @method('DELETE')
+                            <p>comment {{ $comments->id }}</p>
+                            <p>reviews {{ $reviews->id }}</p>
+                            <button type="submit"
+                                class="px-4 py-2 text-sm font-medium text-red-700 bg-red-100 border border-transparent rounded-md shadow-sm hover:bg-red-200 focus:outline-none mr-2 cursor-pointer">
+                                Delete Comment
+                            </button>
+                        </form>
                         <button type="button" onclick="toggleCommentModal({{ $comments->id }}, {{ $reviews->id }})"
-                            class="px-4 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-md shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
+                            class="px-4 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-md shadow-sm hover:bg-gray-50 focus:outline-none cursor-pointer">
                             Close
                         </button>
                     </div>
@@ -483,11 +503,16 @@
                             </div>
                         </div>
                     </div>
-                    <div class="px-6 py-4 bg-gray-50 text-right rounded-b-lg">
-                        <button type="button"
-                            class="px-4 py-2 text-sm font-medium text-red-700 bg-red-100 border border-transparent rounded-md shadow-sm hover:bg-red-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500 mr-2">
-                            Delete Comment
-                        </button>
+                    <div class="px-6 py-4 bg-gray-50 text-right rounded-b-lg flex justify-end">
+                        <form action="{{ route('comments.delete', ['id' => $review->id]) }}" method="post">
+                            @csrf
+                            @method('DELETE')
+                            
+                            <button type="submit"
+                                class="px-4 py-2 text-sm font-medium text-red-700 bg-red-100 border border-transparent rounded-md shadow-sm hover:bg-red-200 focus:outline-none mr-2 cursor-pointer">
+                                Delete Comment
+                            </button>
+                        </form>
                         <button type="button"
                             onclick="toggleCommentWorkerModal({{ $comments->id }}, {{ $review->id }})"
                             class="px-4 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-md shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
@@ -554,5 +579,23 @@
             section == 'products' ? productComSection.classList.remove('hidden') : workerComSection.classList.remove(
                 'hidden');
         }
+        document.addEventListener('DOMContentLoaded', function() {
+            const toast = document.getElementById('successToast');
+
+            if (toast) {
+                toast.classList.remove('hidden');
+                toast.classList.add('opacity-0');
+
+                toast.classList.add('opacity-100');
+                toast.classList.add('transition-opacity')
+                setTimeout(function() {
+                    toast.classList.remove('opacity-100');
+
+                    setTimeout(function() {
+                        toast.classList.add('hidden');
+                    }, 300);
+                }, 5000);
+            }
+        });
     </script>
 @endsection

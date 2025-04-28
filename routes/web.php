@@ -122,4 +122,5 @@ Route::middleware(['auth', CheckAdmin::class])->group(function () {
 
     //manage products
     Route::post('/dashboard/Product/{id}/{status}', [ActivitiesController::class, 'manageProduct'])->name('dashboard.manageProduct');
+    Route::delete('/comment/delete/{id}', [CommentsController::class, 'destroy'])->name('comments.delete');
 });
