@@ -15,4 +15,5 @@ interface ProductRepositoryInterface
     public function getWorkerProducts();
     public function manageProduct($id, $status);
     public function getProductsWithComments();
+    public function filterProducts($data);
 }
