@@ -80,4 +80,42 @@ class UserRepository implements UserRepositoryInterface
             'is_active' => $status
         ]);
     }
+
+    public function filterWorkers($request){
+        $query = User::query()->where('is_active', true)->withAvg('reviews', 'rating')->where('role_id', 1);
+
+        if ($request->filled('search')) {
+            $query->where(function ($q) use ($request) {
+                $q->where('first_name', 'ILIKE', '%' . $request->search . '%')
+                    ->orWhere('last_name', 'ILIKE', '%' . $request->search . '%');
+            });
+        }
+
+        if ($request->filled('category')) {
+            $query->where('category', $request->category);
+        }
+
+        if($request->filled('city')){
+            $query->where('city', $request->city);
+        }
+
+        if ($request->filled('sort')) {
+            switch ($request->sort) {
+                case 'popular':
+                    $query->orderBy('reviews_avg_rating', 'desc');
+                    break;
+                case 'newest':
+                    $query->orderBy('created_at', 'desc');
+                    break;
+                case 'price_low':
+                    $query->orderBy('price', 'asc');
+                    break;
+                case 'price_high':
+                    $query->orderBy('price', 'desc');
+                    break;
+            }
+        }
+
+        return $query->paginate(9);
+    }
 }
