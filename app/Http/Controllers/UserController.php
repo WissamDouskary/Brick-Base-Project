@@ -64,9 +64,9 @@ class UserController extends Controller
         return redirect()->route('SignUp');
     }
 
-    public function getWorkers()
+    public function getWorkers(Request $request)
     {
-        $workers = $this->userService->getWorkers();
+        $workers = $this->userService->filterWorkers($request);
         return view('Pages.Workers', compact('workers'));
     }
 
