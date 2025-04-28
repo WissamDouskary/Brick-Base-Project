@@ -15,4 +15,5 @@ interface UserRepositoryInterface
     public function filterByActive($is_active);
     public function filterByRole($role_id);
     public function manageStatus($id, $status);
+    public function filterWorkers($data);
 }
