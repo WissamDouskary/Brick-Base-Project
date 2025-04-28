@@ -61,4 +61,8 @@ class ProductService
     public function getProductsWithComments(){
         return $this->productrepository->getProductsWithComments();
     }
+
+    public function filterProducts($data){
+        return $this->productrepository->filterProducts($data);
+    }
 }

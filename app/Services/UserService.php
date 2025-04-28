@@ -80,4 +80,8 @@ class UserService
     public function manageStatus($id, $status){
         return $this->userRepository->manageStatus($id, $status);
     }
+
+    public function filterWorkers($data){
+        return $this->userRepository->filterWorkers($data);
+    }
 }
