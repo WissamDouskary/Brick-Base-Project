@@ -82,7 +82,7 @@ class UserRepository implements UserRepositoryInterface
     }
 
     public function filterWorkers($request){
-        $query = User::query()->where('is_active', true)->withAvg('reviews', 'rating')->where('role_id', 1);
+        $query = User::query()->where('is_active', true)->withAvg('reviews', 'rating')->where('role_id', 1)->where('id', '!=', Auth::id());
 
         if ($request->filled('search')) {
             $query->where(function ($q) use ($request) {

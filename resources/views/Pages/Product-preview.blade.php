@@ -112,7 +112,9 @@
                                 class="{{ Auth::user()->role_id == 1 ? 'bg-yellow-200 cursor-not-allowed' : 'bg-yellow-400 cursor-pointer hover:bg-yellow-500' }} text-white font-medium py-3 px-6 rounded-sm transition duration-300">
                                 Add To Cart
                             </button>
-                            <p class="text-sm text-red-500">{{ Auth::user()->role_id == 1 ? "You Can't Add Product to cart, You're a Worker" : "" }}</p>
+                            <p class="text-sm text-red-500">
+                                {{ Auth::user()->role_id == 1 ? "You Can't Add Product to cart, You're a Worker" : '' }}
+                            </p>
                         </form>
                     </div>
                 </div>
@@ -265,14 +267,19 @@
                                 <div class="flex gap-2">
                                     <button onclick="toggleCommentModel({{ $review->id }})"
                                         class="bg-green-400 py-2 rounded-full px-5 cursor-pointer">Edit</button>
-                                    <button type="submit"
-                                        class="bg-red-400 py-2 rounded-full px-5 cursor-pointer">delete</button>
+                                    <form action="{{ route('review.delete', ['id' => $review->id]) }}" method="post">
+                                        @csrf
+                                        @method('DELETE')
+
+                                        <button type="submit"
+                                            class="bg-red-400 py-2 rounded-full px-5 cursor-pointer">delete</button>
+                                    </form>
                                 </div>
                             @endif
                         </div>
                     </div>
 
-                    {{-- <div id="editCommentModal-{{ $review->id }}"
+                    <div id="editCommentModal-{{ $review->id }}"
                         class="flex justify-center hidden items-center fixed inset-0 z-50 bg-black/20">
                         <div class="max-w-max mx-auto bg-white rounded-lg shadow-md overflow-hidden">
                             <div class="px-6 py-4 flex justify-between items-center">
@@ -292,19 +299,7 @@
                                     class="py-2 px-5 block w-1/2 text-white border-gray-300 rounded-md shadow-sm bg-yellow-400 outline-none cursor-pointer">
                             </form>
                         </div>
-                    </div> --}}
-
-                    {{-- <div id="deleteCommentModal-{{ $review->id }}" class="flex justify-center items-center fixed inset-0 bg-black/20">
-                        <div class="bg-white w-120 p-6 rounded-md">
-                            <div>
-                            <h2 class="font-bold text-xl">Delete Comment</h2>
-                            <p>are you sure to delete this Comment ?</p>
-                            </div>
-                            <div>
-                                <button></button>
-                            </div>
-                        </div>
-                    </div> --}}
+                    </div>
                 @endforeach
             @else
                 <div class="w-full pt-12 flex flex-col items-center justify-center text-center">

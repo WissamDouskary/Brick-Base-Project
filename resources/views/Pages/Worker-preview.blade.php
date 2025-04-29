@@ -243,7 +243,7 @@
 
                 @foreach ($reviews as $review)
                     <div class="p-4 border-b border-gray-100">
-                        <div class="flex space-x-3">
+                        <div class="flex space-x-3 items-start">
                             <img src="{{ asset('storage/' . $review->client->profile_photo . '') }}"
                                 class="w-9 h-9 rounded-full"
                                 alt="{{ $review->client->first_name }} {{ $review->client->last_name }}" />
@@ -261,6 +261,41 @@
                                     <span>{{ \Carbon\Carbon::parse($review->created_at)->diffForHumans() }}</span>
                                 </div>
                             </div>
+                            @if (Auth::id() === $review->client->id)
+                                <div class="flex gap-2">
+                                    <button onclick="toggleCommentModel({{ $review->id }})"
+                                        class="bg-green-400 py-2 rounded-full px-5 cursor-pointer">Edit</button>
+                                    <form action="{{ route('review.delete', ['id' => $review->id]) }}" method="post">
+                                        @csrf
+                                        @method('DELETE')
+
+                                        <button type="submit"
+                                            class="bg-red-400 py-2 rounded-full px-5 cursor-pointer">delete</button>
+                                    </form>
+                                </div>
+                            @endif
+                        </div>
+                    </div>
+
+                    <div id="editCommentModal-{{ $review->id }}"
+                        class="flex justify-center hidden items-center fixed inset-0 z-50 bg-black/20">
+                        <div class="max-w-max mx-auto bg-white rounded-lg shadow-md overflow-hidden">
+                            <div class="px-6 py-4 flex justify-between items-center">
+                                <h2 class="text-xl font-bold text-black">Edit Comment</h2>
+                                <button onclick="toggleCommentModel({{ $review->id }})"
+                                    class="text-xl font-bold cursor-pointer text-black">x</button>
+                            </div>
+                            <form action="{{ route('review.update', ['id' => $review->id]) }}" method="post"
+                                class="my-6 mx-6 flex flex-col gap-4 justify-end items-end w-90">
+                                @csrf
+                                @method('PUT')
+
+                                <input type="text" name="comment" value="{{ $review->comment }}"
+                                    placeholder="Edit Your Comment"
+                                    class="py-2 px-5 block w-full border-gray-300 rounded-md shadow-sm outline-none focus:ring-2 focus:ring-yellow-300">
+                                <input type="submit" value="Save"
+                                    class="py-2 px-5 block w-1/2 text-white border-gray-300 rounded-md shadow-sm bg-yellow-400 outline-none cursor-pointer">
+                            </form>
                         </div>
                     </div>
                 @endforeach
@@ -363,6 +398,15 @@
                 section.classList.remove('hidden');
             } else {
                 section.classList.add('hidden');
+            }
+        }
+
+        function toggleCommentModel(id) {
+            const model = document.getElementById('editCommentModal-' + id);
+            if (model.classList.contains('hidden')) {
+                model.classList.remove('hidden');
+            } else {
+                model.classList.add('hidden');
             }
         }
 

@@ -75,6 +75,8 @@ Route::middleware(['auth', CheckUserActive::class, RestrictAdminAccess::class])-
     Route::delete('/order/cancel/{id}', [OrderController::class, 'cancelOrder'])->name('order.cancel');
 
     Route::post('/review/create', [ReviewsController::class, 'store'])->name('review.store');
+    Route::put('/review/update/{id}', [ReviewsController::class, 'update'])->name('review.update');
+    Route::delete('/review/destroy/{id}', [ReviewsController::class, 'destroy'])->name('review.delete');
 });
 
 Route::middleware(['auth', checkUserRole::class, CheckUserActive::class])->group(function () {

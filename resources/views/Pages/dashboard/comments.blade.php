@@ -428,8 +428,6 @@
                         <form action="{{ route('comments.delete', ['id' => $reviews->id]) }}" method="post">
                             @csrf
                             @method('DELETE')
-                            <p>comment {{ $comments->id }}</p>
-                            <p>reviews {{ $reviews->id }}</p>
                             <button type="submit"
                                 class="px-4 py-2 text-sm font-medium text-red-700 bg-red-100 border border-transparent rounded-md shadow-sm hover:bg-red-200 focus:outline-none mr-2 cursor-pointer">
                                 Delete Comment
