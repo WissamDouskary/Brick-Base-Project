@@ -5,10 +5,10 @@
 @section('content')
 
     @if ($errors->any())
-        <div class="text-red-500 text-sm">
-            <ul>
+        <div class="fixed top-4 right-4 bg-red-600 text-white px-5 py-4 rounded-lg shadow-lg z-50">
+            <ul class="text-sm list-disc pl-4">
                 @foreach ($errors->all() as $error)
-                    <li>• {{ $error }}</li>
+                    <li>{{ $error }}</li>
                 @endforeach
             </ul>
         </div>
@@ -61,16 +61,16 @@
                 <h1 class="text-3xl font-bold text-gray-800 mt-1">{{ $worker->first_name . ' ' . $worker->last_name }}</h1>
                 <div class="flex items-center gap-2">
                     <div>
-                    @for ($i = 0; $i < 5; $i++)
-                        @if ($i < floor($worker->reviews_avg_rating))
-                            <span class="text-yellow-500 text-md">★</span>
-                        @elseif ($i - $worker->reviews_avg_rating < 1)
-                            <span class="text-yellow-500 text-md">⯨</span>
-                        @else
-                            <span class="text-gray-400 text-md">★</span>
-                        @endif
-                    @endfor
-                </div>
+                        @for ($i = 0; $i < 5; $i++)
+                            @if ($i < floor($worker->reviews_avg_rating))
+                                <span class="text-yellow-500 text-md">★</span>
+                            @elseif ($i - $worker->reviews_avg_rating < 1)
+                                <span class="text-yellow-500 text-md">⯨</span>
+                            @else
+                                <span class="text-gray-400 text-md">★</span>
+                            @endif
+                        @endfor
+                    </div>
                     <p class="text-yellow-500 text-sm">({{ $worker->reviews_count }}reviews)</p>
                 </div>
             </div>
@@ -104,12 +104,14 @@
                         </div>
                     </div>
                     <div class="mt-8">
-                        <button
-                            class="bg-yellow-400 cursor-pointer hover:bg-yellow-500 text-white font-medium py-3 px-6 rounded-sm transition duration-300"
+                        <button {{ Auth::user()->role_id == 1 ? 'disabled' : '' }}
+                            class="{{ Auth::user()->role_id == 1 ? 'bg-yellow-200 cursor-not-allowed' : 'bg-yellow-400 cursor-pointer hover:bg-yellow-500' }} text-white font-medium py-3 px-6 rounded-sm transition duration-300"
                             onclick="openModel()">
                             Reserve Now
                         </button>
                     </div>
+                    <p class="text-sm text-red-500 mt-3">
+                        {{ Auth::user()->role_id == 1 ? "You Can't reserve a worker, You're a Worker" : '' }}</p>
                 </div>
 
                 <div class="md:w-1/2 mt-6 md:mt-0">
@@ -226,8 +228,11 @@
                                 class="w-full outline-none text-gray-600 resize-none"></textarea>
                         </div>
                         <div class="px-3 py-2 bg-gray-50 border-t border-gray-100 flex justify-end items-center">
-                            <button type="submit"
-                                class="px-4 py-1 cursor-pointer bg-blue-500 text-white rounded-md text-sm font-medium">Comment</button>
+                            <button type="submit" {{ Auth::user()->role_id == 1 ? 'disabled' : '' }}
+                                class="px-4 py-1 bg-blue-500 text-white rounded-md text-sm font-medium 
+                                {{ Auth::user()->role_id == 1 ? 'cursor-not-allowed opacity-50 bg-blue-300' : 'cursor-pointer' }}">
+                                Comment
+                            </button>
                         </div>
                     </form>
                 </div>
@@ -267,13 +272,6 @@
                     </p>
                 </div>
             @endif
-
-            <!-- Load More Button -->
-            <div class="p-3">
-                <button class="w-full py-2 bg-gray-100 hover:bg-gray-200 text-gray-600 text-sm font-medium rounded">
-                    Load More
-                </button>
-            </div>
         </div>
     </div>
 

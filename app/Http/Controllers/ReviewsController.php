@@ -31,5 +31,20 @@ class ReviewsController extends Controller
         
 
         return back()->with('success', 'comment posted successfuly');
-    } 
+    }
+
+    public function update($id, Request $request){
+        $request->validate([
+            'comment' => 'required|max:200|min:3',
+        ]);
+
+        $this->reviewsservice->modify($id, $request->comment);
+
+        return back()->with('success', 'comment updated sucessfuly!');
+    }
+
+    public function destroy($id){
+        $this->reviewsservice->destroy($id);
+        return back()->with('success', 'comment deleted sucessfuly!');
+    }
 }

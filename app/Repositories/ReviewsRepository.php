@@ -24,11 +24,15 @@ class ReviewsRepository implements ReviewsRepositoryInterface {
     }
 
     public function modify($id, $content){
-
+        $review = Review::find($id);
+        $review->update([
+            'comment' => $content
+        ]);
     }
 
     public function delete($id){
-
+        $review = Review::find($id);
+        $review->delete();
     }
 
     public function getReviews($id){

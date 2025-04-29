@@ -35,4 +35,12 @@ class ReviewsService {
     {
         return $this->reviewsrepository->getWorkersReviews();
     }
+
+    public function modify($id, $content){
+        return $this->reviewsrepository->modify($id, $content);
+    }
+
+    public function destroy($id){
+        return $this->reviewsrepository->delete($id);
+    }
 }
