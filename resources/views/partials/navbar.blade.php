@@ -77,11 +77,6 @@
                         @if (Auth::user()->category == null)
                         <a href="{{ route('CompleteRegistration')}}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-50">Complete Registration</a>
                         @endif
-                        <a href="" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-50">Settings</a>
-                    </div>
-
-                    <div class="border-t py-1">
-                        <a href="" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-50">Support</a>
                     </div>
 
                     <div class="border-t py-1">
