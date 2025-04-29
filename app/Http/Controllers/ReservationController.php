@@ -62,7 +62,7 @@ class ReservationController extends Controller
         $this->reservationService->create([
             'start_date' => $request->start_date,
             'end_date' => $request->end_date,
-            'price' => number_format($total_price, 2),
+            'price' => floatval(str_replace(',', '', $total_price)),
             'worker_id' => $request->worker_id,
             'client_id' => Auth::id(),
             'status' => 'Pending',
