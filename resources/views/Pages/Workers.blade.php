@@ -27,7 +27,7 @@
                 <div class="relative w-full sm:w-auto">
                     <select name="sort"
                         class="w-full sm:w-auto bg-white border border-gray-200 text-gray-700 rounded-lg px-3 sm:px-4 py-2 sm:py-2.5 pr-10 appearance-none cursor-pointer focus:outline-none focus:ring-2 focus:ring-yellow-500 focus:border-transparent shadow-sm hover:border-gray-300 transition-colors">
-                        <option value="" selected disabled>Select option</option>
+                        <option value="" selected>Select option</option>
                         <option value="popular" {{ request('sort') == 'popular' ? 'selected' : '' }}>Most
                             Popular</option>
                         <option value="newest" {{ request('sort') == 'newest' ? 'selected' : '' }}>Newest
@@ -48,7 +48,7 @@
                 <div class="relative w-full sm:w-auto">
                     <select name="category"
                         class="w-full sm:w-auto bg-white border border-gray-200 text-gray-700 rounded-lg px-3 sm:px-4 py-2 sm:py-2.5 pr-10 appearance-none cursor-pointer focus:outline-none focus:ring-2 focus:ring-yellow-500 focus:border-transparent shadow-sm hover:border-gray-300 transition-colors">
-                        <option value="" selected disabled>Select Category</option>
+                        <option value="" selected>Select Category</option>
                         <option value="Residential construction"
                             {{ request('category') == 'Residential construction' ? 'selected' : '' }}>
                             Residential construction</option>
@@ -76,7 +76,7 @@
                 <div class="relative w-full sm:w-auto">
                     <select name="city"
                     class="w-full sm:w-auto bg-white border border-gray-200 text-gray-700 rounded-lg px-3 sm:px-4 py-2 sm:py-2.5 pr-10 appearance-none cursor-pointer focus:outline-none focus:ring-2 focus:ring-yellow-500 focus:border-transparent shadow-sm hover:border-gray-300 transition-colors">
-                    <option value="" disabled {{ request('city') ? '' : 'selected' }}>Select City</option>
+                    <option value="" {{ request('city') ? '' : 'selected' }}>Select City</option>
                         <option value="Casablanca" {{ request('city') == 'Casablanca' ? 'selected' : '' }}>Casablanca</option>
                         <option value="Safi" {{ request('city') == 'Safi' ? 'selected' : '' }}>Safi</option>
                         <option value="Agadir" {{ request('city') == 'Agadir' ? 'selected' : '' }}>Agadir</option>

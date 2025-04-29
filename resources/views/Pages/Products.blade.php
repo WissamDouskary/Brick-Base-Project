@@ -48,7 +48,7 @@
                                 <label class="block mb-2 text-sm font-medium text-gray-700">Popularity</label>
                                 <select name="sort"
                                     class="w-full border border-gray-300 rounded py-2 px-3 bg-[#FFFFFF] outline-none">
-                                    <option value="" selected disabled>Select option</option>
+                                    <option value="" selected>Select option</option>
                                     <option value="popular" {{ request('sort') == 'popular' ? 'selected' : '' }}>Most
                                         Popular</option>
                                     <option value="newest" {{ request('sort') == 'newest' ? 'selected' : '' }}>Newest
@@ -64,7 +64,7 @@
                                 <label class="block mb-2 text-sm font-medium text-gray-700">Categories</label>
                                 <select name="category"
                                     class="w-full border border-gray-300 rounded py-2 px-3 bg-[#FFFFFF] outline-none">
-                                    <option value="" selected disabled>Select option</option>
+                                    <option value="" selected>Select option</option>
                                     <option value="Residential construction"
                                         {{ request('category') == 'Residential construction' ? 'selected' : '' }}>
                                         Residential construction</option>
