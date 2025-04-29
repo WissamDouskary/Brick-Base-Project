@@ -21,7 +21,7 @@ class ReservationController extends Controller
     {
         $fields = $request->validate([
             'start_date' => 'required|date|after_or_equal:today',
-            'end_date' => 'required|date|after:start-date',
+            'end_date' => 'required|date|after:start_date',
             'content' => 'required|min:10|max:40'
         ]);
 
@@ -62,7 +62,7 @@ class ReservationController extends Controller
         $this->reservationService->create([
             'start_date' => $request->start_date,
             'end_date' => $request->end_date,
-            'price' => $total_price,
+            'price' => number_format($total_price, 2),
             'worker_id' => $request->worker_id,
             'client_id' => Auth::id(),
             'status' => 'Pending',
