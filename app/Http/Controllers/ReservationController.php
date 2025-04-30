@@ -34,7 +34,7 @@ class ReservationController extends Controller
         $endDB = $end->format('Y-m-d H:i:s');
 
         $total_price = $days * $request->input('total_price');
-        
+
         $this->reservationService->create([
             'start_date' => $request->start_date,
             'end_date' => $request->end_date,
@@ -82,7 +82,7 @@ class ReservationController extends Controller
     public function getWorkerReservedDays($workerId)
     {
         $reservations = Reservation::where('worker_id', $workerId)
-            ->whereNotIn('status', ['Rejected', 'Cancelled'])
+            ->where('status', ['Pending', 'Accepted'])
             ->get(['start_date', 'end_date']);
 
         $dates = [];
