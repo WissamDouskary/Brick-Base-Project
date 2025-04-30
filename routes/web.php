@@ -60,6 +60,8 @@ Route::middleware(['auth', CheckUserActive::class, RestrictAdminAccess::class])-
 
     Route::get('/Products/Preview/{id}', [ProductController::class, 'find'])->name('ProductPreview');
 
+    Route::get('/worker/{id}/disabled-dates', [ReservationController::class, 'getWorkerReservedDays']);
+
     Route::post('/Worker/Reservation', [ReservationController::class, 'create'])->name('reservation.store');
 
     Route::get('/Client/offers', [ReservationController::class, 'getClientOffers'])->name('client.offers');
