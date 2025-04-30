@@ -59,19 +59,19 @@
             <div class="text-start mb-2">
                 <p class="text-yellow-500 text-sm">{{ $worker->job_title }}</p>
                 <h1 class="text-3xl font-bold text-gray-800 mt-1">{{ $worker->first_name . ' ' . $worker->last_name }}</h1>
-                <div class="flex items-center gap-2">
+                <div class="flex items-center gap-2 mt-1">
                     <div>
                         @for ($i = 0; $i < 5; $i++)
                             @if ($i < floor($worker->reviews_avg_rating))
-                                <span class="text-yellow-500 text-md">★</span>
-                            @elseif ($i - $worker->reviews_avg_rating < 1)
-                                <span class="text-yellow-500 text-md">⯨</span>
+                                <span class="text-yellow-500 text-sm"><i class="fas fa-star"></i></span>
+                            @elseif ($i - floor($worker->reviews_avg_rating) < 1)
+                                <span class="text-yellow-500 text-sm"><i class="fas fa-star-half"></i></span>
                             @else
-                                <span class="text-gray-400 text-md">★</span>
+                                <span class="text-gray-400 text-sm"><i class="fas fa-star"></i></span>
                             @endif
                         @endfor
                     </div>
-                    <p class="text-yellow-500 text-sm">({{ $worker->reviews_count }}reviews)</p>
+                    <p class="text-yellow-500 text-sm">({{ $worker->reviews_count }} reviews)</p>
                 </div>
             </div>
 
@@ -262,15 +262,15 @@
                                 </div>
                             </div>
                             @if (Auth::id() === $review->client->id)
-                                <div class="flex gap-2">
+                                <div class="flex">
                                     <button onclick="toggleCommentModel({{ $review->id }})"
-                                        class="bg-green-400 py-2 rounded-full px-5 cursor-pointer">Edit</button>
+                                        class=" py-2 rounded-full px-5 cursor-pointer"><i class="fa-solid fa-pen-to-square"></i></button>
                                     <form action="{{ route('review.delete', ['id' => $review->id]) }}" method="post">
                                         @csrf
                                         @method('DELETE')
 
                                         <button type="submit"
-                                            class="bg-red-400 py-2 rounded-full px-5 cursor-pointer">delete</button>
+                                            class="py-2 rounded-full px-5 cursor-pointer"><i class="fa-solid fa-trash"></i></button>
                                     </form>
                                 </div>
                             @endif
@@ -441,7 +441,7 @@
             }
         });
 
-        const workerId = document.getElementById('worker_id').value ;
+        const workerId = document.getElementById('worker_id').value;
 
         fetch(`/worker/${workerId}/disabled-dates`)
             .then(res => res.json())

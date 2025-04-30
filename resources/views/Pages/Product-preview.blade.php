@@ -264,15 +264,15 @@
                                 </div>
                             </div>
                             @if (Auth::id() === $review->client->id)
-                                <div class="flex gap-2">
+                                <div class="flex">
                                     <button onclick="toggleCommentModel({{ $review->id }})"
-                                        class="bg-green-400 py-2 rounded-full px-5 cursor-pointer">Edit</button>
+                                        class=" py-2 rounded-full px-5 cursor-pointer"><i class="fa-solid fa-pen-to-square"></i></button>
                                     <form action="{{ route('review.delete', ['id' => $review->id]) }}" method="post">
                                         @csrf
                                         @method('DELETE')
 
                                         <button type="submit"
-                                            class="bg-red-400 py-2 rounded-full px-5 cursor-pointer">delete</button>
+                                            class="py-2 rounded-full px-5 cursor-pointer"><i class="fa-solid fa-trash"></i></button>
                                     </form>
                                 </div>
                             @endif

@@ -7,14 +7,6 @@
                 <p class="text-gray-600 text-sm">Sign up for industry news & insights</p>
             </div>
             <div class="flex flex-col md:flex-row gap-6 w-full md:w-auto">
-                <form action="" class="flex flex-col sm:flex-row gap-3 w-full">
-                    <input type="text" placeholder="Your Name"
-                        class="px-4 py-2 rounded focus:border focus:border-yellow-300 focus:outline-none w-full" />
-                    <input type="email" placeholder="Your Email Address"
-                        class="px-4 py-2 rounded focus:border focus:border-yellow-300 focus:outline-none w-full" />
-                    <button type="submit" class="bg-amber-400 text-white px-6 py-2 rounded cursor-pointer w-full sm:w-auto">Submit
-                        Now</button>
-                </form>
 
                 <!-- Social Icons -->
                 <div class="flex items-center justify-center md:justify-start gap-4 mt-4 md:mt-0 md:ml-4">
