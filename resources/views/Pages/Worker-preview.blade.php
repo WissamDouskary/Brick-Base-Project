@@ -322,7 +322,7 @@
                 @csrf
                 @method('POST')
 
-                <input type="hidden" name="worker_id" value="{{ $worker->id }}">
+                <input type="hidden" name="worker_id" id="worker_id" value="{{ $worker->id }}">
 
                 <!-- Date Range Selection -->
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -337,7 +337,7 @@
                                         clip-rule="evenodd" />
                                 </svg>
                             </div>
-                            <input type="datetime-local" id="start-date" name="start_date"
+                            <input type="datetime-local" id="start_date" name="start_date"
                                 class="pl-10 py-2 block w-full border-gray-300 rounded-md shadow-sm outline-yellow-500"
                                 required>
                         </div>
@@ -354,7 +354,7 @@
                                         clip-rule="evenodd" />
                                 </svg>
                             </div>
-                            <input type="datetime-local" id="end-date" name="end_date"
+                            <input type="datetime-local" id="end_date" name="end_date"
                                 class="pl-10 py-2 block w-full border-gray-300 rounded-md shadow-sm outline-yellow-500"
                                 required>
                         </div>
@@ -440,6 +440,22 @@
                 }, 5000);
             }
         });
+
+        const workerId = document.getElementById('worker_id').value ;
+
+        fetch(`/worker/${workerId}/disabled-dates`)
+            .then(res => res.json())
+            .then(disabledDates => {
+                flatpickr("#start_date", {
+                    dateFormat: "Y-m-d",
+                    disable: disabledDates
+                });
+
+                flatpickr("#end_date", {
+                    dateFormat: "Y-m-d",
+                    disable: disabledDates
+                });
+            });
     </script>
 
 @endsection

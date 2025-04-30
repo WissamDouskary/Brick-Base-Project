@@ -34,31 +34,7 @@ class ReservationController extends Controller
         $endDB = $end->format('Y-m-d H:i:s');
 
         $total_price = $days * $request->input('total_price');
-
-        $alreadyReserved = Reservation::where('worker_id', $request->worker_id)
-            ->where(function ($query) use ($startDB, $endDB) {
-                $query->where(function ($q) use ($startDB, $endDB) {
-                    $q->where('start_date', '<=', $startDB)
-                        ->where('end_date', '>', $startDB);
-                })
-                    ->orWhere(function ($q) use ($startDB, $endDB) {
-                        $q->where('start_date', '<', $endDB)
-                            ->where('end_date', '>=', $endDB);
-                    })
-                    ->orWhere(function ($q) use ($startDB, $endDB) {
-                        $q->where('start_date', '>=', $startDB)
-                            ->where('end_date', '<=', $endDB);
-                    });
-            })
-            ->first();
-
-        if ($alreadyReserved) {
-
-            $avDate = Carbon::parse($alreadyReserved->end_date);
-
-            return back()->with('error', 'this worker is reserved before please chose other date after ' . $avDate);
-        }
-
+        
         $this->reservationService->create([
             'start_date' => $request->start_date,
             'end_date' => $request->end_date,
@@ -75,13 +51,13 @@ class ReservationController extends Controller
     public function getWorkerOffers(Request $request)
     {
         $status = $request->query('status');
-    
+
         if ($status && $status !== 'All') {
             $offers = $this->reservationService->filterOffers($status);
         } else {
             $offers = $this->reservationService->getWorkerOffers();
         }
-    
+
         return view('Pages.offres-worker', compact('offers'));
     }
 
@@ -91,14 +67,36 @@ class ReservationController extends Controller
         return back()->with('success', 'status updated!');
     }
 
-    public function getClientOffers(Request $request){
+    public function getClientOffers(Request $request)
+    {
         $status = $request->input('status');
 
-        if($status && $status !== "All"){
+        if ($status && $status !== "All") {
             $offers = $this->reservationService->filterOffersClient($status);
         } else {
             $offers = $this->reservationService->getClientOffers();
         }
         return view('Pages.offer-client', compact('offers'));
+    }
+
+    public function getWorkerReservedDays($workerId)
+    {
+        $reservations = Reservation::where('worker_id', $workerId)
+            ->whereNotIn('status', ['Rejected', 'Cancelled'])
+            ->get(['start_date', 'end_date']);
+
+        $dates = [];
+
+        foreach ($reservations as $reservation) {
+            $start = \Carbon\Carbon::parse($reservation->start_date);
+            $end = \Carbon\Carbon::parse($reservation->end_date);
+
+            while ($start->lte($end)) {
+                $dates[] = $start->format('Y-m-d');
+                $start->addDay();
+            }
+        }
+
+        return response()->json($dates);
     }
 }
