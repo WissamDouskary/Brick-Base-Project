@@ -111,6 +111,14 @@
                                                     </button>
                                                 </form>
                                             </div>
+                                        @elseif ($offer->status == 'Failed')
+                                            <div class="flex gap-2">
+                                                <a href="#"
+                                                    onclick="openReservationModal({{ $offer->id }}); return false;"
+                                                    class="flex-1 cursor-pointer bg-blue-500 text-white text-center py-1.5 rounded text-sm hover:bg-blue-600 transition duration-200">
+                                                    View Details
+                                                </a>
+                                            </div>
                                         @else
                                             <div class="flex gap-2">
                                                 <a href="#"
@@ -118,6 +126,11 @@
                                                     class="flex-1 cursor-pointer bg-blue-500 text-white text-center py-1.5 rounded text-sm hover:bg-blue-600 transition duration-200">
                                                     View Details
                                                 </a>
+                                                <a href="/Workers/Preview/{{ $offer->worker_id }}#commentsSection"><button
+                                                        type="button"
+                                                        class="cursor-pointer bg-green-500 text-white text-center py-1.5 px-35 rounded text-sm hover:bg-green-600 transition duration-200">
+                                                        Leave Review
+                                                    </button></a>
                                             </div>
                                         @endif
                                     </div>

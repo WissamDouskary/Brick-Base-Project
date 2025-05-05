@@ -118,10 +118,10 @@
                                                         View Details
                                                     </a>
                                                     @if ($order->status === 'Completed')
-                                                        <button type="button"
-                                                            class="flex-1 cursor-pointer bg-green-500 text-white text-center py-1.5 rounded text-sm hover:bg-green-600 transition duration-200">
+                                                        <a href="/Products/Preview/{{ $order->product->id }}#commentsSection"><button type="button"
+                                                            class="cursor-pointer bg-green-500 text-white text-center py-1.5 px-35 rounded text-sm hover:bg-green-600 transition duration-200">
                                                             Leave Review
-                                                        </button>
+                                                        </button></a>
                                                     @endif
                                                 </form>
                                             @endif

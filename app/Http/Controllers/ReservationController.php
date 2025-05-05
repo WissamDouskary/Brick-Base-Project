@@ -82,6 +82,7 @@ class ReservationController extends Controller
     public function getWorkerReservedDays($workerId)
     {
         $reservations = Reservation::where('status', ['Pending', 'Accepted'])
+            ->where('worker_id', $workerId)
             ->get(['start_date', 'end_date']);
 
         $dates = [];

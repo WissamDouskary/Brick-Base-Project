@@ -195,7 +195,7 @@
             </div>
         </section>
         {{-- comment section --}}
-        <div class="w-full mx-auto bg-white rounded-lg shadow-md overflow-hidden mt-16">
+        <div class="w-full mx-auto bg-white rounded-lg shadow-md overflow-hidden mt-16" id="commentsSection">
             <div class="p-4 border-b border-gray-200">
                 <h2 class="text-xl font-semibold text-gray-800">Comments</h2>
             </div>
